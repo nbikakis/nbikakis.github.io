@@ -1,0 +1,69 @@
+*{margin:0; padding:0; border:0; font-size:100%; font:inherit; vertical-align:baseline;}
+
+html{font-size:100%; overflow-y:scroll; -webkit-text-size-adjust:100%; -ms-text-size-adjust:100%;}
+
+body{line-height:1;}
+
+body, input, textarea{font:12px/20px 'Droid Sans',sans-serif; background:#FFF; color:#000;}
+
+.clear{clear:both;}
+
+strong{font-weight:bold;}
+
+.clearfix:after{content:"."; display:block; height:0; clear:both; visibility:hidden;}
+
+#wrapper{width:960px; margin:0 auto;}
+
+.header{width:960px; position:relative; overflow:hidden; margin:0 auto; text-align:left;}
+div#header{ padding-top:15px;}
+.logo{float:left; width:450px; margin:30px 30px 28px 28px;}
+h1.logo{background:url("../images/logo.png") no-repeat; background-size: 220px; width:250px;  height:185px; margin:18px 0px -27px -3px; text-indent:-9999px; float:left;}
+h1.logo a{display:block; height:100%;}
+h3{font-size:16px; margin:10px auto;}
+
+div.nav{height:130px; width:670px; border-left:1px solid #bdbdbd; float:right; margin:26px 30px 0 0; list-style:none;}
+div.nav ul{margin:70px 0 0 44px; float:left; list-style:none; text-decoration:none;}
+div.nav ul:first-child{margin-left:7px;}
+div.nav ul li{margin:-2px 0 0;}
+div.nav a{font:10px 'Droid Sans',sans-serif; color:#999; text-transform:uppercase; text-decoration:none;}
+div.nav a:hover{color:#56a8d8;}
+div.nav li.title{margin:0 0 10px 0;}
+div.nav li.title a, ul.menu-side a{font:bold 13px 'Droid Sans',sans-serif; text-transform:none; color:#777;}
+ul.menu-side a{font-size:12px;}
+div.nav li.title a:hover{color:#777 !important;}
+div.nav ul.menu-side{margin:17px 31px 8px 0; float:right;}
+div.nav ul.menu-side li{background:url("../images/list.png") no-repeat left center; margin-bottom:9px; padding-left:13px;}
+div.nav ul.menu-side a:hover{color:#56a8d8;}
+div.nav ul.menu-side a.active:hover{color:#2595d7;}
+div.nav li.title a.active{color:#383838;}
+div.nav li a.active{color:#56a8d8;}
+
+.intro-p{float:left; margin:-24px 0 65px; padding-top:40px; width:100%; font-family:'Raleway'; font-size:22px; color:#414141;}
+.intro-2{float:left; margin:10px 0 30px; padding-top:10px; width:100%; font-family:'Raleway'; font-size:16px; color:#414141;}
+
+.intro-2 b{font-weight:bold}
+
+.intro-2 a{color:#414141; text-decoration:none;}
+.intro-2 a:hover{color:#56a8d8 !important;}
+
+.banner-image{border-top:1px solid #CCC; float:center; margin:10px 0 30px; padding-top:20px; width:100%;}
+
+.one_half{width:46%;}
+.one_third{width:30.5%;}
+.one_fourth{width:22%;}
+.one_fifth{width:16.8%;}
+.one_sixth{width:13.33%;}
+.two_fifth{width:37.6%;}
+.two_third{width:65.33%;}
+.three_fifth{width:58.4%;}
+.three_fourth{width:74%;}
+.four_fifth{width:67.2%;}
+.five_sixth{width:82.67%;}
+.one_half, .one_third, .two_third, .three_fourth, .one_fourth, .one_fifth, .two_fifth, .three_fifth, .four_fifth, .one_sixth, .five_sixth{position:relative; margin-right:4%; margin-bottom:20px; float:left; color:#414141;}
+.column-last{margin-right:0 !important; clear:right;}
+.tabs_type_2 .one_third{width:29%;}
+
+div.footer-text{background:#fff no-repeat; padding:25px 0 0; width:960px; float:left; border-top:1px solid #CCC; margin-top:30px;}
+div.footer-text p:first-child{margin:0;}
+div.footer-text p{color:#ccc;}
+div.footer-text a{color:#999; text-decoration:none;}
