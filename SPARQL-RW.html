@@ -1,0 +1,591 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+<meta http-equiv="Content-Language" content="el, en, gr"/>
+
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-7"/>
+
+<title>SPARQL-RW : Ontology Mapping and SPARQL Query Rewriting in the Web of Linked Data</title>
+
+<meta name="keywords" content="Web of data integration Linked data Linked open data query ansering over linked data query rewriting over linked data  onology mapping over linked data Semantic web mediator sparql query mediation SPARQL-RW : Ontology Mapping and SPARQL Rewriting in the Web of Data sparql query rewriting sparql reformulation owl mappings sparql owl mappings web of data integration interoperability"/>
+
+
+<meta name="author" content="Bikakis Nikos"/>
+
+
+<style type="text/css">
+
+/* main text*/
+
+.c8 {
+	font-family: Verdana, Arial, Helvetica;
+	font-size: 70%;
+	list-style-type: square;
+	color: #444444;
+
+	}
+
+	/* pub text*/
+
+.c9 {
+	font-family: Verdana, Arial, Helvetica;
+		list-style-type: square;
+
+	font-size: 68%;
+		color: #444444
+
+}
+
+
+.c11 {
+	font-family: Verdana, Arial, Helvetica;
+	color: #444444
+}
+
+td.c7 {
+	color: #365666;
+	font-family: Arial, Helvetica;
+	font-weight: bold;
+	font-size: 95%;
+	
+}
+
+td.c3 {
+	font-family: Verdana, Arial, Helvetica;
+	font-size: 70%;
+	color: #444444;
+}
+
+h3.c2 {
+	font-family: Verdana, Arial, Helvetica;
+	color: #444444;
+	font-size: 80%
+	
+}
+
+h5.c2 {
+	font-family: Verdana, Arial, Helvetica;
+	color: #365666;
+	font-size: 80%
+
+	}
+
+	/*name*/
+h2.c1 {
+	font-family:  Arial, Helvetica;
+	color: #365666;
+	font-size: 130%;
+}
+
+
+
+td.c1 {
+	font-family: Verdana, Arial, Helvetica;
+	color: #365666;
+	font-size: 90%;
+}
+.style1 {color: #365666}
+
+
+a:link {
+	text-decoration: none;
+	color: #365666
+}
+a:visited {
+	text-decoration: none;
+	color: #365666
+}
+a:hover {
+	text-decoration: underline;
+	color: #365666
+}
+a:active {
+color: #365666;
+	text-decoration: none;
+}
+.style3 {font-family: Arial, Helvetica, sans-serif}
+.style7 {color: #000099; font-weight: bold; }
+
+
+.title {
+	font-family: Verdana, Arial, Helvetica;
+	color: #365666;
+font-weight: bold; 
+	font-size: 18px
+
+}
+
+.title2{
+	font-family: Verdana, Arial, Helvetica;
+	color: #365666;
+font-weight: bold; 
+font-size:14px
+	
+}
+
+.Sub-title {
+	font-family: Verdana, Arial, Helvetica;
+	color: #365666;
+font-weight: bold; 
+
+font-size:13px
+	
+}
+
+.text {
+	font-family: Verdana, Arial, Helvetica;
+
+	color: #444444;
+
+
+font-size:11px
+}
+.section {
+	font-family: Verdana, Arial, Helvetica;
+	color: #365666;
+font-weight: bold; 
+font-size:13px
+	
+}
+
+.footnot{
+	font-family: Verdana, Arial, Helvetica;
+
+	color: #444444;
+
+
+font-size:8px
+}
+
+.text-color {
+	
+		font-family: Verdana, Arial, Helvetica;
+
+	color: #365666;
+
+
+font-size:11px
+}
+
+.text-color2 {
+	font-family: Verdana, Arial, Helvetica;
+	color: #F00;
+	font-size:9px
+}
+
+	.text-color3{
+	font-family: Verdana, Arial, Helvetica;
+	color: #365666;
+	font-size:9px
+	}
+	
+	
+
+ 
+
+/*test */
+.xxxxxxxxx {
+	font-size: 0.01px;
+	color: #FFF;
+	text-align: right;
+}
+/*test */
+a.xxxxxxxxx {
+	font-size: 1px;
+	color: #FFF;
+}
+
+</style>
+</head>
+ <body>
+		
+
+<table width="670" border="0" align="center">
+  <tr>
+     <td><table align="center" width="670" border="0"cellpadding="0" >
+       <tr>
+       </tr>
+       <tr>
+         <td width="200"  ><img src="SPARQL-RW.png" width="172" height="125" /></td>
+         <td width="5" ></td>
+         <td><table width="100%"  height="23%" border="0">
+           <tr>
+             <td colspan="2" valign="middle" align="left" class="title">The S<span class="title2">PARQL</span>-RW<br/> 
+             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; framework.</td>
+           </tr>
+           <tr>
+             <td width="29%" height="63">&nbsp;</td>
+             <td width="71%" align="right" valign="bottom" class="Sub-title"><span class="title2">O</span>ntology <span class="title2">M</span>apping and <span class="title2">S</span>PARQL <span class="title2">Q</span>uery 
+             <br/> <span class="title2">R</span>ewriting in the <span class="title2">W</span>eb of <span class="title2">D</span>ata.              
+               </td>
+           </tr>
+         </table></td>
+       </tr>
+     </table>
+	 </td>
+  </tr>
+   <tr>
+     <td height="33" valign="top"><table width="670" align="center" cellpadding="0"  id="research">
+       <tr valign="middle">
+         <td width="140" height="5"align="left" bgcolor="#5E8AB8"></td>
+       </tr>
+     </table></td>
+   </tr>
+   <tr>
+     <td><table align="center" width="670" cellpadding="0">
+       <tr>
+         <td height="25" class="c8">&nbsp;</td>
+         <td align="right" class="text"><table width="120" border="0" align="right">
+             <tr>
+               <td width="113" align="right"><span class="title2">A</span><span class="section">bout.</span></td>
+             </tr>
+             <tr>
+               <td height="3" bgcolor="#E6E6FF"></td>
+             </tr>
+          </table></td>
+       </tr>
+       <tr>
+         <td width="32%" height="104" class="c8">&nbsp;</td>
+         <td width="68%" align="right" valign="top" class="text">
+       <p>  The SPARQL-RW (SPARQL-ReWriting) Framework provides transparent query
+            access over mapped RDF datasets in the Web of Linked Data. </p>
+           <p>The SPARQL-RW Framework provides a method for SPARQL query rewriting, with
+             respect to a set of predefined mappings between ontology schemas.<br/>
+             To this end, a set of rich and flexible mapping types <br />
+             are supported by
+            the SPARQL-RW Framework.</p></td>
+       </tr>
+     </table>
+	 
+	 <table width="235"  height="15" align="right">
+<tr> 
+<td>
+<!-- AddThis Button BEGIN -->
+<div class="addthis_toolbox addthis_default_style ">
+<a class="addthis_button_facebook_like"  fb:like:layout="button_count"></a>
+<a class="addthis_button_tweet"></a>
+<a class="addthis_button" href="http://www.addthis.com/bookmark.php">
+         <img src="http://s7.addthis.com/static/btn/sm-plus.gif"
+         width="16" height="16" border="0" alt="Share" /></a> 
+</div>
+<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4f9c4a1325fb6e61"></script>
+<!-- AddThis Button END -->
+</td>
+</tr>
+</table>
+	 
+	 </td>
+   </tr>
+   <tr>
+     <td height="120"><table align="center" width="670" cellpadding="0">
+       
+		 <tr>
+			 <td height="25" align="left" valign="bottom" class="c8"><table width="120" border="0" align="left">
+				 <tr align="left">
+					 <td width="114"><span class="title2">N</span><span class="section">ews. </span> </td>
+				 </tr>
+				 <tr align="left">
+					 <td height="3" bgcolor="#E6E6FF"></td>
+				 </tr>
+			 </table></td>
+		 </tr>
+		 
+		 
+		 
+		 <tr valign="top">
+			 <td height="100%" class="c8"><table width="100%" border="0" align="left">
+				 <tr>
+					 <td width="90%"   valign="top"><ul>
+						 
+						[09|2016]
+						<span class="text"> New version (v.1.3) of W3C Standards Timeline released!</span>
+				<strong class="text-color3"><i>#New Version #Timeline #W3C.</i></strong></span>  
+					<span class="text"> <b>Files:</b></span> [</span><a href="http://www.dblab.ntua.gr/~bikakis/XMLSemanticWebW3CTimeline.pdf" target="_blank"><strong>pdf</strong></a>]
+				[</span><a href="http://www.dblab.ntua.gr/~bikakis/XMLSemanticWebW3CTimeline.svg" target="_blank"><strong>svg</strong></a>]
+				[</span><a href="http://www.dblab.ntua.gr/~bikakis/XMLSemanticWebW3CTimeline.png" target="_blank"><strong>png</strong></a>] 
+
+
+						 <table width="100%" border="0">
+							 <tr>
+								 <td height="3"></td>
+							 </tr>
+						 </table>
+
+						 
+						 [07|2013]
+						 <span class="text"> Check SPARQL-RW online 
+						 </span><a href="http://www.music.tuc.gr/projects/sw/sparql-rw/" target="_blank">Demo</a>!
+						 <strong class="text-color3"><i>#online #demo</i></strong>
+						 
+						 <table width="100%" border="0">
+							 <tr>
+								 <td height="3"></td>
+							 </tr>
+						 </table>
+						 
+						 [07|2013]
+						 <span class="text"> Like SPARQL-RW on 
+						 </span><a href="http://www.facebook.com/SPARQL.RW" target="_blank">Facebook</a>!
+						 <strong class="text-color3"><i>#Facebook </i></strong>
+						 
+						 <table width="100%" border="0">
+							 <tr>
+								 <td height="3"></td>
+							 </tr>
+						 </table>
+						 
+						 [07|2013]
+						 <span class="text"> Like SPARQL2XQuery on </span><a href="http://www.facebook.com/SPARQL2XQuery" target="_blank">Facebook</a>!
+						 <strong class="text-color3"><i>#SPARQL2XQuery #Facebook.</i></strong>
+						 
+						 </span>
+						 
+						 
+						 <table width="100%" border="0">
+							 <tr>
+								 <td height="7"></td>
+							 </tr>
+						 </table>
+					 </ul></td>
+				 <td width="10%"></td>
+				 </tr>
+			 </table></td>
+		 </tr>
+		 
+	   <tr>
+         <td height="25" align="left" valign="bottom" class="c8"><table width="120" border="0" align="left">
+           <tr align="left">
+             <td width="114"><span class="title2">K</span><span class="section">ey </span><span class="title2">F</span><span class="section">eatures.</span></td>
+             </tr>
+           <tr align="left">
+             <td height="3" bgcolor="#E6E6FF"></td>
+             </tr>
+         </table></td>
+        </tr>
+       <tr>
+        </tr>
+       <tr valign="top">
+         <td height="107" class="c8">
+         
+           <table width="100%" border="0" align="left">
+             <tr>
+               <td width="90%" height="62"  valign="top">
+               
+               <ul>
+			              <li><strong class="text-color">Mapping Specification between Ontologies Schemas.</strong></li>
+   <table width="100%" border="0">
+             <tr>
+               <td height="3"></td>
+             </tr>
+           </table>
+           <li><strong class="text-color">Flexible Rich Mapping Support.</strong></li>
+     
+           <table width="100%" border="0">
+             <tr>
+               <td height="3"></td>
+             </tr>
+           </table>
+           <li><strong class="text-color">SPARQL Query ReWriting based on Mappings.</strong></li>
+		   
+		         <table width="100%" border="0">
+             <tr>
+               <td height="3"></td>
+             </tr>
+           </table>
+           <li><strong class="text-color">Inference Support over SPARQL ReWriting. </strong><span class="text"> </span></li>
+		   
+           <table width="100%" border="0">
+             <tr>
+               <td height="3"></td>
+             </tr>
+           </table>
+		              <li><strong class="text-color">  Semantics Preserving Query ReWriting. </strong><span class="text"> </span></li>
+
+					   <table width="100%" border="0">
+             <tr>
+               <td height="3"></td>
+             </tr>
+           </table>
+		              <li><strong class="text-color">   Java System Prototype. </strong><span class="text"> </span></li>
+
+			   <table width="100%" border="0">
+             <tr>
+               <td height="3"></td>
+               
+             </tr>
+           </table>
+					  
+			   <li><strong class="text">   <a href="http://www.music.tuc.gr/projects/sw/sparql-rw/" target="_blank">Online Demo</a> </strong>  &nbsp;  <strong span class="text-color2"> new </span> </strong> </li>
+
+			   <table width="100%" border="0">
+             <tr>
+               <td height="3"></td>
+               
+             </tr>
+           </table>
+		   
+               </ul></td>
+               <td width="10%"></td>
+             </tr>
+           </table>
+          </td>
+       </tr>
+     </table></td>
+   </tr>
+   <tr>
+     <td align="left" valign="top">
+     
+     <table align="left" width="595" cellpadding="0">
+       <tr>
+         <td width="589" height="25" align="left" valign="bottom" class="c8"><table width="120" border="0" align="left">
+           <tr align="left">
+             <td width="114"><span class="title2">P</span><span class="section">ublications.</span></td>
+             </tr>
+           <tr align="left">
+             <td height="3" bgcolor="#E6E6FF"></td>
+             </tr>
+         </table></td>
+        </tr>
+       <tr>
+         <td height="105" valign="top" class="c8"><ul>
+                 <li>
+             <div align="justify"><span class="text"> Makris K., Bikakis N., Gioldasis N., Christodoulakis S.: "</span><a href="http://www.dblab.ntua.gr/~bikakis/papers/SPARQL-RWTransparentQueryAccessoverMappedRDFDataSources@EDBT2012.pdf" target="_blank"><strong>SPARQL-RW: Transparent Query Access over Mapped RDF Data Sources</strong></a>". 15th International Conference on Extending Database Technology   <strong>(EDBT '12)</strong>.
+              <strong>[<a href="http://www.dblab.ntua.gr/~bikakis/papers/SPARQL-RW - Poster - EDBT.pdf" target="_blank">Poster</a>]</strong></div>
+           </li> 
+                      <table width="100%" border="0">
+             <tr>
+               <td height="3"></td>
+             </tr>
+           </table>
+              <li>
+                <div align="justify">
+	                  Makris K., Gioldasis N., Bikakis N., Christodoulakis S.:
+
+                  "<span class="style1"><a href="http://www.dblab.ntua.gr/~bikakis/papers/TR-2010.SPARQLRewritingforQuery MediationoverMappedOntologies.pdf"   target="_blank"><strong>SPARQL Rewriting for Query Mediation over Mapped Ontologies</strong></a></span>". Technical Report 2010.
+                </div>
+           </li>
+           
+           
+           <table width="100%" border="0">
+             <tr>
+               <td height="3"></td>
+             </tr>
+           </table>
+           
+          <li><div align="justify">
+	                  Makris K., Gioldasis N., Bikakis N., Christodoulakis S.:
+
+                  "<span class="style1"><a href="http://www.dblab.ntua.gr/~bikakis/papers/OntologyMappingandSPARQLRewriting@ODBASE10.pdf"   target="_blank"><strong>Ontology Mapping and SPARQL Rewriting for Querying Federated RDF Data Sources</strong></a></span>". 9th International Conference on Ontologies, DataBases, and Applications of Semantics <b>(ODBASE'10)</b>.        </div>
+       
+	</li>
+    
+          
+           <table width="100%" border="0">
+             <tr>
+               <td height="3"></td>
+             </tr>
+           </table>
+           
+           <li>
+                <div align="justify">Makris K., Bikakis N., Gioldasis N., Tsinaraki C., Christodoulakis S.: "<span class="style1"><a href="http://www.dblab.ntua.gr/~bikakis/papers/WSKS09-TowardsAMediatorbasedOnOWLandSPARQL.pdf" onClick="javascript: pageTracker._trackPageview('/papers/dexa'); "  target="_blank"><strong>Towards a Mediator based on OWL and SPARQL</strong></a></span>". 2nd World Summit on the Knowledge Society <b>(WSKS '09)</b>.                           <br > 
+                </div>
+              </li>
+
+
+           <table width="100%" border="0">
+             <tr>
+               <td height="3"></td>
+             </tr>
+           </table>
+              
+    
+
+         
+           
+         </ul></td>
+        </tr>
+     </table></td>
+   </tr>
+   <tr>
+     <td><table align="center" width="670" cellpadding="0">
+       <tr>
+         <td height="25" align="left" valign="bottom" class="c8"><table width="120" border="0" align="left">
+           <tr align="left">
+             <td width="114"><span class="title2">P</span><span class="section">eople.</span></td>
+             </tr>
+           <tr align="left">
+             <td height="3" bgcolor="#E6E6FF"></td>
+             </tr>
+         </table></td>
+        </tr>
+       <tr>
+         <td height="70" valign="top" class="c8"><ul>
+           <li><a href="http://www.music.tuc.gr/Person.show?ID=244" target="_blank"><strong>Konstantinos Makris</strong></a></li>
+           <li><a href="http://www.music.tuc.gr/Person.show?ID=5" target="_blank"><strong>Nektarios Gioldasis </strong></a></li>
+           <li><a href="http://www.dblab.ntua.gr/~bikakis" target="_blank"><strong>Nikos Bikakis </strong>
+           </a> </li>
+           <li><a href="http://www.music.tuc.gr/Faculty.show?ID=2" target="_blank"><strong>Prof. Stavros Christodoulakis</strong></a></li>
+         </ul></td>
+        </tr>
+     </table></td>
+   </tr>
+   <tr>
+     <td><table align="center" width="670" cellpadding="0">
+       <tr>
+         <td height="25" align="left" valign="bottom" class="c8"><table width="154" border="0" align="left">
+           <tr align="left">
+             <td width="169"><span class="title2">F</span><span class="section">amily Frameworks.</span></td>
+           </tr>
+           <tr align="left">
+             <td height="3" bgcolor="#E6E6FF"></td>
+           </tr>
+         </table></td>
+       </tr>
+       <tr>
+         <td height="70" valign="top" class="c8"><ul>
+           <li> <a href="http://www.dblab.ntua.gr/~bikakis/SPARQL2XQuery.html" target="_blank"><strong>SPARQL2ΧQuery. </strong>  </a>Bridging the gap between the XML and the Semantic Web. </li>
+           <li><a href="http://www.music.tuc.gr/projects/sw/xs2owl/" target="_blank"><strong>XS2OWL. </strong></a>Transform XML Schema into OWL otnologies.</li></ul></td>
+       </tr>
+     </table></td>
+   </tr>
+   <tr>
+     <td height="40" align="center" valign="middle"><table width="100%" border="0">
+       <tr>
+         <td><table width="100%" border="0">
+           <tr>
+             <td height="1"></td>
+             <td width="130" height="1" bgcolor="#5E8AB8"></td>
+             <td height="1"></td>
+           </tr>
+         </table></td>
+       </tr>
+       <tr>
+         <td height="12" align="center" valign="middle" class="footnot"> &copy; 2009-2011 &middot;  sparql-rw project.</td>
+       </tr>
+     </table></td>
+   </tr>
+</table>
+
+<br/>
+		
+<span class="xxxxxxxxx">Bikakis N., Tsinaraki C., Gioldasis N., Stavrakantonakis I., Christodoulakis S.:<a href="http://www.dblab.ntua.gr/~bikakis/papers/XMLSemanticWebSurvey.pdf" target="_blank" class="xxxxxxxxx"><strong>The XML and Semantic Web Worlds: Technologies, Interoperability and Integration. A survey of the State of the Art</strong></a>". Semantic Hyper/Multi-media Adaptation: Schemes and Applications, Springer 2012. 
+</span>
+ 
+																																																			<script type="text/javascript">
+
+																																																					  var _gaq = _gaq || [];
+																																																					  _gaq.push(['_setAccount', 'UA-11024030-4']);
+																																																					  _gaq.push(['_trackPageview']);
+
+																																																					  (function() {
+																																																						var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+																																																						ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+																																																						var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+																																																					  })();
+
+																																																					</script>
+  
+</body>
+</html>
