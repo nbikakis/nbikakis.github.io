@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Human-Data Interaction, Exploration, and Visualization in the AI Era</title>
+  <meta name="description" content="Academic project page for Human-Data Interaction, Exploration, and Visualization in the AI Era: Challenges and Opportunities.">
+  <meta name="keywords" content="human-data interaction, visual analytics, multimodal analytics, generative visualization, AI-guided exploration, foundation models, trustworthy AI">
+  <meta property="og:title" content="Human-Data Interaction, Exploration, and Visualization in the AI Era">
+  <meta property="og:description" content="Challenges and opportunities for human-centered, AI-assisted, multimodal visual analytics systems.">
+  <meta property="og:image" content="static/images/infographic.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="ai_chall.css">
+  <style>
+    /* Page-level refinements */
+    :root {
+      --accent-blue: #2563eb;
+      --accent-cyan: #0ea5e9;
+      --challenge: #b91c1c;
+      --challenge-soft: #fff1f2;
+      --opportunity: #2563eb;
+      --opportunity-soft: #eff6ff;
+    }
+
+    .publication-header {
+      padding: 4.75rem 0 2.65rem;
+    }
+
+    .publication-title {
+      max-width: 1000px;
+      margin: 0 auto 1.4rem;
+      font-size: clamp(1.8rem, 4.5vw, 3.8rem);
+      line-height: .98;
+      letter-spacing: -0.05em;
+      font-weight: 500;
+    }
+
+    .publication-subtitle {
+      max-width: 790px;
+      font-size: clamp(1rem, 1.8vw, 1.18rem);
+      line-height: 1.55;
+      margin-bottom: 1.35rem;
+    }
+
+    .publication-authors {
+      max-width: 1000px;
+      font-size: .98rem;
+      line-height: 1.6;
+    }
+
+    .publication-affiliations {
+      max-width: 800px;
+      font-size: .88rem;
+      line-height: 1.55;
+    }
+
+    .publication-venue {
+      margin-top: .75rem;
+      background: #eff6ff;
+      color: #1d4ed8;
+      border: 1px solid #bfdbfe;
+      font-size: .9rem;
+      letter-spacing: .01em;
+    }
+
+    .link-blocks {
+      margin-top: 1.65rem;
+    }
+
+    .title {
+      margin-bottom: 1.65rem;
+      font-size: clamp(1.45rem, 2.7vw, 2.05rem);
+      letter-spacing: -0.03em;
+    }
+
+    .title::after {
+      width: 64px;
+      height: 3px;
+background: linear-gradient(90deg, #64748b, #cbd5e1);    }
+
+    .section,
+    .section2 {
+      padding: 3.6rem 0;
+    }
+
+    .content {
+      max-width: 900px;
+      font-size: 1.04rem;
+      line-height: 1.78;
+    }
+
+    #abstract .content p,
+    #abstract .abstract-text p {
+      text-align: justify;
+      text-justify: inter-word;
+      hyphens: auto;
+    }
+
+    .figure-section {
+      padding: 2.4rem 0 2.1rem;
+      background: transparent;
+    }
+
+    .figure-section .publication-banner {
+      max-width: 760px;
+      margin: 0 auto;
+      border-radius: 18px;
+      box-shadow: 0 18px 45px -28px rgb(15 23 42 / 0.55);
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+
+    .figure-section .publication-banner:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 24px 55px -30px rgb(15 23 42 / 0.65);
+    }
+
+    .figure-modal-trigger {
+      display: block;
+      width: 100%;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      cursor: zoom-in;
+    }
+
+    .figure-modal-trigger img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .figure-modal-trigger:focus-visible {
+      outline: 3px solid rgba(37, 99, 235, .45);
+      outline-offset: 4px;
+      border-radius: var(--radius-lg);
+    }
+
+    .grid {
+      align-items: stretch;
+    }
+
+    .grid .card {
+      height: 100%;
+    }
+
+    .card {
+      padding: 1.08rem 1.12rem;
+    }
+
+    .card h3 {
+      font-size: 1rem;
+      line-height: 1.28;
+      margin-bottom: .45rem;
+    }
+
+    .card p,
+    .card li {
+      font-size: .94rem;
+      line-height: 1.55;
+    }
+
+    .co-headings {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: .85rem;
+      margin: 0 0 .85rem;
+    }
+
+    .co-column-title {
+      margin: 0;
+      text-align: center;
+      font-size: 1.16rem;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      font-weight: 800;
+    }
+
+    .co-card-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-auto-rows: 1fr;
+      gap: .85rem;
+      align-items: stretch;
+    }
+
+    .mini-insight-card {
+      height: 100%;
+      min-height: 104px;
+      display: flex;
+      align-items: flex-start;
+      gap: .68rem;
+      padding: .85rem .95rem;
+      border-color: rgba(148, 163, 184, .24);
+    }
+
+    .mini-insight-card h3 {
+      margin: 0 0 .18rem;
+      font-size: .96rem;
+      line-height: 1.22;
+    }
+
+    .mini-insight-card p {
+      margin: 0;
+      font-size: .88rem;
+      line-height: 1.42;
+    }
+
+    .mini-icon {
+      flex: 0 0 auto;
+      width: 1.6rem;
+      height: 1.6rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      font-size: .86rem;
+      font-weight: 850;
+      line-height: 1;
+      margin-top: .05rem;
+    }
+
+    .challenge-icon {
+      background: var(--challenge-soft);
+      color: var(--challenge);
+      border: 1px solid #fecdd3;
+    }
+
+    .opportunity-icon {
+      background: var(--opportunity-soft);
+      color: var(--opportunity);
+      border: 1px solid #bfdbfe;
+    }
+
+    .bibtex-header {
+      align-items: flex-end;
+    }
+
+    .bibtex-header .title::after {
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    .footer {
+      font-size: .88rem;
+    }
+
+    .image-modal[hidden] {
+      display: none;
+    }
+
+    .image-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      background: rgba(15, 23, 42, .82);
+      backdrop-filter: blur(4px);
+    }
+
+    .image-modal img {
+      max-width: min(95vw, 1200px);
+      max-height: 90vh;
+      width: auto;
+      height: auto;
+      border-radius: var(--radius-lg);
+      background: #fff;
+      box-shadow: var(--shadow-xl);
+    }
+
+    .image-modal-close {
+      position: absolute;
+      top: 1.25rem;
+      right: 1.25rem;
+      width: 44px;
+      height: 44px;
+      border: 1px solid rgba(255, 255, 255, .35);
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .96);
+      color: var(--text-primary);
+      font-size: 1.5rem;
+      line-height: 1;
+      cursor: pointer;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .image-modal-close:hover {
+      background: #fff;
+      transform: translateY(-1px);
+    }
+
+    body.modal-open {
+      overflow: hidden;
+    }
+
+    @media (max-width: 900px) {
+      .publication-header {
+        padding: 3.4rem 0 2rem;
+      }
+
+      .figure-section .publication-banner {
+        max-width: 100%;
+      }
+
+      .co-headings {
+        display: none;
+      }
+
+      .co-card-grid {
+        grid-template-columns: 1fr;
+        grid-auto-rows: auto;
+      }
+
+      .mini-insight-card {
+        min-height: 0;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .publication-title {
+        font-size: 2rem;
+        letter-spacing: -0.04em;
+      }
+
+      .section,
+      .section2 {
+        padding: 2.8rem 0;
+      }
+
+      .content {
+        font-size: 1rem;
+        line-height: 1.7;
+      }
+
+      #abstract .content p,
+      #abstract .abstract-text p {
+        text-align: left;
+      }
+
+      .image-modal {
+        padding: 1rem;
+      }
+
+      .image-modal img {
+        max-width: 96vw;
+        max-height: 84vh;
+      }
+    }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ScholarlyArticle",
+    "headline": "Human-Data Interaction, Exploration, and Visualization in the AI Era: Challenges and Opportunities",
+    "author": [
+      {"@type": "Person", "name": "Jean-Daniel Fekete"},
+      {"@type": "Person", "name": "Yifan Hu"},
+      {"@type": "Person", "name": "Dominik Moritz"},
+      {"@type": "Person", "name": "Arnab Nandi"},
+      {"@type": "Person", "name": "Senjuti Basu Roy"},
+      {"@type": "Person", "name": "Eugene Wu"},
+      {"@type": "Person", "name": "Nikos Bikakis"},
+      {"@type": "Person", "name": "George Papastefanatos"},
+      {"@type": "Person", "name": "Panos K. Chrysanthis"},
+      {"@type": "Person", "name": "Guoliang Li"},
+      {"@type": "Person", "name": "Lingyun Yu"}
+    ],
+    "datePublished": "2026",
+    "identifier": "arXiv:2603.05542"
+  }
+  </script>
+</head>
+<body>
+  <header class="publication-header">
+    <div class="container">
+     <!-- <div class="eyebrow">Preprint · 2026 · arXiv:2603.05542</div> -->
+      <h1 class="publication-title">Human-Data Interaction, Exploration, and Visualization in the AI Era</h1>
+      <p class="publication-subtitle">Challenges and opportunities for human-centered, AI-assisted, multimodal visual analytics systems.</p>
+      <div class="publication-authors" aria-label="authors">
+        <span class="author-block">Jean-Daniel Fekete</span>
+        <span class="author-block">Yifan Hu</span>
+        <span class="author-block">Dominik Moritz</span>
+        <span class="author-block">Arnab Nandi</span>
+        <span class="author-block">Senjuti Basu Roy</span>
+        <span class="author-block">Eugene Wu</span>
+        <span class="author-block">Nikos Bikakis</span>
+        <span class="author-block">George Papastefanatos</span>
+        <span class="author-block">Panos K. Chrysanthis</span>
+        <span class="author-block">Guoliang Li</span>
+        <span class="author-block">Lingyun Yu</span>
+      </div>
+      <p class="publication-affiliations">
+       University Paris-Saclay & Inria · Northeastern University · Carnegie Mellon University & Apple · Ohio State University ·  New Jersey Inst. of Technology · Columbia University · Hellenic Mediterranean University & Archimedes/Athena RC · Athena RC · University of Pittsburgh · Tsinghua University · Xi'an Jiaotong-Liverpool University
+      </p>
+      <!--<div class="publication-venue">Preprint · 2026 · arXiv:2603.05542</div> -->
+      <nav class="link-blocks" aria-label="paper resources">
+        <a class="button" href="https://www.nbikakis.com/papers/Human-Data%20Interaction,%20Exploration,%20and%20Visualization%20in%20the%20AI%20Era%20Challenges%20and%20Opportunities_2026.pdf" target="_blank">Paper PDF</a>
+        <a class="button secondary" href="https://www.nbikakis.com/papers/Human-Data%20Interaction,%20Exploration,%20and%20Visualization%20in%20the%20AI%20Era%20Challenges%20and%20Opportunities_2026_Infographic.pdf" target="_blank">Infographic [pdf]</a>
+        <a class="button secondary" href="https://www.nbikakis.com/papers/Human-Data%20Interaction,%20Exploration,%20and%20Visualization%20in%20the%20AI%20Era%20Challenges%20and%20Opportunities_2026_Infographic.png" target="_blank">Infographic [png]</a>
+        <a class="button secondary" href="https://arxiv.org/abs/2603.05542" target="_blank">arXiv</a>
+        <a class="button secondary" href="#citation">BibTeX</a>
+      </nav>
+    </div>
+  </header>
+
+
+
+
+ 
+
+  <main>
+
+    <section class="figure-section" aria-label="infographic teaser">
+      <div class="container">
+        <figure class="publication-banner">
+          <button class="figure-modal-trigger" type="button" aria-haspopup="dialog" aria-controls="infographicModal" aria-label="Open infographic in larger view" title="Open larger view">
+            <img src="static/images/infographic.png" alt="Infographic summarizing challenges and opportunities for human-AI collaboration and analytics in the AI era." loading="eager">
+          </button>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section2" id="abstract">
+      <div class="container">
+        <h2 class="title">Abstract</h2>
+        <div class="content abstract-text">
+          <p>
+            The rapid advancement of AI is transforming human-centered systems, with major implications for human-AI interaction, human-data interaction, and visual analytics. Data analysis increasingly involves large-scale, heterogeneous, and multimodal data that is often unstructured, while foundation models such as LLMs and VLMs introduce new uncertainty into analytical workflows.
+          </p>
+          <p>
+            The paper examines how these changes expose persistent challenges in latency, scalability, interaction, exploration, reliability, and interpretability. It argues for end-to-end, human-centered systems that co-design data management, AI components, interfaces, and visualization, while keeping humans meaningfully involved through feedback, verification, and trust calibration.
+          </p>
+        </div>
+<!--		 
+		 <ul class="keywords">
+          <li>Human-AI Collaboration</li>
+          <li>Visual Analytics</li>
+          <li>Multimodal Analytics</li>
+          <li>Generative Visualization</li>
+          <li>AI-guided Exploration</li>
+          <li>Foundation Models</li>
+          <li>Trustworthy AI</li>
+        </ul>
+-->    
+	</div>
+    </section>
+
+
+
+    <section class="section" id="key-insights">
+      <div class="container">
+        <h2 class="title">Key insights</h2>
+        <div class="grid">
+          <article class="card"><h3>Tightly coupled requirements</h3><p>Human-data interaction systems must integrate responsive interaction, multimodal data handling, guidance, visualization, and trustworthy AI feedback.</p></article>
+          <article class="card"><h3>Latency and scalability are barriers</h3><p>Multimodal data, complex interactions, embeddings, streams, and deep learning models all intensify scalability and responsiveness constraints.</p></article>
+          <article class="card"><h3>End-to-end design is essential</h3><p>System architecture, data operations, AI models, interfaces, and visualization need to be designed together, not optimized independently.</p></article>
+          <article class="card"><h3>AI requires human oversight</h3><p>AI can support guidance, semantic understanding, and usability, but brittleness, errors, unpredictability, and bias make human-in-the-loop oversight indispensable.</p></article>
+          <article class="card"><h3>Visualization becomes generative</h3><p>Visualization is shifting from static depiction to progressive, narrative, aesthetics-aware, and adaptive guidance for sensemaking and trust.</p></article>
+          <article class="card"><h3>Cross-disciplinary work is crucial</h3><p>The research agenda spans systems, databases, AI, information visualization, HCI, computer graphics, and cognitive science.</p></article>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="section2" id="figure-insights">
+      <div class="container">
+        <h2 class="title">Challenges and Opportunities</h2>
+
+        <div class="co-headings" aria-hidden="true">
+          <h3 class="co-column-title">Challenges</h3>
+          <h3 class="co-column-title">Opportunities</h3>
+        </div>
+
+        <div class="co-card-grid">
+          <article class="card mini-insight-card">
+            <span class="mini-icon challenge-icon" aria-hidden="true">▲</span>
+            <div>
+              <h3>Latency issues</h3>
+              <p>Interactive systems need real-time response to preserve analytical flow.</p>
+            </div>
+          </article>
+          <article class="card mini-insight-card">
+            <span class="mini-icon opportunity-icon" aria-hidden="true">✦</span>
+            <div>
+              <h3>Human-centered data management</h3>
+              <p>Query processing, indexing, and storage can be optimized for interactive analytics.</p>
+            </div>
+          </article>
+
+          <article class="card mini-insight-card">
+            <span class="mini-icon challenge-icon" aria-hidden="true">▲</span>
+            <div>
+              <h3>Scalability</h3>
+              <p>Large datasets and high-velocity analysis require scalable data operations.</p>
+            </div>
+          </article>
+          <article class="card mini-insight-card">
+            <span class="mini-icon opportunity-icon" aria-hidden="true">✦</span>
+            <div>
+              <h3>Guided exploration</h3>
+              <p>AI suggestions can help users discover what can be asked and analyzed.</p>
+            </div>
+          </article>
+
+          <article class="card mini-insight-card">
+            <span class="mini-icon challenge-icon" aria-hidden="true">▲</span>
+            <div>
+              <h3>AI uncertainty</h3>
+              <p>Errors and bias require verification, provenance, and human oversight.</p>
+            </div>
+          </article>
+          <article class="card mini-insight-card">
+            <span class="mini-icon opportunity-icon" aria-hidden="true">✦</span>
+            <div>
+              <h3>AR/VR interfaces</h3>
+              <p>Virtual and augmented environments can support in-the-world analytics.</p>
+            </div>
+          </article>
+
+          <article class="card mini-insight-card">
+            <span class="mini-icon challenge-icon" aria-hidden="true">▲</span>
+            <div>
+              <h3>Multimodal complexity</h3>
+              <p>Text, images, audio, video, and rich documents require new abstractions.</p>
+            </div>
+          </article>
+          <article class="card mini-insight-card">
+            <span class="mini-icon opportunity-icon" aria-hidden="true">✦</span>
+            <div>
+              <h3>Narrative visualization</h3>
+              <p>Data storytelling can guide attention and improve interpretation.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="citation">
+      <div class="container">
+        <div class="bibtex-header">
+          <h2 class="title" style="text-align:left;margin-bottom:0">BibTeX</h2>
+          <button class="copy-bibtex-btn" type="button" onclick="copyBibtex()"><span class="copy-text">Copy</span></button>
+        </div>
+        <pre><code id="bibtex">@misc{fekete2026humanDataInteractionAI,
+  title  = {Human-Data Interaction, Exploration, and Visualization in the AI Era: Challenges and Opportunities},
+  author = {Fekete, Jean-Daniel and Hu, Yifan and Moritz, Dominik and Nandi, Arnab and Basu Roy, Senjuti and Wu, Eugene and Bikakis, Nikos and Papastefanatos, George and Chrysanthis, Panos K. and Li, Guoliang and Yu, Lingyun},
+  year   = {2026},
+  eprint = {2603.05542},
+  archivePrefix = {arXiv}
+}</code></pre>
+      </div>
+    </section>
+  </main>
+   <footer class="footer">
+    <div class="container">
+      <p>This page uses as base the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template">Academic Project Page Template</a>
+	  </p>     </div>
+  </footer>
+
+  <button class="scroll-to-top" id="scrollTop" type="button" aria-label="Scroll to top">↑</button>
+
+  <div class="image-modal" id="infographicModal" role="dialog" aria-modal="true" aria-label="Infographic larger view" hidden>
+    <button class="image-modal-close" type="button" aria-label="Close enlarged infographic">×</button>
+    <img src="static/images/infographic.png" alt="Large infographic summarizing challenges and opportunities for human-AI collaboration and analytics in the AI era.">
+  </div>
+
+  <script>
+    function copyBibtex() {
+      const text = document.getElementById('bibtex').innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = document.querySelector('.copy-bibtex-btn');
+        const label = btn.querySelector('.copy-text');
+        label.textContent = 'Copied';
+        btn.classList.add('copied');
+        setTimeout(() => { label.textContent = 'Copy'; btn.classList.remove('copied'); }, 1700);
+      });
+    }
+
+    const scrollBtn = document.getElementById('scrollTop');
+    window.addEventListener('scroll', () => {
+      scrollBtn.classList.toggle('visible', window.scrollY > 400);
+    });
+    scrollBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+
+    const infographicTrigger = document.querySelector('.figure-modal-trigger');
+    const infographicModal = document.getElementById('infographicModal');
+    const infographicClose = infographicModal.querySelector('.image-modal-close');
+
+    function openInfographicModal() {
+      infographicModal.hidden = false;
+      document.body.classList.add('modal-open');
+      infographicClose.focus();
+    }
+
+    function closeInfographicModal() {
+      infographicModal.hidden = true;
+      document.body.classList.remove('modal-open');
+      infographicTrigger.focus();
+    }
+
+    infographicTrigger.addEventListener('click', openInfographicModal);
+    infographicClose.addEventListener('click', closeInfographicModal);
+
+    infographicModal.addEventListener('click', (event) => {
+      if (event.target === infographicModal) {
+        closeInfographicModal();
+      }
+    });
+
+    window.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && !infographicModal.hidden) {
+        closeInfographicModal();
+      }
+    });
+
+  </script>
+</body>
+</html>
