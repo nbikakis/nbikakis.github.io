@@ -10,7 +10,7 @@ Language Models, Semantic Trajectories, Spatiotemporal Data
 Mining, Explainable AI, Trajectory Annotation, Spatial Data
 Enrichment, Mobility Pattern Mining">
   <meta property="og:title" content="Context-Enriched Natural Language Descriptions of Vessel Trajectories">
-  <meta property="og:description" content="A framework for turning raw AIS trajectories into semantic episodes, contextual representations, and LLM-generated trip narratives.">
+  <meta property="og:description" content="A framework for turning raw AIS trajectories into semantically-enriched  LLM-generated trip narratives.">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -375,10 +375,10 @@ code { font-family: "SF Mono", Monaco, Cascadia Code, "Roboto Mono", Menlo, Cons
 .publication-title {
   max-width: 1120px;
   margin: 0 auto 1.25rem;
-  font-size: clamp(1.75rem, 4.05vw, 3.45rem);
+      font-size: clamp(1.8rem, 4.5vw, 3.8rem);
   line-height: 1.12;
-  letter-spacing: -0.0024em;
-  font-weight: 500;
+  letter-spacing: -0.06em;
+  font-weight: 400;
   text-wrap: balance;
 }
 .publication-subtitle {
@@ -782,7 +782,13 @@ body.modal-open {
   }
 }
 
-  </style>
+  
+.related-paper-card .related-paper-link + .related-paper-link {
+  margin-left: .35rem;
+  margin-top: .25rem;
+}
+
+</style>
 </head>
 <body>
   <header class="publication-header">
@@ -804,11 +810,16 @@ body.modal-open {
       <p class="publication-affiliations">Archimedes/Athena RC · University of the Aegean · Athena RC · Hellenic Mediterranean University</p>
        <nav class="link-blocks" aria-label="paper resources">
         <a class="button" href="Context-Enriched%20Natural%20Language%20Descriptions%20of%20Vessel%20Trajectories_2026.pdf" target="_blank" rel="noopener">Paper PDF</a>
-        <a class="button secondary github-button" href="https://github.com/M3-Archimedes/AIS-semantic-trajectories" target="_blank" rel="noopener">GitHub</a>
 		
+        <a class="button secondary github-button" href="https://github.com/M3-Archimedes/AIS-semantic-trajectories" target="_blank" rel="noopener">GitHub 1</a>
+		
+				        <a class="button secondary github-button" href="https://github.com/M3-Archimedes/AIS-trajectory-annotation" target="_blank" rel="noopener">GitHub 2</a>
+
+
 		<a class="button secondary github-button" href="https://github.com/M3-Archimedes" target="_blank" rel="noopener">Project GitHub</a>
 		
-		
+
+ 		
         <a class="button secondary" href="#citation">BibTeX</a>
       </nav>
     </div>
@@ -842,7 +853,7 @@ body.modal-open {
     </section>
 
 
- 
+    
 
     <section class="section2" id="related-papers">
       <div class="container">
@@ -859,6 +870,7 @@ body.modal-open {
               29th International Conference on Extending Database Technology, EDBT 2026.
             </p>
             <a class="related-paper-link" href="Data-Driven%20Trajectory%20Imputation%20for%20Vessel%20Mobility%20Analysis_EDBT_2026.pdf" target="_blank" rel="noopener">Paper PDF</a>
+            <a class="related-paper-link github-button" href="https://github.com/M3-Archimedes/HABIT" target="_blank" rel="noopener">GitHub</a>
           </article>
 
           <article class="card related-paper-card">
@@ -871,6 +883,7 @@ body.modal-open {
               International Workshop on Multi-Sensor Trajectory Knowledge Discovery &amp; Extraction, MuseKDE 2026.
             </p>
             <a class="related-paper-link" href="Trajectory%20Imputation%20Using%20Computer%20Vision%20Models_2026%20%284%29.pdf" target="_blank" rel="noopener">Paper PDF</a>
+            <a class="related-paper-link github-button" href="https://github.com/M3-Archimedes/IMaGe-based-ImputatioN-of-Trajectories" target="_blank" rel="noopener">GitHub</a>
           </article>
         </div>
       </div>
