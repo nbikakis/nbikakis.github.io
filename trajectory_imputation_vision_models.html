@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Trajectory Imputation Using Computer Vision Models</title>
+  <meta name="description" content="Project page for Trajectory Imputation Using Computer Vision Models.">
+  <meta name="keywords" content="Trajectory imputation, Computer vision, Wave maps, U-Net, AIS, Maritime analytics">
+  <meta property="og:title" content="Trajectory Imputation Using Computer Vision Models">
+  <meta property="og:description" content="IMGIN reframes trajectory imputation as image reconstruction by converting movement data into wave maps and filling missing regions with a CNN.">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+:root {
+  --primary-color: #2563eb;
+  --primary-hover: #1d4ed8;
+  --secondary-color: #64748b;
+  --accent-color: #0ea5e9;
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+  --text-light: #94a3b8;
+  --background-primary: #ffffff;
+  --background-secondary: #f8fafc;
+  --background-accent: #f1f5f9;
+  --border-color: #e2e8f0;
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --gradient-accent: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  --radius: 14px;
+  --radius-lg: 20px;
+  --max-width: 1080px;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  color: var(--text-primary);
+  background:
+    radial-gradient(circle at top left, rgba(37, 99, 235, 0.10), transparent 30rem),
+    radial-gradient(circle at top right, rgba(14, 165, 233, 0.10), transparent 26rem),
+    var(--background-primary);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  line-height: 1.65;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a { color: var(--primary-color); text-decoration: none; }
+a:hover { color: var(--primary-hover); text-decoration: underline; }
+
+.container { width: min(calc(100% - 32px), var(--max-width)); margin: 0 auto; }
+
+.publication-header {
+  padding: 5.5rem 0 3rem;
+  text-align: center;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .5rem .85rem;
+  margin-bottom: 1.35rem;
+  border: 1px solid rgba(37, 99, 235, 0.18);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.82);
+  color: #1e40af;
+  font-size: .9rem;
+  font-weight: 700;
+  box-shadow: var(--shadow-sm);
+}
+
+.publication-title {
+  max-width: 1000px;
+  margin: 0 auto 1.4rem;
+  color: var(--text-primary);
+font-size: clamp(1.8rem, 4.5vw, 3.8rem);
+  line-height: .98;
+  letter-spacing: -0.05em;
+  font-weight: 500;
+}
+
+.publication-subtitle {
+  max-width: 760px;
+  margin: 0 auto 1.6rem;
+  color: var(--text-secondary);
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+}
+
+.publication-authors {
+  max-width: 980px;
+  margin: 0 auto 1rem;
+  font-size: 1.02rem;
+  font-weight: 600;
+}
+
+.author-block { display: inline-block; margin: 0 .12rem .25rem; }
+.author-block:not(:last-child)::after { content: " ·"; color: var(--text-light); }
+
+.publication-affiliations {
+  max-width: 500px;
+  margin: 0 auto 3.5rem; 
+  color: var(--text-secondary);
+  font-size: .92rem;
+}
+
+.publication-venue {
+  display: inline-block;
+  width: fit-content;
+  margin: .4rem auto 0;
+  padding: .55rem 1rem;
+  border-radius: var(--radius);
+  background: var(--background-accent);
+  color: var(--text-secondary);
+  font-weight: 700;
+}
+
+.link-blocks {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: .7rem;
+  margin-top: 2rem;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .45rem;
+  min-height: 44px;
+  padding: .4rem .9rem;
+  border: 2px solid transparent;
+  border-radius: var(--radius);
+  background: var(--text-primary);
+  color: #fff;
+  box-shadow: var(--shadow-md);
+  font-weight: 700;
+  font-size: .92rem;
+  line-height: 1.15;
+  text-decoration: none;
+  transition: all .25s cubic-bezier(0.4, 0, 0.2, 1);
+
+}
+.button:hover { transform: translateY(-2px); background: var(--primary-color); color: #fff; text-decoration: none; box-shadow: var(--shadow-lg); }
+.button.secondary { color: var(--text-primary); background: #fff; border-color: var(--border-color); box-shadow: var(--shadow-sm); }
+.button.secondary:hover { color: var(--primary-color); border-color: rgba(37, 99, 235, .34); }
+
+.hero.is-light {
+  padding: 3rem 0;
+  background: var(--background-primary);
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.publication-banner {
+  overflow: hidden;
+  max-width: 700px;
+  margin: 0 auto;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  background: #fff;
+  box-shadow: var(--shadow-xl);
+}
+.publication-banner img { display: block; width: 100%; height: auto; }
+.banner-caption {
+  padding: 1rem 1.25rem;
+  border-top: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  font-size: .95rem;
+  text-align: left;
+}
+
+.section2 {  padding: 4rem 0;    background: var(--background-secondary);
+}
+
+.section {  padding: 4rem 0; }
+.section + .section { border-top: 1px solid var(--border-color); }
+.title {
+  margin: 0 0 1.4rem;
+  color: var(--text-primary);
+  font-size: clamp(1.55rem, 3vw, 2.15rem);
+  line-height: 1.15;
+  letter-spacing: -0.035em;
+  font-weight: 800;
+  text-align: center;
+}
+.title::after {
+  content: "";
+  display: block;
+  width: 58px;
+  height: 3px;
+  margin: .85rem auto 0;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #64748b, #cbd5e1);
+}
+
+.content {
+  max-width: 860px;
+  margin: 0 auto;
+  color: var(--text-secondary);
+  font-size: 1.08rem;
+}
+.content p { margin: 0 0 1.15rem; }
+
+.keywords {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: .55rem;
+  max-width: 900px;
+  margin: 1.8rem auto 0;
+  padding: 0;
+  list-style: none;
+}
+.keywords li {
+  padding: .45rem .75rem;
+  border: 1px solid rgba(37, 99, 235, .14);
+  border-radius: 999px;
+  background: #eff6ff;
+  color: #1d4ed8;
+  font-size: .9rem;
+  font-weight: 700;
+}
+
+.grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+.grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.card {
+  padding: 1.2rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  background: #fff;
+  box-shadow: var(--shadow-sm);
+  transition: all .25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+.card h3 { margin: 0 0 .35rem; font-size: 1.03rem; line-height: 1.25; }
+.card p, .card li { color: var(--text-secondary); font-size: .96rem; }
+.card ul { margin: .7rem 0 0; padding-left: 1.1rem; }
+
+.takeaway { display: flex; gap: .8rem; }
+.number {
+  flex: 0 0 auto;
+  width: 2rem;
+  height: 2rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #eff6ff;
+  color: var(--primary-color);
+  font-weight: 850;
+}
+
+.bibtex-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  max-width: 900px;
+  margin: 0 auto .8rem;
+}
+.bibtex-header h2 { margin: 0; }
+.copy-bibtex-btn {
+  border: none;
+  border-radius: var(--radius);
+  background: var(--primary-color);
+  color: white;
+  padding: .7rem .9rem;
+  cursor: pointer;
+  font-weight: 750;
+  transition: all .2s ease;
+}
+.copy-bibtex-btn:hover { transform: translateY(-2px); background: var(--primary-hover); }
+.copy-bibtex-btn.copied { background: #10b981; }
+pre {
+  max-width: 900px;
+  margin: 0 auto;
+  overflow-x: auto;
+  padding: 1.25rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  background: #0f172a;
+  color: #dbeafe;
+  font-size: .9rem;
+  line-height: 1.55;
+  box-shadow: var(--shadow-md);
+}
+code { font-family: "SF Mono", Monaco, Cascadia Code, "Roboto Mono", Menlo, Consolas, monospace; }
+
+.footer {
+  padding: 2.5rem 0 3rem;
+  border-top: 1px solid var(--border-color);
+  background: var(--background-secondary);
+  color: var(--text-secondary);
+  font-size: .92rem;
+  text-align: center;
+}
+.footer p { max-width: 820px; margin: 0 auto .6rem; }
+
+.footer a {
+  color: var(--text-secondary);
+  text-decoration: none;
+ }
+
+.footer a:hover {
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+
+.scroll-to-top {
+  position: fixed;
+  right: 1.4rem;
+  bottom: 1.4rem;
+  width: 48px;
+  height: 48px;
+  border: none;
+  border-radius: 50%;
+  background: var(--primary-color);
+  color: #fff;
+  box-shadow: var(--shadow-lg);
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transition: all .2s ease;
+}
+.scroll-to-top.visible { opacity: 1; visibility: visible; }
+.scroll-to-top:hover { transform: translateY(-2px); background: var(--primary-hover); }
+
+@media (max-width: 900px) {
+  .publication-header { padding: 3.5rem 0 2rem; }
+  .grid, .grid.two { grid-template-columns: 1fr; }
+  .publication-title { letter-spacing: -0.05em; }
+  .section { padding: 3rem 0; }
+}
+@media (max-width: 560px) {
+  .publication-title { font-size: 2rem; }
+  .button { width: 100%; }
+  .bibtex-header { align-items: flex-start; flex-direction: column; }
+}
+@media print {
+  .link-blocks, .scroll-to-top { display: none; }
+  body { background: #fff; }
+  .card, .publication-banner { box-shadow: none; }
+}
+
+
+/* Tailored paper page refinements */
+:root {
+  --accent-blue: #2563eb;
+  --accent-cyan: #0ea5e9;
+  --ink-soft: #475569;
+  --panel: #ffffff;
+  --panel-soft: #f8fafc;
+  --line: #dbe3ef;
+}
+
+.publication-header { padding: 4.8rem 0 2.7rem; }
+.publication-title {
+  max-width: 1060px;
+  margin: 0 auto 1.25rem;
+  font-size: clamp(1.85rem, 4.45vw, 3.8rem);
+  line-height: 1.02;
+  letter-spacing: -0.052em;
+  font-weight: 500;
+}
+.publication-subtitle {
+  max-width: 840px;
+  font-size: clamp(1rem, 1.8vw, 1.18rem);
+  line-height: 1.55;
+  margin-bottom: 1.35rem;
+}
+.publication-authors { max-width: 1040px; font-size: .98rem; line-height: 1.6; }
+.publication-affiliations { max-width: 820px; font-size: .88rem; line-height: 1.55; margin-bottom: 2.1rem; }
+.publication-venue {
+  margin-top: .2rem;
+  margin-bottom: .25rem;
+  background: #eff6ff;
+  color: #1d4ed8;
+  border: 1px solid #bfdbfe;
+  font-size: .88rem;
+  letter-spacing: .01em;
+}
+.link-blocks { margin-top: 1.35rem; align-items: center; }
+.button { min-height: 36px; padding: .42rem .9rem; font-size: .92rem; line-height: 1.15; }
+
+.section, .section2 { padding: 3.55rem 0; }
+.section + .section, .section2 + .section, .section + .section2 { border-top: 1px solid var(--border-color); }
+.title { margin-bottom: 1.65rem; font-size: clamp(1.45rem, 2.65vw, 2.05rem); letter-spacing: -0.03em; }
+.title::after { width: 64px; height: 3px; background: linear-gradient(90deg, #64748b, #cbd5e1); }
+.content { max-width: 920px; font-size: 1.04rem; line-height: 1.78; }
+.content p { text-align: justify; text-justify: inter-word; hyphens: auto; }
+
+.topic-strip {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: .55rem;
+  max-width: 940px;
+  margin: 1.55rem auto 0;
+  padding: 0;
+  list-style: none;
+}
+.topic-strip li {
+  padding: .42rem .72rem;
+  border: 1px solid rgba(37, 99, 235, .14);
+  border-radius: 999px;
+  background: #eff6ff;
+  color: #1d4ed8;
+  font-size: .86rem;
+  font-weight: 750;
+}
+
+.glance {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 1.35rem;
+  border: 1px solid rgba(148, 163, 184, .28);
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, .92);
+  box-shadow: 0 18px 45px -34px rgb(15 23 42 / .55);
+}
+.glance-title { margin: 0 0 1rem; text-align: center; font-size: 1.08rem; font-weight: 850; letter-spacing: -0.02em; }
+.glance-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .85rem; }
+.glance-card { border: 1px solid rgba(148, 163, 184, .24); border-radius: var(--radius); background: var(--panel-soft); padding: .95rem .9rem; text-align: center; }
+.glance-card strong { display: block; color: var(--text-primary); font-size: 1.5rem; line-height: 1.05; margin-bottom: .25rem; }
+.glance-card span { display: block; color: var(--text-secondary); font-size: .84rem; line-height: 1.35; }
+
+.grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; align-items: stretch; }
+.grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.grid.four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.card { height: 100%; padding: 1.08rem 1.12rem; }
+.card h3 { font-size: 1rem; line-height: 1.28; margin-bottom: .45rem; }
+.card p, .card li { font-size: .94rem; line-height: 1.55; }
+.card .tag {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: .62rem;
+  padding: .22rem .48rem;
+  border-radius: 999px;
+  background: #f1f5f9;
+  color: var(--ink-soft);
+  font-size: .74rem;
+  font-weight: 850;
+  letter-spacing: .055em;
+  text-transform: uppercase;
+}
+.card .metric { display: block; color: var(--primary-color); font-size: 1.65rem; line-height: 1; font-weight: 850; margin-bottom: .35rem; }
+
+.pipeline {
+  max-width: 1040px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: .9rem;
+}
+.step {
+  position: relative;
+  padding: 1.1rem 1rem;
+  border: 1px solid rgba(148, 163, 184, .26);
+  border-radius: var(--radius-lg);
+  background: #fff;
+  box-shadow: var(--shadow-sm);
+}
+.step-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  margin-bottom: .65rem;
+  border-radius: 50%;
+  background: #eff6ff;
+  color: var(--primary-color);
+  font-size: .88rem;
+  font-weight: 850;
+}
+.step h3 { margin: 0 0 .35rem; font-size: .98rem; line-height: 1.28; }
+.step p { margin: 0; color: var(--text-secondary); font-size: .9rem; line-height: 1.5; }
+
+.evidence-list {
+  max-width: 960px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: .85rem;
+}
+.evidence-item {
+  display: grid;
+  grid-template-columns: 190px 1fr;
+  gap: 1rem;
+  padding: 1rem 1.05rem;
+  border: 1px solid rgba(148, 163, 184, .28);
+  border-radius: var(--radius-lg);
+  background: #fff;
+  box-shadow: var(--shadow-sm);
+}
+.evidence-item strong { color: var(--text-primary); font-size: .98rem; line-height: 1.3; }
+.evidence-item p { margin: 0; color: var(--text-secondary); font-size: .95rem; line-height: 1.58; }
+
+.bibtex-header { align-items: flex-end; }
+.bibtex-header .title::after { margin-left: 0; margin-right: 0; }
+.footer { font-size: .88rem; }
+.footer a { color: var(--text-secondary); text-decoration: none; }
+.footer a:hover { color: var(--text-primary); text-decoration: none; }
+
+@media (max-width: 980px) {
+  .grid, .grid.two, .grid.four { grid-template-columns: 1fr; }
+  .pipeline { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .glance-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .evidence-item { grid-template-columns: 1fr; }
+}
+@media (max-width: 560px) {
+  .publication-title { font-size: 2rem; letter-spacing: -0.04em; }
+  .section, .section2 { padding: 2.8rem 0; }
+  .content { font-size: 1rem; line-height: 1.7; }
+  .content p { text-align: left; }
+  .pipeline, .glance-grid { grid-template-columns: 1fr; }
+}
+
+  
+/* Figure section and image modal */
+.figure-section {
+  padding: 2.3rem 0 2.4rem;
+  background: transparent;
+}
+
+.figure-section .publication-banner {
+  max-width: 980px;
+  margin: 0 auto;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 18px 45px -28px rgb(15 23 42 / 0.55);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.figure-section .publication-banner:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 24px 55px -30px rgb(15 23 42 / 0.65);
+}
+
+.figure-modal-trigger {
+  display: block;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  background: transparent;
+  cursor: zoom-in;
+}
+
+.figure-modal-trigger img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.figure-modal-trigger:focus-visible {
+  outline: 3px solid rgba(37, 99, 235, .45);
+  outline-offset: 4px;
+  border-radius: var(--radius-lg);
+}
+
+.image-modal[hidden] {
+  display: none;
+}
+
+.image-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: rgba(15, 23, 42, .82);
+  backdrop-filter: blur(4px);
+}
+
+.image-modal img {
+  max-width: min(96vw, 1250px);
+  max-height: 90vh;
+  width: auto;
+  height: auto;
+  border-radius: var(--radius-lg);
+  background: #fff;
+  box-shadow: var(--shadow-xl);
+}
+
+.image-modal-close {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(255, 255, 255, .35);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .96);
+  color: var(--text-primary);
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: var(--shadow-lg);
+}
+
+.image-modal-close:hover {
+  background: #fff;
+  transform: translateY(-1px);
+}
+
+body.modal-open {
+  overflow: hidden;
+}
+
+/* Related works section */
+.related-paper-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  max-width: 980px;
+  margin: 0 auto;
+  align-items: stretch;
+}
+
+.related-paper-card {
+  height: 100%;
+}
+
+.related-paper-card h3 {
+  color: var(--text-primary);
+  font-size: 1.02rem;
+  line-height: 1.32;
+  letter-spacing: -0.01em;
+  margin: 0 0 .55rem;
+}
+
+.related-paper-card p {
+  margin: 0 0 .65rem;
+  color: var(--text-secondary);
+  font-size: .93rem;
+  line-height: 1.55;
+}
+
+.related-paper-card .tag {
+  background: #eff6ff;
+  color: #1d4ed8;
+  border: 1px solid #bfdbfe;
+}
+
+.related-paper-note {
+  margin-bottom: .8rem;
+  color: #475569;
+  font-weight: 650;
+}
+
+.related-paper-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem;
+  margin-top: .2rem;
+}
+
+.related-paper-link {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  min-height: 26px;
+  padding: .24rem .58rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 7px;
+  background: #fff;
+  color: var(--text-primary);
+  font-size: .78rem;
+  line-height: 1.1;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.related-paper-link:hover {
+  color: #1d4ed8;
+  border-color: #94a3b8;
+  background: #f8fafc;
+  text-decoration: none;
+}
+
+.github-button {
+  border-color: #cbd5e1;
+}
+
+.github-button:hover {
+  color: #0f172a;
+  border-color: #94a3b8;
+}
+
+@media (max-width: 900px) {
+  .related-paper-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+  
+.figure-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .55rem .85rem;
+  align-items: center;
+  justify-content: center;
+  padding: .75rem .95rem .85rem;
+  border-top: 1px solid var(--border-color);
+  background: #fff;
+  color: var(--text-secondary);
+  font-size: 1.02rem;
+  line-height: 1.35;
+}
+
+.figure-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: .34rem;
+  white-space: nowrap;
+}
+
+.legend-swatch {
+  width: .82rem;
+  height: .82rem;
+  display: inline-block;
+  border: 1px solid rgba(15, 23, 42, .45);
+  border-radius: 2px;
+}
+
+.legend-departure { background: #00ff00; }
+.legend-arrival { background: #d52b1e; }
+.legend-wave {
+  width: 1.5rem;
+  background: linear-gradient(90deg, #00d51a, #d9a9f5, #f02eea);
+}
+.legend-arrow {
+  color: #334155;
+  font-size: 1rem;
+  font-weight: 900;
+}
+
+  
+.comparison-figure-section {
+  padding-top: 1.2rem;
+}
+
+.comparison-figure-section .publication-banner {
+  max-width: 620px;
+}
+
+.comparison-caption {
+  padding: 1rem 1.15rem 1.1rem;
+  border-top: 1px solid var(--border-color);
+  background: #fff;
+  color: var(--text-secondary);
+  font-size: .98rem;
+  line-height: 1.55;
+  text-align: left;
+}
+
+.comparison-caption strong {
+  display: block;
+  margin-bottom: .35rem;
+  color: var(--text-primary);
+  font-size: 1rem;
+}
+
+.figure-legend {
+  flex-direction: column;
+  gap: .45rem;
+}
+
+.figure-legend strong {
+  color: var(--text-primary);
+  font-weight: 850;
+}
+
+.figure-legend .legend-swatch {
+  width: 1rem;
+  height: 1rem;
+}
+
+.figure-legend .legend-wave {
+  width: 2rem;
+}
+
+  </style>
+</head>
+<body>
+  <header class="publication-header">
+    <div class="container">
+      <h1 class="publication-title">Trajectory Imputation Using Computer Vision Models</h1>
+      <p class="publication-subtitle">IMGIN Framework Reframes Trajectory Imputation Problem as Image Reconstruction Task</p>
+      <div class="publication-authors" aria-label="authors">
+        <span class="author-block">Panagiotis Betchavas</span>
+        <span class="author-block">Alexandros Troupiotis-Kapeliaris</span>
+        <span class="author-block">Kostas Patroumpas</span>
+        <span class="author-block">Giannis Spiliopoulos</span>
+        <span class="author-block">Dimitrios Skoutas</span>
+        <span class="author-block">Dimitris Zissis</span>
+        <span class="author-block">Nikos Bikakis</span>
+      </div>
+      <p class="publication-affiliations">Archimedes/Athena RC · University of the Aegean · Athena RC · Hellenic Mediterranean University</p>
+       <nav class="link-blocks" aria-label="paper resources">
+        <a class="button" href="https://www.nbikakis.com/papers/Trajectory%20Imputation%20Using%20Computer%20Vision%20Models_2026.pdf" target="_blank" rel="noopener">Paper PDF</a>
+        <a class="button secondary github-button" href="https://github.com/M3-Archimedes/IMaGe-based-ImputatioN-of-Trajectories" target="_blank" rel="noopener">GitHub</a>
+        <a class="button secondary github-button" href="https://github.com/M3-Archimedes" target="_blank" rel="noopener">Project GitHub</a>
+         <a class="button secondary" href="#citation">BibTeX</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="figure-section" aria-label="trajectory-to-wave-map figure">
+      <div class="container">
+        <figure class="publication-banner">
+          <button class="figure-modal-trigger" type="button" aria-haspopup="dialog" aria-controls="trajectoryFigureModal" aria-label="Open figure in larger view" title="Open larger view">
+            <img src="imgin_wave_map_trajectory_figure.png" alt="Illustration showing vessel trajectories transformed into wave map image representations for computer-vision-based trajectory imputation." loading="eager">
+          </button>
+
+          <figcaption class="figure-legend" aria-label="figure legend">
+            <span class="figure-legend-item"><span class="legend-swatch legend-wave" aria-hidden="true"></span>Wave map representation</span>
+            <span class="figure-legend-item"><strong>Trajectory to Wave map Transformation</strong></span>
+          </figcaption>
+        </figure>
+      </div>
+ 
+    </section>
+
+    <section class="section2" id="overview">
+      <div class="container">
+        <h2 class="title">Abstract</h2>
+        <div class="content"><p>
+		 In this work, we propose IMGIN, a novel framework that reformulates trajectory imputation as an image reconstruction task. We introduce the notion of wave map, a spatiotemporal representation in which raw trajectory data is transformed into a structured multi-channel image, where temporal evolution is captured by image coordinates and spatial location is encoded by color. This representation enables the use of high-performance computer vision architectures to recover missing path segments. To the best of our knowledge, this is the first work to address the trajectory imputation problem using image reconstruction techniques. Preliminary evaluation on real-world maritime datasets demonstrates that IMGIN achieves accuracy comparable to a state-of-the-art method.
+		  </div>
+       </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2 class="title">Main Idea</h2>
+        <div class="pipeline"><article class="step"><span class="step-number">1</span><h3>Preprocess trips</h3><p>Filter trips, remove outlier durations, and resample irregular AIS observations onto a regular temporal grid.</p></article><article class="step"><span class="step-number">2</span><h3>Encode space</h3><p>Map positions to H3 cells and encode normalized centroids as RGB values.</p></article><article class="step"><span class="step-number">3</span><h3>Build wave maps</h3><p>Create N x N image tensors where grid position captures time and pixel color captures spatial state.</p></article><article class="step"><span class="step-number">4</span><h3>Reconstruct paths</h3><p>Use a masked U-Net reconstruction pipeline and map outputs back to H3 centroids and coordinates.</p></article></div>
+      </div>
+    </section>
+
+ 
+
+ 
+
+
+
+    <section class="figure-section comparison-figure-section" aria-label="imputation comparison example">
+      <div class="container">
+        <figure class="publication-banner">
+          <img src="imgin_imputation_comparison_example.png" alt="Comparison of trajectory imputation results showing multiple reconstructed paths against the ground truth." loading="lazy">
+          <figcaption class="comparison-caption">
+            <strong>Imputation comparison example</strong>
+            Ground truth (white), SLI (brown), HABIT (light/dark green for H3 resolution 9/10), and IMGIN (pink/purple for H3 resolution 9/10).
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section2" id="related-papers">
+      <div class="container">
+        <h2 class="title">Related Works</h2>
+
+        <div class="related-paper-grid">
+          <article class="card related-paper-card">
+             <h3>Data-Driven Trajectory Imputation for Vessel Mobility Analysis</h3>
+            <p>
+              Giannis Spiliopoulos, Alexandros Troupiotis-Kapeliaris, Kostas Patroumpas,
+              Nikolaos Liapis, Dimitrios Skoutas, Dimitris Zissis, and Nikos Bikakis.
+            </p>
+            <p class="related-paper-note">
+              29th International Conference on Extending Database Technology, EDBT 2026.
+            </p>
+            <div class="related-paper-links">
+              <a class="related-paper-link" href="https://www.nbikakis.com/papers/Data-Driven%20Trajectory%20Imputation%20for%20Vessel%20Mobility%20Analysis_EDBT_2026.pdf" target="_blank" rel="noopener">Paper PDF</a>
+              <a class="related-paper-link github-button" href="https://github.com/M3-Archimedes/HABIT" target="_blank" rel="noopener">GitHub</a>
+            </div>
+          </article>
+
+          <article class="card related-paper-card">
+             <h3>Context-Enriched Natural Language Descriptions of Vessel Trajectories</h3>
+            <p>
+              Kostas Patroumpas, Alexandros Troupiotis-Kapeliaris, Giannis Spiliopoulos,
+              Panagiotis Betchavas, Dimitrios Skoutas, Dimitris Zissis, and Nikos Bikakis.
+            </p>
+            <p class="related-paper-note">
+              IEEE International Conference on Mobile Data Management, MDM 2026.
+            </p>
+            <div class="related-paper-links">
+              <a class="related-paper-link" href="https://www.nbikakis.com/papers/Context-Enriched%20Natural%20Language%20Descriptions%20of%20Vessel%20Trajectories_2026.pdf" target="_blank" rel="noopener">Paper PDF</a>
+              <a class="related-paper-link github-button" href="https://github.com/M3-Archimedes/AIS-semantic-trajectories" target="_blank" rel="noopener">GitHub 1</a>
+			                <a class="related-paper-link github-button" href="https://github.com/M3-Archimedes/AIS-trajectory-annotation" target="_blank" rel="noopener">GitHub 2</a>
+
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="section" id="citation">
+      <div class="container">
+        <div class="bibtex-header">
+          <h2 class="title" style="text-align:left;margin-bottom:0">BibTeX</h2>
+          <button class="copy-bibtex-btn" type="button" onclick="copyBibtex()"><span class="copy-text">Copy</span></button>
+        </div>
+        <pre><code id="bibtex">@inproceedings{btps2026,
+  title  = {Trajectory Imputation Using Computer Vision Models},
+  author = {Betchavas, Panagiotis and Troupiotis-Kapeliaris, Alexandros and Patroumpas, Kostas and Spiliopoulos, Giannis and Skoutas, Dimitrios and Zissis, Dimitris and Bikakis, Nikos},
+  booktitle ={International Workshop on Multi-Sensor Trajectory Knowledge Discovery & Extraction (MuseKDE 2026)},
+  year   = {2026}
+}</code></pre>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>This page uses as base the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank" rel="noopener">Academic Project Page Template</a>.</p>
+    </div>
+  </footer>
+
+
+  <div class="image-modal" id="trajectoryFigureModal" role="dialog" aria-modal="true" aria-label="Trajectory figure larger view" hidden>
+    <button class="image-modal-close" type="button" aria-label="Close enlarged figure">×</button>
+    <img src="imgin_wave_map_trajectory_figure.png" alt="Large illustration showing vessel trajectories transformed into wave-map image representations for computer-vision-based trajectory imputation.">
+  </div>
+
+  <button class="scroll-to-top" id="scrollTop" type="button" aria-label="Scroll to top">↑</button>
+
+  <script>
+    function copyBibtex() {
+      const text = document.getElementById('bibtex').innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = document.querySelector('.copy-bibtex-btn');
+        const label = btn.querySelector('.copy-text');
+        label.textContent = 'Copied';
+        btn.classList.add('copied');
+        setTimeout(() => { label.textContent = 'Copy'; btn.classList.remove('copied'); }, 1700);
+      });
+    }
+
+    const scrollBtn = document.getElementById('scrollTop');
+    window.addEventListener('scroll', () => {
+      scrollBtn.classList.toggle('visible', window.scrollY > 400);
+    });
+    scrollBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+
+    const trajectoryFigureTrigger = document.querySelector('.figure-modal-trigger');
+    const trajectoryFigureModal = document.getElementById('trajectoryFigureModal');
+    const trajectoryFigureClose = trajectoryFigureModal ? trajectoryFigureModal.querySelector('.image-modal-close') : null;
+
+    function openTrajectoryFigureModal() {
+      if (!trajectoryFigureModal || !trajectoryFigureClose) return;
+      trajectoryFigureModal.hidden = false;
+      document.body.classList.add('modal-open');
+      trajectoryFigureClose.focus();
+    }
+
+    function closeTrajectoryFigureModal() {
+      if (!trajectoryFigureModal || !trajectoryFigureTrigger) return;
+      trajectoryFigureModal.hidden = true;
+      document.body.classList.remove('modal-open');
+      trajectoryFigureTrigger.focus();
+    }
+
+    if (trajectoryFigureTrigger && trajectoryFigureModal && trajectoryFigureClose) {
+      trajectoryFigureTrigger.addEventListener('click', openTrajectoryFigureModal);
+      trajectoryFigureClose.addEventListener('click', closeTrajectoryFigureModal);
+
+      trajectoryFigureModal.addEventListener('click', (event) => {
+        if (event.target === trajectoryFigureModal) {
+          closeTrajectoryFigureModal();
+        }
+      });
+
+      window.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && !trajectoryFigureModal.hidden) {
+          closeTrajectoryFigureModal();
+        }
+      });
+    }
+  </script>
+</body>
+</html>
