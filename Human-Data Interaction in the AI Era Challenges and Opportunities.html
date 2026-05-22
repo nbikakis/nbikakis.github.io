@@ -768,6 +768,37 @@ background: linear-gradient(90deg, #64748b, #cbd5e1);    }
         grid-auto-rows: auto;
       }
 
+      #figure-insights .co-card-grid::before,
+      #figure-insights .co-card-grid::after {
+        display: block;
+        padding: .15rem .1rem .25rem;
+        font-size: 1.08rem;
+        line-height: 1.2;
+        font-weight: 850;
+        letter-spacing: -0.02em;
+      }
+
+      #figure-insights .co-card-grid::before {
+        content: "Challenges";
+        order: 0;
+        color: var(--challenge);
+      }
+
+      #figure-insights .co-card-grid::after {
+        content: "Opportunities";
+        order: 2;
+        margin-top: .8rem;
+        color: var(--opportunity);
+      }
+
+      #figure-insights .co-card-grid article:nth-child(odd) {
+        order: 1;
+      }
+
+      #figure-insights .co-card-grid article:nth-child(even) {
+        order: 3;
+      }
+
       .mini-insight-card {
         min-height: 0;
       }
