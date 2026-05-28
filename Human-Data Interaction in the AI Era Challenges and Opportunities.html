@@ -529,6 +529,205 @@ background: linear-gradient(90deg, #64748b, #cbd5e1);    }
       text-decoration: none;
     }
 
+
+
+    /* Community perspectives section */
+    .perspective-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: .95rem;
+      align-items: stretch;
+    }
+
+    .perspective-card {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: .62rem;
+      padding: 1.05rem 1.1rem;
+      border: 1px solid rgba(148, 163, 184, .28);
+      border-radius: var(--radius-lg);
+      background: #fff;
+      box-shadow: var(--shadow-sm);
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    }
+
+    .perspective-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+      border-color: rgba(37, 99, 235, .28);
+    }
+
+    .perspective-kicker {
+      width: fit-content;
+      padding: .25rem .58rem;
+      border-radius: 999px;
+      background: #eff6ff;
+      color: #1d4ed8;
+      border: 1px solid #bfdbfe;
+      font-size: .76rem;
+      font-weight: 850;
+      letter-spacing: .01em;
+    }
+
+    .perspective-card h3 {
+      margin: 0;
+      color: var(--text-primary);
+      font-size: 1.03rem;
+      line-height: 1.24;
+      letter-spacing: -0.02em;
+    }
+
+    .perspective-card p,
+    .perspective-card li {
+      color: var(--text-secondary);
+      font-size: .9rem;
+      line-height: 1.52;
+    }
+
+    .perspective-card p {
+      margin: 0;
+    }
+
+    .perspective-card ul {
+      margin: .15rem 0 0;
+      padding-left: 1.08rem;
+    }
+
+    .perspective-card li {
+      margin: 0 0 .42rem;
+    }
+
+    .perspective-card li:last-child {
+      margin-bottom: 0;
+    }
+
+    @media (max-width: 1050px) {
+      .perspective-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+
+
+    /* New and evolving issues section */
+    .issue-highlight-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: .95rem;
+      align-items: stretch;
+      margin: 1.1rem 0 1.35rem;
+    }
+
+    .issue-card {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: .55rem;
+      padding: 1.05rem 1.1rem;
+      border: 1px solid rgba(148, 163, 184, .28);
+      border-radius: var(--radius-lg);
+      background: #fff;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .issue-card h3 {
+      margin: 0;
+      color: var(--text-primary);
+      font-size: 1rem;
+      line-height: 1.24;
+      letter-spacing: -0.02em;
+    }
+
+    .issue-card p {
+      margin: 0;
+      color: var(--text-secondary);
+      font-size: .9rem;
+      line-height: 1.52;
+    }
+
+    .issue-pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .42rem;
+      margin-top: .1rem;
+    }
+
+    .issue-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: .26rem .56rem;
+      border-radius: 999px;
+      background: #f8fafc;
+      color: #334155;
+      border: 1px solid rgba(148, 163, 184, .35);
+      font-size: .76rem;
+      font-weight: 750;
+      line-height: 1.2;
+    }
+
+    .issue-summary-panel {
+      margin-top: 1rem;
+      padding: 1.15rem 1.2rem;
+      border: 1px solid rgba(148, 163, 184, .28);
+      border-radius: var(--radius-lg);
+      background: linear-gradient(180deg, #ffffff, #f8fafc);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .issue-summary-panel h3 {
+      margin: 0 0 .45rem;
+      color: var(--text-primary);
+      font-size: 1.05rem;
+      line-height: 1.25;
+      letter-spacing: -0.02em;
+    }
+
+    .issue-summary-panel p {
+      margin: 0;
+      color: var(--text-secondary);
+      font-size: .94rem;
+      line-height: 1.62;
+    }
+
+    .issue-summary-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: .85rem;
+      margin: 1rem 0;
+    }
+
+    .issue-summary-item {
+      padding: .85rem .9rem;
+      border: 1px solid rgba(148, 163, 184, .22);
+      border-radius: var(--radius-md);
+      background: #fff;
+    }
+
+    .issue-summary-item h4 {
+      margin: 0 0 .3rem;
+      color: var(--text-primary);
+      font-size: .88rem;
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+    }
+
+    .issue-summary-item p {
+      font-size: .86rem;
+      line-height: 1.5;
+    }
+
+    .issue-summary-note {
+      padding-top: .8rem;
+      border-top: 1px solid rgba(148, 163, 184, .24);
+    }
+
+    @media (max-width: 1050px) {
+      .issue-highlight-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
     /* Footer sharing icons */
     .footer-content {
       display: flex;
@@ -1014,6 +1213,106 @@ background: linear-gradient(90deg, #64748b, #cbd5e1);    }
 </article>
 </div>
 </div>
+</section><section class="section" id="community-perspectives">
+<div class="container">
+<h2 class="title">Selected Community Perspectives</h2>
+<p class="related-papers-intro">
+          Three complementary viewpoints expand the research agenda around personalized visual exploration, effective guidance in data ecosystems, and robust LLM-powered analytics.
+        </p>
+<div aria-label="selected community perspectives" class="perspective-grid">
+<article class="perspective-card">
+<div class="perspective-kicker">Personalized visual exploration</div>
+<h3>Truly personalized visual data exploration</h3>
+<p class="related-paper-authors">Sihem Amer-Yahia · CNRS, Université Grenoble Alpes, France</p>
+<p>Personalization should cover both the data being recommended and the visual mappings used to represent it. This raises questions about whether data and visual recommendations should be learned and evaluated together, how users should provide granular feedback, and how privacy can be preserved while keeping interaction sub-second.</p>
+<ul>
+<li><strong>Research direction:</strong> combine relational algebra with declarative visualization grammars to support in-database online learning, multi-armed bandits, and federated learning.</li>
+<li><strong>Systems opportunity:</strong> co-optimize training, inference, rewards, and materialized exploration pathways so personalized recommendations remain interactive.</li>
+<li><strong>Applications:</strong> systems such as Dora The Explorer for astronomers and DashBot for medical professionals illustrate how different expertise levels require different balances of automation, validation, and user control.</li>
+</ul>
+</article>
+<article class="perspective-card">
+<div class="perspective-kicker">Guidance &amp; interoperability</div>
+<h3>Effective guidance and interoperable analytics components</h3>
+<p class="related-paper-authors">Leilani Battle · University of Washington, USA</p>
+<p>AI assistants increasingly recommend what analysts should explore next, but the field still needs stronger ways to decide whether such guidance is useful, rigorous, domain-aware, and safe. Generic recommendations and excessive user trust in automated outputs make evaluation and bias mitigation central challenges.</p>
+<ul>
+<li><strong>Research direction:</strong> incorporate domain context into recommendation algorithms and AI models, and build benchmarks that validate their outputs.</li>
+<li><strong>Human factors:</strong> study how auto-generated recommendations shape analyst reasoning by strengthening collaborations across data management, visualization, HCI, psychology, and cognitive science.</li>
+<li><strong>Interoperability:</strong> optimize tools as components within larger ecosystems such as computational notebooks, where user-driven workloads are influenced by DBMSs, visualization packages, imported libraries, and collaborative practices.</li>
+</ul>
+</article>
+<article class="perspective-card">
+<div class="perspective-kicker">Generative AI for analytics</div>
+<h3>Harnessing generative AI for data analytics</h3>
+<p class="related-paper-authors">Aditya Parameswaran · UC Berkeley, USA</p>
+<p>LLMs could democratize data work across exploration, transformation, and insight discovery, including for users without coding backgrounds. Yet current LLMs remain brittle: they make unpredictable mistakes, disregard instructions, hallucinate facts, and make it difficult for users to understand reasoning or recover from failures.</p>
+<ul>
+<li><strong>Robustness:</strong> decompose data tasks into tightly scoped subtasks, combine models with different capabilities, resolve inconsistencies, and use assertions or cross-checking to catch errors.</li>
+<li><strong>Unstructured data:</strong> support analysis over PDFs, documents, images, and videos through lightweight interaction modalities such as navigation, search, highlighting, and ranked transformation suggestions.</li>
+<li><strong>Interfaces:</strong> move beyond chat-only interaction by integrating natural language, code, forms, examples, demonstration, direct manipulation, spreadsheets, notebooks, and collaborative handoff.</li>
+</ul>
+</article>
+</div>
+</div>
+</section><section class="section2" id="new-evolving-issues">
+<div class="container">
+<h2 class="title">New and Evolving Issues</h2>
+<p class="related-papers-intro">
+          The BigVis community perspective survey shows that several 2020 challenges remain important, especially scalability and efficiency, while AI has introduced new concerns around LLMs, fairness, trustworthiness, explanations, non-expert users, progressive analysis, and immersive visualization. The three selected perspectives refine this agenda into more concrete research and system-design issues.
+        </p>
+<div aria-label="summary of new and evolving issues" class="issue-highlight-grid">
+<article class="issue-card">
+<h3>Legacy issues that remain central</h3>
+<p>Scalability, efficiency, visual analysis for ML applications, user understanding, assistance, guidance, benchmarks, explanations, and data stories remain foundational for human-data interaction systems.</p>
+<div class="issue-pill-row">
+<span class="issue-pill">Scalability</span>
+<span class="issue-pill">Efficiency</span>
+<span class="issue-pill">Guidance</span>
+<span class="issue-pill">Evaluation</span>
+</div>
+</article>
+<article class="issue-card">
+<h3>AI-era issues made explicit</h3>
+<p>The related survey highlights newly prominent concerns: exploiting LLMs, ensuring fairness and trustworthiness, serving non-expert users, handling high-dimensional and stream data, and supporting progressive or immersive analytics.</p>
+<div class="issue-pill-row">
+<span class="issue-pill">LLMs</span>
+<span class="issue-pill">Trust</span>
+<span class="issue-pill">Non-experts</span>
+<span class="issue-pill">Progressive analysis</span>
+</div>
+</article>
+<article class="issue-card">
+<h3>Issues sharpened by the new perspectives</h3>
+<p>The added viewpoints push the agenda toward joint personalization of data and encodings, domain-aware guidance, notebook interoperability, robust LLM task decomposition, multimodal analytics, post-chat interfaces, and collaborative handoff.</p>
+<div class="issue-pill-row">
+<span class="issue-pill">Personalization</span>
+<span class="issue-pill">Interoperability</span>
+<span class="issue-pill">Robustness</span>
+<span class="issue-pill">Collaboration</span>
+</div>
+</article>
+</div>
+<div class="issue-summary-panel" aria-label="summary comparison of new and existing issues">
+<h3>Compact summary</h3>
+<p>The new material does not replace the related paper’s agenda; it makes it more actionable. The survey identifies the main challenge families, while the added perspectives translate them into concrete design, system, and evaluation questions.</p>
+<div class="issue-summary-grid">
+<div class="issue-summary-item">
+<h4>What remains</h4>
+<p>Scalability, efficiency, user understanding, guidance, evaluation, and explanations continue to be the baseline requirements for visual analytics systems.</p>
+</div>
+<div class="issue-summary-item">
+<h4>What AI adds</h4>
+<p>LLMs, fairness, trustworthiness, non-expert use, progressive analysis, and immersive or multimodal interfaces become more visible and urgent.</p>
+</div>
+<div class="issue-summary-item">
+<h4>What the new perspectives sharpen</h4>
+<p>The agenda becomes more specific: personalize both data and encodings, validate domain-aware guidance, support notebook ecosystems, verify LLM outputs, analyze unstructured media, and enable collaboration.</p>
+</div>
+</div>
+<p class="issue-summary-note"><strong>Overall takeaway:</strong> the field is moving from isolated visualization recommendations toward end-to-end human-centered analytics systems that combine data management, visualization, AI, privacy, interaction, and evaluation.</p>
+</div>
+</div>
 </section><section class="section" id="related-papers">
 <div class="container">
 <h2 class="title">Related Papers</h2>
@@ -1024,7 +1323,6 @@ background: linear-gradient(90deg, #64748b, #cbd5e1);    }
 <p class="related-paper-venue">ACM SIGMOD Blog, January 2025</p>
 <div class="paper-links">
 <a href="https://wp.sigmod.org/?p=3820" rel="noopener" target="_blank">SIGMOD Blog</a>
-<a href="https://www.nbikakis.com/papers/Data%20Exploration%20and%20Visual%20Analytics%20Challenges%20in%20AI%20Era_SIGMOD_BLOG_2024.pdf" rel="noopener" target="_blank">Paper PDF</a>
 </div>
 </article>
 <article class="related-paper-tile">
