@@ -145,7 +145,27 @@
 
     .interest-strip {
       margin: 10px 0 0 10px;
-      text-align: justify;
+      display: grid;
+      grid-template-columns: max-content minmax(0, 1fr);
+      column-gap: 8px;
+      row-gap: 4px;
+      align-items: baseline;
+      text-align: left;
+    }
+
+    .interest-label {
+      white-space: nowrap;
+    }
+
+    .interest-keywords {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2px 24px;
+      align-items: baseline;
+    }
+
+    .interest-keywords span {
+      white-space: nowrap;
     }
 
     .item-list {
@@ -239,6 +259,19 @@
       .book-actions { gap: 10px 18px; }
 
       .item-list { padding-left: 20px; }
+
+      .interest-strip {
+        grid-template-columns: 1fr;
+        margin-left: 0;
+      }
+
+      .interest-keywords {
+        gap: 4px 16px;
+      }
+
+      .interest-keywords span {
+        white-space: normal;
+      }
     }
 
     @media print {
@@ -286,15 +319,17 @@ the <a href="https://www.cse.uoi.gr/?lang=en" rel="noopener" target="_blank"><st
 <div class="paragraph">I received my PhD in Computer Science in 2016 from the <a href="http://www.ntua.gr" rel="noopener" target="_blank"><strong>National Technical University of Athens</strong></a>,
 under the supervision of Prof. <a href="https://archimedesai.gr/en/leadership/timos-sellis" rel="noopener" target="_blank"><strong>Timos Sellis</strong></a>.
 In 2009 I received my Diploma in Electronic &amp; Computer Engineering from the <a href="http://www.tuc.gr" rel="noopener" target="_blank"><strong>Technical University of Crete</strong></a>.</div>
-<div class="interest-strip"><b>&gt; Interests :: </b>
-_Human-Data Interaction      _Data Structures
-_Personalization Systems
-_Explainable AI &amp; Fairness
-<br/>
-_Spatial &amp; Social Data
-_Hard Computational Problems
-_Web of Data
-<br>
+<div class="interest-strip">
+<b class="interest-label">&gt; Interests ::</b>
+<span class="interest-keywords">
+<span>_Human-Data Interaction</span>
+<span>_Data Structures</span>
+<span>_Personalization Systems</span>
+<span>_Explainable AI &amp; Fairness</span>
+<span>_Spatial &amp; Social Data</span>
+<span>_Hard Computational Problems</span>
+<span>_Web of Data</span>
+</span>
 </div>
 </div>
 </section>
