@@ -19,6 +19,9 @@
   --bg: #f8fafc;
   --surface: #ffffff;
   --surface-soft: #f1f5f9;
+  --section-bg: #ffffff;
+  --section-bg-alt: #f1f5f9;
+  --section-bg-blue: #eff6ff;
   --text-primary: #0f172a;
   --text-secondary: #475569;
   --text-muted: #64748b;
@@ -140,9 +143,22 @@ a:hover { text-decoration: underline; }
 .button:hover { background: #1d4ed8; transform: translateY(-1px); text-decoration: none; box-shadow: 0 20px 42px -28px rgba(37,99,235,.9); }
 .button.secondary { background: #fff; color: #1d4ed8; border-color: #bfdbfe; box-shadow: var(--shadow-sm); }
 .button.secondary:hover { background: #eff6ff; }
-.section, .section2 { padding: 3.6rem 0; }
-.section { background: rgba(255,255,255,.62); }
-.section2 { background: transparent; }
+.section, .section2 {
+  position: relative;
+  padding: 3.6rem 0;
+}
+.section {
+  background: linear-gradient(180deg, rgba(241,245,249,.98), rgba(248,250,252,.98));
+  border-top: 1px solid rgba(148, 163, 184, .18);
+  border-bottom: 1px solid rgba(148, 163, 184, .18);
+}
+.section2 {
+  background: var(--section-bg);
+}
+.figure-section {
+  position: relative;
+  background: var(--section-bg);
+}
 .title {
   position: relative;
   margin: 0 auto 1.65rem;
@@ -541,13 +557,13 @@ body.modal-open { overflow: hidden; }
 .top-figure-card {
   max-width: 760px;
   margin: 0 auto;
-  border-radius: var(--radius-xl);
+  border-radius: 12px;
   box-shadow: var(--shadow-lg);
 }
-.top-figure-card .figure-modal-trigger { background: #fff; padding: 12px; }
+.top-figure-card .figure-modal-trigger { background: #fff; padding: 12px; border-radius: inherit; }
 .top-figure-card img {
   width: 100%;
-  border-radius: 8px;
+  border-radius: 4px;
   height: auto;
   display: block;
 }
@@ -560,16 +576,46 @@ body.modal-open { overflow: hidden; }
   .top-challenges-figure { padding-top: 1rem; }
 }
 
+
+/* Section background bands matching the requested layout */
+.publication-header,
+.top-challenges-figure,
+.compact-snapshot-section {
+  background: #fff;
+}
+#abstract,
+#challenges-opportunities,
+#companion-infographic {
+  background: linear-gradient(180deg, rgba(241,245,249,.98), rgba(248,250,252,.98));
+  border-top: 1px solid rgba(148, 163, 184, .18);
+  border-bottom: 1px solid rgba(148, 163, 184, .18);
+}
+#key-insights,
+#figures,
+#related-papers,
+#citation {
+  background: var(--section-bg);
+}
+
 /* Compact survey snapshot revision */
-.compact-snapshot-section { padding: 1.6rem 0 2rem; }
+.compact-snapshot-section {
+  padding: 1.6rem 0 2rem;
+  background: #fff;
+  border-top: 0;
+  border-bottom: 0;
+}
 .compact-snapshot { max-width: 860px; }
-.compact-snapshot-head { padding: 1rem 1.15rem; grid-template-columns: 1fr auto; }
-.compact-snapshot-head h2 { font-size: clamp(1.1rem, 1.8vw, 1.45rem); }
-.compact-snapshot-head p { font-size: .86rem; line-height: 1.42; }
-.compact-snapshot-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); padding: .9rem .9rem .55rem; gap: .75rem; }
-.compact-stat { min-height: 0; padding: .82rem .9rem; }
-.compact-stat .snapshot-number { font-size: 1.08rem; line-height: 1.12; }
-.compact-stat .snapshot-note { font-size: .76rem; line-height: 1.35; }
+.compact-snapshot-head { padding: 1.05rem 1.2rem; grid-template-columns: 1fr auto; }
+.compact-snapshot-head h2 { font-size: clamp(1.3rem, 2vw, 1.65rem); }
+.compact-snapshot-head p { font-size: .98rem; line-height: 1.52; }
+.compact-snapshot-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); padding: .95rem .95rem .65rem; gap: .8rem; }
+.compact-stat { min-height: 0; padding: .95rem 1rem; border-radius: 0; }
+.compact-stat .snapshot-number { font-size: 1.05rem; line-height: 1.22; }
+.compact-stat .snapshot-note { font-size: .94rem; line-height: 1.48; }
+.compact-snapshot .snapshot-stat,
+.compact-snapshot .snapshot-explainer-card {
+  border-radius: 0;
+}
 @media (max-width: 680px) {
   .compact-snapshot-head { grid-template-columns: 1fr; }
   .compact-snapshot-grid { grid-template-columns: 1fr; }
@@ -772,8 +818,8 @@ body.modal-open { overflow: hidden; }
   text-justify: inter-word;
   hyphens: auto;
 }
-.compact-snapshot .snapshot-badge { font-size: .76rem; }
-.compact-stat .snapshot-label { font-size: .86rem; line-height: 1.22; }
+.compact-snapshot .snapshot-badge { font-size: .9rem; }
+.compact-stat .snapshot-label { font-size: .95rem; line-height: 1.25; }
 .compact-snapshot .discussion-takeaway {
   width: calc(100% - 1.8rem);
   max-width: 820px;
@@ -784,8 +830,8 @@ body.modal-open { overflow: hidden; }
   border-left: 4px solid rgba(14, 165, 233, .72);
   background: linear-gradient(135deg, rgba(240, 249, 255, .96), rgba(255,255,255,.98));
   box-shadow: 0 10px 28px -24px rgba(15, 23, 42, .55);
-  font-size: .85rem;
-  line-height: 1.5;
+  font-size: .95rem;
+  line-height: 1.58;
   text-align: justify;
   text-justify: inter-word;
   hyphens: auto;
@@ -812,7 +858,7 @@ body.modal-open { overflow: hidden; }
   white-space: nowrap;
  }
 .figure-download-links a {
-  color: var(--text-secondary)
+  color: var(--text-secondary);
   text-decoration: none;
 }
 .figure-download-links a:hover { text-decoration: underline; }
@@ -847,7 +893,7 @@ body.modal-open { overflow: hidden; }
       <span class="author-block">Lingyun Yu</span>
     </div>
     <p class="publication-affiliations">Hellenic Mediterranean University &amp; Archimedes/Athena RC · University of Pittsburgh · Tsinghua University · Athena RC · Xi’an Jiaotong-Liverpool University</p>
-    <div class="publication-venue">ACM SIGMOD Record, 2025</div>
+    <div class="publication-venue">ACM SIGMOD Record 2025</div>
     <nav aria-label="paper resources" class="link-blocks">
       <a class="button" href="https://sigmodrecord.org/publications/sigmodRecord/2506/pdfs/11_Reports_Bikakis.pdf" target="_blank" rel="noopener">Paper PDF</a>
        <a class="button secondary" href="#related-papers">Related Papers</a>
@@ -884,13 +930,13 @@ body.modal-open { overflow: hidden; }
         </div>
        </div>
       <div class="snapshot-grid compact-snapshot-grid" aria-label="survey highlights">
-        <div class="snapshot-stat compact-stat"><span class="snapshot-number">94% of participants</span>
-		<span class="snapshot-label">Scalability &amp; Efficiency Challenge</span>
+        <div class="snapshot-stat compact-stat"><span class="snapshot-number">Major Challenges</span>
+		<span class="snapshot-note"><b>Scalability &amp; efficiency, Visual analysis for ML applications, and Understand what the user need.</b></span>
 		</div>
-        <div class="snapshot-stat compact-stat"><span class="snapshot-number">Emerging topics</span>
-				<span class="snapshot-note">Human-in-the-loop processing, human-centered ML, and progressive analytics tie at the top.</span></div>
+        <div class="snapshot-stat compact-stat"><span class="snapshot-number">Emerging Topics</span>
+				<span class="snapshot-note"><b>Human-in-the-loop processing, human-centered ML, and progressive analytics tie at the top.</b></span></div>
       </div>
-      <p class="discussion-takeaway"><strong>Takeaway:</strong> the survey highlights the broad acceptance of the importance of all the challenges identified in the  <a class="inline-report-link" href="#bigvis-2020-report">community report</a> four years ago. It argues that older issues such as scalability and visual analysis for ML remain broadly accepted, while AI introduces a new layer of concerns around LLM use, trust, explanations, and access for non-expert users.</p>
+      <p class="discussion-takeaway"><strong>Takeaway:</strong> the report highlights the broad acceptance of the importance of all the challenges identified in the  <a class="inline-report-link" href="#bigvis-2020-report">community report</a> four years ago. It argues that older issues such as scalability and visual analysis for ML remain broadly accepted, while AI introduces a new layer of concerns around LLM use, trust, explanations, and access for non-expert users.</p>
     </article>
   </div>
 </section>
@@ -943,7 +989,7 @@ body.modal-open { overflow: hidden; }
 
 <section class="section" id="figures">
   <div class="container">
-    <h2 class="title">Survey Figures</h2>
+    <h2 class="title">Survey Results</h2>
     <div class="figure-grid">
       <figure class="figure-card">
         <button aria-label="Open participants and 2020 challenges figure" class="figure-modal-trigger" type="button">
