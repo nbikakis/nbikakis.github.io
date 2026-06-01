@@ -370,8 +370,7 @@ code { font-family: "SF Mono", Monaco, Cascadia Code, "Roboto Mono", Menlo, Cons
   margin: 0 auto 1.25rem;
   font-size: clamp(1.85rem, 4.45vw, 3.8rem);
   line-height: 1.02;
-  letter-spacing: -0.052em;
-  font-weight: 500;
+   font-weight: 500;
 }
 .publication-subtitle {
   max-width: 840px;
@@ -844,7 +843,8 @@ body.modal-open {
       <div class="container">
         <h2 class="title">Abstract</h2>
         <div class="content"><p>
-		 In this work, we propose IMGIN, a novel framework that reformulates trajectory imputation as an image reconstruction task. We introduce the notion of wave map, a spatiotemporal representation in which raw trajectory data is transformed into a structured multi-channel image, where temporal evolution is captured by image coordinates and spatial location is encoded by color. This representation enables the use of high-performance computer vision architectures to recover missing path segments. To the best of our knowledge, this is the first work to address the trajectory imputation problem using image reconstruction techniques. Preliminary evaluation on real-world maritime datasets demonstrates that IMGIN achieves accuracy comparable to a state-of-the-art method.
+		 In this work, we propose IMGIN, a novel framework that reformulates trajectory imputation as an image reconstruction task. 
+		 We introduce the notion of Wave map, a spatiotemporal representation in which raw trajectory data is transformed into a structured multi-channel image, where temporal evolution is captured by image coordinates and spatial location is encoded by color. This representation enables the use of high-performance computer vision architectures to recover missing path segments. To the best of our knowledge, this is the first work to address the trajectory imputation problem using image reconstruction techniques. Preliminary evaluation on real-world maritime datasets demonstrates that IMGIN achieves accuracy comparable to a state-of-the-art method.
 		  </div>
        </div>
     </section>
@@ -852,7 +852,11 @@ body.modal-open {
     <section class="section">
       <div class="container">
         <h2 class="title">Main Idea</h2>
-        <div class="pipeline"><article class="step"><span class="step-number">1</span><h3>Preprocess trips</h3><p>Filter trips, remove outlier durations, and resample irregular AIS observations onto a regular temporal grid.</p></article><article class="step"><span class="step-number">2</span><h3>Encode space</h3><p>Map positions to H3 cells and encode normalized centroids as RGB values.</p></article><article class="step"><span class="step-number">3</span><h3>Build wave maps</h3><p>Create N x N image tensors where grid position captures time and pixel color captures spatial state.</p></article><article class="step"><span class="step-number">4</span><h3>Reconstruct paths</h3><p>Use a masked U-Net reconstruction pipeline and map outputs back to H3 centroids and coordinates.</p></article></div>
+        <div class="pipeline"><article class="step"><span class="step-number">1</span><h3>Preprocess Trajectories</h3>
+		<p>Filter trips, remove outlier durations, and resample irregular trajectory signals onto a regular temporal grid.</p></article>
+		<article class="step"><span class="step-number">2</span><h3>Encode Space</h3><p>Map positions to H3 cells and encode normalized centroids as RGB values.</p></article>
+		<article class="step"><span class="step-number">3</span><h3>Build Wave maps</h3><p>Create N x N image tensors where grid position captures time and pixel color captures spatial state.</p></article>
+		<article class="step"><span class="step-number">4</span><h3>Reconstruct Trajectories</h3><p>Use a masked U-Net reconstruction pipeline and map outputs back to H3 centroids and coordinates.</p></article></div>
       </div>
     </section>
 
@@ -867,7 +871,7 @@ body.modal-open {
         <figure class="publication-banner">
           <img src="imgin_imputation_comparison_example.png" alt="Comparison of trajectory imputation results showing multiple reconstructed paths against the ground truth." loading="lazy">
           <figcaption class="comparison-caption">
-            <strong>Imputation comparison example</strong>
+            <strong>Imputation Example: Vessel Trajectories</strong>
             Ground truth (white), SLI (brown), HABIT (light/dark green for H3 resolution 9/10), and IMGIN (pink/purple for H3 resolution 9/10).
           </figcaption>
         </figure>
