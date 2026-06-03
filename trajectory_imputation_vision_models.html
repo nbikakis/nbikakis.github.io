@@ -536,7 +536,7 @@ code { font-family: "SF Mono", Monaco, Cascadia Code, "Roboto Mono", Menlo, Cons
 .figure-section .publication-banner {
   max-width: 980px;
   margin: 0 auto;
-  border-radius: 18px;
+  border-radius: 6px;
   overflow: hidden;
   background: #fff;
   border: 1px solid var(--border-color);
@@ -568,7 +568,7 @@ code { font-family: "SF Mono", Monaco, Cascadia Code, "Roboto Mono", Menlo, Cons
 .figure-modal-trigger:focus-visible {
   outline: 3px solid rgba(37, 99, 235, .45);
   outline-offset: 4px;
-  border-radius: var(--radius-lg);
+  border-radius: 6px;
 }
 
 .image-modal[hidden] {
@@ -844,6 +844,24 @@ body.modal-open {
   .examples-grid .publication-banner {
     max-width: 100%;
   }
+}
+
+
+/* Reduced corner radius for example figures */
+.examples-grid .publication-banner {
+  border-radius: 6px;
+}
+
+.examples-grid .comparison-caption {
+  border-radius: 0 0 6px 6px;
+}
+
+.example-modal-trigger:focus-visible {
+  border-radius: 6px;
+}
+
+.image-modal img {
+  border-radius: 6px;
 }
 
   </style>
