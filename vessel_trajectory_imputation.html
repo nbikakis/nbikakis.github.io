@@ -912,6 +912,8 @@ body.modal-open {
       <nav class="link-blocks" aria-label="paper resources">
         <a class="button" href="https://openproceedings.org/2026/conf/edbt/paper-288.pdf" target="_blank" rel="noopener">Paper PDF</a>
         <a class="button secondary github-button" href="https://github.com/M3-Archimedes/HABIT" target="_blank" rel="noopener">GitHub</a>
+				<a class="button secondary github-button" href="https://github.com/M3-Archimedes" target="_blank" rel="noopener">Project GitHub</a>
+
           <a class="button secondary" href="#citation">BibTeX</a>
       </nav>
 
@@ -957,7 +959,7 @@ body.modal-open {
 
     <section class="section2" id="pipeline">
       <div class="container">
-        <h2 class="title">HABIT Framework</h2>
+        <h2 class="title">HABIT Framework Workflow</h2>
         <div class="pipeline">
           <article class="step"><span class="step-number">1</span><h3>Preprocess AIS trips</h3><p>Clean raw AIS positions, remove noisy records, detect stops and communication gaps, and segment each vessel track into trips.</p></article>
           <article class="step"><span class="step-number">2</span><h3>Build an H3 graph</h3><p>Project locations to H3 cells, aggregate traffic statistics, and construct a weighted transition graph from historical movement.</p></article>
@@ -1003,7 +1005,7 @@ body.modal-open {
           <h2 class="title" style="text-align:left;margin-bottom:0">BibTeX</h2>
           <button class="copy-bibtex-btn" type="button" onclick="copyBibtex()"><span class="copy-text">Copy</span></button>
         </div>
-        <pre><code id="bibtex">@inproceedings{spiliopoulos2026habit,
+        <pre><code id="bibtex">@inproceedings{spiliopoulos2026Habit,
   title     = {{Data-Driven Trajectory Imputation for Vessel Mobility Analysis}},
   author    = {Spiliopoulos, Giannis and Troupiotis-Kapeliaris, Alexandros and Patroumpas, Kostas and Liapis, Nikolaos and Skoutas, Dimitrios and Zissis, Dimitris and Bikakis, Nikos},
   booktitle = {Proceedings of the 29th International Conference on Extending Database Technology (EDBT)},
