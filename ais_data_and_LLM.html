@@ -3,14 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>From Vessel Trajectories to Context-Enriched Natural Language Trip Descriptions</title>
+  <title>From Vessel Trajectories to Semantically-enriched LLM-generated Trip Narratives</title>
   <meta name="description" content="Page for the paper: Context-Enriched Natural Language Descriptions of Vessel Trajectories.">
-  <meta name="keywords" content="Maritime AI, Vessel Trajectory Analysis, Large
-Language Models, Semantic Trajectories, Spatiotemporal Data
-Mining, Explainable AI, Trajectory Annotation, Spatial Data
-Enrichment, Mobility Pattern Mining">
-  <meta property="og:title" content="Context-Enriched Natural Language Descriptions of Vessel Trajectories">
-  <meta property="og:description" content="A framework for turning raw AIS trajectories into semantically-enriched  LLM-generated trip narratives.">
+  <meta name="keywords" content="Maritime AI, Vessel Trajectory Analysis, Large Language Models, Semantic Trajectories, Spatiotemporal Data Mining, Explainable AI, Trajectory Annotation, Spatial Data Enrichment, Mobility Pattern Mining">
+  <meta property="og:title" content="Semantically-enriched LLM-generated Trip Narratives">
+  <meta property="og:description" content="A framework for trajectories into semantically-enriched LLM-generated trip narratives.">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -377,8 +374,8 @@ code { font-family: "SF Mono", Monaco, Cascadia Code, "Roboto Mono", Menlo, Cons
   margin: 0 auto 1.25rem;
       font-size: clamp(1.8rem, 4.5vw, 3.8rem);
   line-height: 1.12;
-  letter-spacing: -0.06em;
-  font-weight: 400;
+  letter-spacing: -0.02em;
+  font-weight: 500;
   text-wrap: balance;
 }
 .publication-subtitle {
@@ -703,6 +700,57 @@ body.modal-open {
   .pipeline, .glance-grid { grid-template-columns: 1fr; }
 }
 
+
+/* External context sources */
+.sources-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: .85rem;
+  max-width: 1040px;
+  margin: 0 auto;
+}
+.source-card {
+  height: 100%;
+  padding: 1.45rem 1.25rem;
+  border: 1px solid rgba(148, 163, 184, .28);
+  border-radius: var(--radius-lg);
+  background: #fff;
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+  transition: all .25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.source-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+.source-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 4rem;
+  height: 4rem;
+  margin-bottom: 1rem;
+  border-radius: 50%;
+  background: #eff6ff;
+  color: #1d4ed8;
+  font-size: 2rem;
+  line-height: 1;
+}
+.source-card h3 { margin: 0 0 .35rem; font-size: .98rem; line-height: 1.25; }
+.source-card p { margin: 0; color: var(--text-secondary); font-size: .9rem; line-height: 1.48; }
+.sources-note {
+  max-width: 880px;
+  margin: 1.25rem auto 0;
+  color: var(--text-secondary);
+  font-size: .95rem;
+  line-height: 1.6;
+  text-align: center;
+}
+
+@media (max-width: 980px) {
+  .sources-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 560px) {
+  .sources-grid { grid-template-columns: 1fr; }
+}
+
 /* Related papers section */
 .related-paper-grid {
   display: grid;
@@ -788,13 +836,14 @@ body.modal-open {
   margin-top: .25rem;
 }
 
+ 
 </style>
 </head>
 <body>
   <header class="publication-header">
     <div class="container">
       <h1 class="publication-title">Context-Enriched Natural Language Descriptions of Vessel Trajectories</h1>
-      <p class="publication-subtitle">From Vessel Trajectories to Context-Enriched Natural Language Trip Descriptions</p>
+      <p class="publication-subtitle">From Vessel Trajectories to Context-enriched LLM-generated Trip Narrative</p>
 	   
 
       <div class="publication-authors" aria-label="authors">
@@ -849,6 +898,46 @@ body.modal-open {
       <div class="container">
         <h2 class="title">From AIS Points to Trip Narratives</h2>
         <div class="pipeline"><article class="step"><span class="step-number">1</span><h3>Annotate mobility</h3><p>Detect stops, gaps, speed changes, slow motion, turns, and noisy positions in raw AIS streams.</p></article><article class="step"><span class="step-number">2</span><h3>Segment trips</h3><p>Split long trajectories into trips and episodes such as sailing, stopped, turning, maneuvering, and communication gap.</p></article><article class="step"><span class="step-number">3</span><h3>Add context</h3><p>Enrich each episode with ports, coastal features, offshore areas, traffic schemes, weather, and bathymetry.</p></article><article class="step"><span class="step-number">4</span><h3>Generate descriptions</h3><p>Pass context-enriched JSON to LLMs to produce human-readable trip narratives and summary statistics.</p></article></div>
+      </div>
+    </section>
+
+
+    <section class="section2" id="external-sources">
+      <div class="container">
+        <h2 class="title">External Sources Used for Context Enrichment</h2>
+        <div class="sources-grid" aria-label="external sources used for semantic enrichment">
+          <article class="source-card">
+            <span class="source-icon" aria-hidden="true">⚓</span>
+            <h3>Ports &amp; harbors</h3>
+            <p>Nearby ports, anchorages, and maritime infrastructure used to describe trip endpoints and stops.</p>
+          </article>
+          
+		  <article class="source-card">
+            <span class="source-icon" aria-hidden="true">☁️</span>
+            <h3>Weather</h3>
+            <p>Meteorological conditions that explain speed changes, delays, and trip-level context.</p>
+          </article>
+		  
+		  
+		  <article class="source-card">
+            <span class="source-icon" aria-hidden="true">🌊</span>
+            <h3>Coasts &amp; sea areas</h3>
+            <p>Coastal regions, offshore zones, and geographic context for locating vessel movement.</p>
+          </article>
+          <article class="source-card">
+            <span class="source-icon" aria-hidden="true">🧭</span>
+            <h3>Traffic schemes</h3>
+            <p>Maritime routes, separation schemes, and navigation areas that help interpret maneuvers.</p>
+          </article>
+          
+		  
+          <article class="source-card">
+            <span class="source-icon" aria-hidden="true">🗺️</span>
+            <h3>Bathymetry</h3>
+            <p>Sea-depth information used to enrich trajectories with environmental and spatial constraints.</p>
+          </article>
+        </div>
+        <p class="sources-note">These external sources are combined with AIS-derived episodes before the LLM generation step, so trip narratives can mention not only movement patterns but also the surrounding maritime, geographic, and meteorological context.</p>
       </div>
     </section>
 
