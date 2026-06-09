@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>nikos bikakis | home page</title>
+<meta content="nikos bikakis | home page" name="description"/>
+<meta content="Bikakis, Mpikakis Bikaki, Mpikaki, Nikos, data, database, visualization, research, greece, Nick, Nikolaos" name="keywords"/>
+<meta content="Nikos Bikakis" name="author"/>
+<link href="favicon.ico" rel="icon" type="image/x-icon"/>
+<link href="favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+<style>
+    :root {
+      --accent: #5881E3;
+      --text: #3f3f3f;
+      --muted: #6c6c6c;
+      --link: #4d4d4d;
+      --link-hover: #5881E3;
+      --highlight: #F00;
+      --bg: #ffffff;
+      --panel: #fbfbfb;
+      --border: #e8e8e8;
+      --shadow: rgba(0, 0, 0, 0.08);
+      --content-width: 800px;
+      --font: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: linear-gradient(180deg, var(--bg) 0%, var(--bg) 62%, #fbfbfb 100%);
+      color: var(--text);
+      font-family: var(--font);
+      font-size: 12px;
+      line-height: 1.62;
+      letter-spacing: 0.005em;
+    }
+
+    a {
+      color: var(--link);
+      text-decoration: none;
+      transition: color 160ms ease;
+    }
+
+    a:hover, a:focus {
+      color: var(--link-hover);
+      text-decoration: none;
+    }
+
+    a:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+      border-radius: 3px;
+    }
+
+    .page {
+      width: min(var(--content-width), calc(100% - 32px));
+      margin: 0 auto;
+      padding: 18px 0 34px;
+    }
+
+    .site-header {
+      display: grid;
+      grid-template-columns: 3px minmax(0, 1fr) auto;
+      gap: 14px;
+      align-items: end;
+      margin-top: 10px;
+    }
+
+    .accent-bar {
+      align-self: stretch;
+      background: var(--accent);
+      border-radius: 999px;
+    }
+
+    .identity {
+      padding-top: 8px;
+    }
+
+    .title {
+      margin: 0 0 15px;
+      color: #333333;
+      font-size: 28px;
+      font-weight: 400;
+      line-height: 1.18;
+      letter-spacing: 0.02em;
+    }
+
+    .affiliation {
+      margin: 0 0 2px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.4;
+    }
+
+    .contact-block {
+      display: grid;
+      grid-template-columns: 60px minmax(0, 1fr);
+      gap: 3px 8px;
+      align-items: center;
+      margin-top: 17px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .contact-label { grid-row: span 2; }
+    .contact-label b { color: var(--text); }
+
+    .portrait {
+      align-self: end;
+    }
+
+    .portrait img {
+      display: block;
+      border-radius: 10px;
+      box-shadow: 0 10px 28px var(--shadow);
+    }
+
+    .site-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 18px;
+      margin: 36px 0 30px;
+      padding: 10px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      font-size: 12px;
+    }
+
+    .site-nav a {
+      position: relative;
+      padding: 2px 0;
+      font-weight: 700;
+      letter-spacing: 0.025em;
+    }
+
+    .site-nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -3px;
+      height: 1px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 160ms ease;
+    }
+
+    .site-nav a:hover::after,
+    .site-nav a:focus::after {
+      transform: scaleX(1);
+    }
+
+    .section-block {
+      margin: 0 0 30px;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin: 0 0 10px;
+      color: #333333;
+      font-size: 17px;
+      font-weight: 700;
+      line-height: 1.3;
+      letter-spacing: 0.01em;
+    }
+
+    .section-title::before {
+      content: "";
+      width: 3px;
+      height: 1.25em;
+      background: var(--accent);
+      border-radius: 999px;
+      flex: 0 0 3px;
+    }
+
+    .section-content {
+      padding-left: 16px;
+    }
+
+    .paragraph {
+      margin: 0 0 10px;
+      text-align: justify;
+    }
+
+    .interest-strip {
+      display: grid;
+      grid-template-columns: max-content minmax(0, 1fr);
+      column-gap: 18px;
+      align-items: baseline;
+      margin: 12px 0 0 10px;
+      text-align: left;
+    }
+
+    .interest-label {
+      color: #333333;
+      white-space: nowrap;
+    }
+
+    .interest-items {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 24px;
+      min-width: 0;
+    }
+
+    .interest-item {
+      display: inline-block;
+      white-space: nowrap;
+    }
+
+    .item-list {
+      margin: 0;
+      padding-left: 22px;
+      color: var(--text);
+      list-style-image: url("list.png");
+    }
+
+    .item-list li {
+      margin: 0 0 9px;
+      text-align: justify;
+    }
+
+    .publications-list li { margin-bottom: 6px; }
+
+    .book-card {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 28px;
+      align-items: start;
+      padding: 16px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+
+    .book-details h3 {
+      margin: 0 0 10px;
+      font-size: 14.4px;
+      line-height: 1.35;
+    }
+
+    .book-details p {
+      margin: 0 0 3px;
+    }
+
+    .note, .smallColorText2 {
+      color: var(--highlight);
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .smallText { font-size: 11px; }
+
+    .book-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 24px;
+      align-items: center;
+      margin-top: 20px;
+    }
+
+    .book-actions a {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      white-space: nowrap;
+    }
+
+    .book-cover {
+      display: inline-block;
+    }
+
+    .book-cover img {
+      display: block;
+      border-radius: 6px;
+      box-shadow: 0 8px 22px var(--shadow);
+    }
+
+    @media screen and (max-width: 700px) {
+      body { font-size: 13px; }
+
+      .page {
+        width: min(100% - 24px, var(--content-width));
+        padding-top: 12px;
+      }
+
+      .site-header {
+        grid-template-columns: 3px minmax(0, 1fr);
+        align-items: start;
+      }
+
+      .portrait {
+        grid-column: 2;
+        justify-self: start;
+        margin-top: 12px;
+      }
+
+      .site-nav {
+        gap: 8px 12px;
+        margin-top: 24px;
+      }
+
+      .section-content { padding-left: 8px; }
+
+      .interest-strip {
+        grid-template-columns: 1fr;
+        row-gap: 5px;
+        margin-left: 0;
+      }
+
+      .interest-items {
+        gap: 5px 16px;
+      }
+
+      .book-card {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        padding: 14px;
+      }
+
+      .book-cover {
+        order: -1;
+      }
+
+      .book-details {
+        order: 1;
+      }
+
+      .book-actions { gap: 10px 18px; }
+
+      .item-list { padding-left: 20px; }
+    }
+
+    @media print {
+      .site-nav { display: none; }
+      .page { width: 100%; padding: 0; }
+      body { background: #ffffff; }
+      .book-card { border: 0; padding: 0; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+<header class="site-header">
+<div aria-hidden="true" class="accent-bar"></div>
+<div class="identity">
+<h1 class="title">nikos bikakis</h1>
+<p class="affiliation">Hellenic Mediterranean University | Greece</p><p class="affiliation">ATHENA Research Center | Greece</p>
+<div class="contact-block">
+<span class="contact-label"><b>conταcτ</b></span>
+<span>bikakis |_ατ_| <img alt="" height="12px" src="h.png"/></span>
+<span>bikakis |_ατ_| <img alt="" height="12px" src="a.png"/></span>
+</div>
+</div>
+<div class="portrait"><img height="160px" src="pic.png"/></div>
+</header>
+<nav aria-label="Page sections" class="site-nav">
+<a href="#about">About</a>
+<a href="#news">News</a>
+<a href="#book">Book</a>
+<a href="#service">Service</a>
+<a href="#publications">Publications</a>
+<a href="#projects">Projects</a>
+<a href="#misc">Misc</a>
+</nav>
+<main>
+<section class="section-block" id="about">
+<h2 class="section-title">_about</h2>
+<div class="section-content">
+<div class="paragraph">I am an Assistant Professor in  the Department of Electronic Engineering
+at the <a href="https://hmu.gr" rel="noopener" target="_blank"><b>Hellenic Mediterranean University</b></a>
+and  a Research Associate at the <a href="http://www.imsi.athenarc.gr" rel="noopener" target="_blank"><b>Information Management Systems Institute</b></a>
+of the   <a href="https://www.athenarc.gr" rel="noopener" target="_blank"><b>ATHENA Research Center</b></a>, Greece.
+Previously, I was a research engineer in industry, a  postdoctoral researcher at the
+<a href="https://www.dept.aueb.gr/en/cs" rel="noopener" target="_blank"><strong>Athens University of Economics &amp; Business</strong></a>,
+the <a href="https://www.cse.uoi.gr/?lang=en" rel="noopener" target="_blank"><strong>University of Ioannina</strong></a>, and  the
+<a href="http://www.imsi.athenarc.gr" rel="noopener" target="_blank"><strong>ATHENA Research Center</strong></a>.
+I received my PhD in Computer Science in 2016 from the <a href="http://www.ntua.gr" rel="noopener" target="_blank"><strong>National Technical University of Athens</strong></a> and my Diploma in Electronic &amp; Computer Engineering from the <a href="http://www.tuc.gr" rel="noopener" target="_blank"><strong>Technical University of Crete</strong></a>.</div>
+
+<div class="interest-strip">
+<b class="interest-label">&gt; Interests ::</b>
+<span class="interest-items">
+<span class="interest-item">_Human-Data Interaction</span>
+<span class="interest-item">_Data Structures</span>
+<span class="interest-item">_Query Processing</span>
+<span class="interest-item">_Personalization Systems</span>
+<span class="interest-item">_Explainable AI &amp; Fairness</span>
+<span class="interest-item">_Spatial &amp; Social Data</span>
+<span class="interest-item">_Hard Computational Problems</span>
+<span class="interest-item">_Web of Data</span>
+</span>
+</div>
+</div>
+</section>
+<section class="section-block" id="news">
+<h2 class="section-title">_news</h2>
+<div class="section-content">
+<ul class="item-list">
+<li><b>New Preprint :: </b> <b><a href="/papers/Human-Data Interaction, Exploration, and Visualization in the AI Era Challenges and Opportunities_2026.pdf" rel="noopener" target="_blank">Human-Data Interaction, Exploration, and Visualization in the AI Era: Challenges and Opportunities</a></b>, Jean-Daniel Fekete, Yifan Hu, Dominik Moritz, Arnab Nandi, Senjuti Basu Roy, Eugene Wu, Nikos Bikakis, George Papastefanatos, Panos K. Chrysanthis, Guoliang Li, Lingyun Yu <b> [<a href="/Human-Data Interaction in the AI Era Challenges and Opportunities.html" rel="noopener" target="_blank">page</a>] </b> <b> [infographic: <a href="/papers/Human-Data Interaction, Exploration, and Visualization in the AI Era Challenges and Opportunities_2026_Infographic.pdf" rel="noopener" target="_blank"> /.pdf</a> <a href="/papers/Human-Data Interaction, Exploration, and Visualization in the AI Era Challenges and Opportunities_2026_Infographic.png" rel="noopener" target="_blank"> /.png</a>] </b></li>
+
+
+<li><b> EDBT 2026 Paper :: </b> <a href="/papers/Data-Driven Trajectory Imputation for Vessel Mobility Analysis_EDBT_2026.pdf" rel="noopener" target="_blank"> <strong>Data-Driven Trajectory Imputation for Vessel Mobility Analysis</strong></a> <b>[<a href="/vessel_trajectory_imputation.html" rel="noopener" target="_blank">page</a>]</b> <b>[<a href="https://github.com/M3-Archimedes/HABIT" rel="noopener" target="_blank">GitHub</a>]</b></li>
+
+
+<li><b> MDM 2026 Paper :: </b> <a href="/papers/Context-Enriched Natural Language Descriptions of Vessel Trajectories_2026.pdf" rel="noopener" target="_blank"> <strong>Context-Enriched Natural Language Descriptions of Vessel Trajectories</strong></a> <b>[<a href="/ais_data_and_LLM.html" rel="noopener" target="_blank">page</a>]</b> <b> [<a href="https://github.com/M3-Archimedes/AIS-semantic-trajectories" rel="noopener" target="_blank">GitHub 1</a>] [<a href="https://github.com/M3-Archimedes/AIS-trajectory-annotation" rel="noopener" target="_blank">GitHub 2</a>] </b></li>
+
+
+<li><b> MuseKDE 2026 Paper :: </b> <a href="/papers/Trajectory%20Imputation%20Using%20Computer%20Vision%20Models_2026.pdf" rel="noopener" target="_blank"> <strong>Trajectory Imputation Using Computer Vision Models</strong></a> <b>[<a href="/trajectory_imputation_vision_models.html" rel="noopener" target="_blank">page</a>]</b> <b>[<a href="https://github.com/M3-Archimedes/IMaGe-based-ImputatioN-of-Trajectories" rel="noopener" target="_blank">GitHub</a>]</b></li>
+
+
+<li><b> New Preprint :: </b> <a href="/papers/Explaining_Group_Recommendations_via_Counterfactuals_2025.pdf" rel="noopener" target="_blank"> <strong>Explaining Group Recommendations via Counterfactuals</strong></a></li>
+
+
+<li><b>Services 2026</b> [highlights] <b>::</b> WWW 2026, ACM SIGMOD 2026, VLDB 2026, IEEE ICDE 2026, EDBT 2026/27, DASFAA 2026 [Senior PC]</li>
+
+
+<li><b> New Project :: M3: Multimodal Foundation Models for the Maritime Domain </b> <a href="https://github.com/M3-Archimedes" rel="noopener" target="_blank">[GitHub]</a></li>
+
+
+<li><b> New Preprint :: </b> <a href="https://arxiv.org/pdf/2505.19872" rel="noopener" target="_blank"> <strong>Adaptive Indexing for Approximate Query Processing in Exploratory Data Analysis</strong></a></li>
+
+
+<li><b> ACM SIGMOD Blog Post [Jan. 2025]:: </b> <a href="https://wp.sigmod.org/?p=3820" rel="noopener" target="_blank"> <b>Data Exploration and Visual Analytics Challenges in AI Era</b>, </a> Sihem Amer-Yahia, Leilani Battle, Yifan Hu, Dominik Moritz, Aditya Parameswaran, Nikos Bikakis, Panos K. Chrysanthis, Guoliang Li, George Papastefanatos, Lingyun Yu.</li>
+
+
+<li><b>ACM SIGMOD Record article 2025 :: </b> <b> <a href="/papers/Visual Analytics Challenges and Trends in the Age of AI_SIGMOD Record_2025.pdf" rel="noopener" target="_blank">Visual Analytics Challenges and Trends in the Age of AI: The BigVis Community Perspective</a></b>, Nikos Bikakis, Panos K. Chrysanthis, Guoliang Li, George Papastefanatos, Lingyun Yu. <b>[<a href="/Visual_Analytics_Challenges_Trends_AI_ERA.html" rel="noopener" target="_blank">page</a>]</b></li>
+
+
+<li>Happy to serve <strong><a href="https://www2025.thewebconf.org" rel="noopener" target="_blank">WWW 2025</a></strong>, <strong><a href="https://vldb.org/2025/" rel="noopener" target="_blank">VLDB 2025</a></strong> and <strong><a href="https://edbticdt2025.upc.edu" rel="noopener" target="_blank">EDBT 2025</a></strong> as a PC member, and <strong><a href="https://dasfaa2025.github.io" rel="noopener" target="_blank">DASFAA 2025</a></strong> as a Senior PC member!</li>
+
+
+<li><b>DOLAP 2025 Paper :: </b> <a href="/papers/Counterfactual_Explanations_for_Group_Recomemndations_2025.pdf" rel="noopener" target="_blank"> Counterfactual Explanations for Group Recommendations </a></li>
+
+
+<li><b>2025 Services</b> [highlights]<br/><b>Senior PC Member</b> :: DASFAA 2025<br/><b>PC Member :: </b> WWW 2025, VLDB 2025, EDBT 2025, etc.<br/><b>Guest Editor :: </b> Data Exploration &amp; Visual Analytics in AI Era, Big Data Research, Elsevier<br/><b>Organizer</b> :: <a href="https://bigvis.imsi.athenarc.gr/bigvis2024/" rel="noopener" target="_blank">BigVis @ VLDB 2024</a></li>
+
+
+<li><b>ACM SIGMOD Record article 2024 :: </b> <a href="/papers/bigdata_visualization_sigmod_record_2024.pdf" rel="noopener" target="_blank">Visualizing, Exploring &amp; Analyzing Big Data: A 6-Year Story</a>, N. Bikakis, G. Papastefanatos, P.K. Chrysanthis, O. Papemmanuil, D. Auber, S. Frey, I. Fujishiro, H. Hauptmann, S. Liu, K-L. Ma, T. Schreck, M. Sedlmair, M. Sharaf.</li>
+
+
+<li><b> Organizer :: </b> <strong><a href="https://bigvis.imsi.athenarc.gr/bigvis2024" rel="noopener" target="_blank">7th International Workshop on Big Data Visual Exploration &amp; Analytics (BigVis 2024)</a></strong> @ <b><a href="https://vldb.org/2024/" rel="noopener" target="_blank">VLDB 2024</a></b>, Guangzhou, China, alongside Panos Chrysanthis, Guoliang Li, George Papastefanatos and Lingyun Yu.</li>
+
+
+<li><b> VLDB Journal Paper 2024 :: </b> <a href="/papers/Resource_Aware_Adaptive_Indexing_for_In_situ_Visual_Exploration_and_Analytics_VLDBJ_2022.pdf" rel="noopener" target="_blank"> Resource-Aware Adaptive Indexing for In-situ Visual Exploration and Analytics</a> <a href="/papers/rawvis_poster.pdf" rel="noopener" target="_blank">[poster]</a> <a href="https://github.com/visualfacts/rawvis" rel="noopener" target="_blank">[code]</a> <a href="http://www.rawvis.net" rel="noopener" target="_blank">[home]</a></li>
+
+
+<li><b>Encyclopedia Article Invitation :: </b> <a href="https://doi.org/10.1007/978-3-319-63962-8_109-2" rel="noopener" target="_blank"><strong>Big Data Visualization Tools</strong></a>, @ Encyclopedia of Big Data Technologies, 2nd ed, Springer, 2024</li>
+</ul>
+</div>
+</section>
+<section class="section-block" id="book">
+<h2 class="section-title">_book</h2>
+<div class="section-content">
+<div class="book-card">
+<div class="book-details">
+<h3><a href="http://www.linkeddatavisualization.com/" rel="noopener" target="_blank">Linked Data Visualization: Techniques, Tools and Big Data</a></h3>
+<p>Laura Po, Nikos Bikakis, Federico Desimoni &amp; George Papastefanatos</p>
+<p>Springer, 2020</p>
+<p>ISBN: 9781681737256 (softcover)  ||  9781681737270 / 978-3-031-79491-9 (hardcover)</p>
+<p>ISBN: 9781681737263 / 978-3-031-79490-2 (ebook)  ||  9781681738345 (epub)</p>
+<p>DOI: 10.2200/S00967ED1V01Y201911WBE019 / 10.1007/978-3-031-79490-2</p>
+<p class="note">&gt;_ Among the top-5 most downloaded book (in 2020) in the Data, Semantics, and Knowledge series (Morgan &amp; Claypool Publishers, 2021).</p>
+<div aria-label="Book links" class="book-actions">
+<a href="http://www.linkeddatavisualization.com" rel="noopener" target="_blank"><img alt="book site" height="22pt" src="icons/homepage.png"/> <b>Homepage</b></a>
+<a href="https://link.springer.com/book/10.1007/978-3-031-79490-2" rel="noopener" target="_blank"><img alt="Springer site" height="22pt" src="icons/mchome.png"/> <b>Publisher Site</b></a>
+<a href="http://www.linkeddatavisualization.com/resources/book_sample.pdf" rel="noopener" target="_blank"><img alt="Book Sample" height="23pt" src="icons/sample.png"/> <b>Book Sample</b></a>
+<a href="http://www.linkeddatavisualization.com/order.html" rel="noopener" target="_blank"><img alt="Order" height="23pt" src="icons/order.png"/> <b>Order</b></a>
+</div>
+</div>
+<a class="book-cover" href="http://www.linkeddatavisualization.com" rel="noopener" target="_blank"><img alt="Linked Data Visualization book cover" height="190px" src="icons/data_visualization_book_cover.jpg"/></a>
+</div>
+</div>
+</section>
+<section class="section-block" id="service">
+<h2 class="section-title">_service</h2>
+<div class="section-content">
+<ul class="item-list">
+<li><strong>Organizer/Editor/Chair.</strong> IEEE Computer Graphics &amp; Applications 2021 [Guest Editor], BigVis 2024-2018 [Organizer/General Chair], Big Data Research 2025, 2020 &amp; 2018, Elsevier [Guest Editor], Frontiers in Big Data [Associate Editor], MDM 2021 &amp; 2026 [Publicity Chair], EDBT 2021 [Session Chair], Journal of Web Semantics, Elsevier [Guest Editorial Board], Open Journal of databases [Associate Editor], DASFAA 2014 [Session Chair]</li>
+
+
+<li><strong>Program Committee Member [partial list].</strong> WWW [2022-2025], SIGMOD [2023-2025], VLDB [2025, 2026], ICDE [2026], EDBT/ICDT [2021-2026], DASFAA [2021-2026] [Senior PC], CIKM [2019-2023]</li>
+
+
+<li><strong>Reviewer [partial list].</strong> <a href="https://www.springer.com/journal/778" rel="noopener" target="_blank">VLDB Journal</a>, <a href="https://www.computer.org/web/tkde" rel="noopener" target="_blank">IEEE TKDE</a>, <a href="http://tkdd.acm.org" rel="noopener" target="_blank">ACM TKDD</a>, <a href="https://www.computer.org/csdl/journal/tg" rel="noopener" target="_blank">IEEE TVCG</a>, <a href="http://tweb.acm.org" rel="noopener" target="_blank">ACM TWEB</a>, <a href="https://academic.oup.com/bioinformatics" rel="noopener" target="_blank">Bioinformatics</a>, <a href="http://www.journals.elsevier.com/information-systems" rel="noopener" target="_blank">Information Systems</a>, <a href="http://www.semantic-web-journal.net/" rel="noopener" target="_blank">Semantic Web Journal</a>, <a href="http://www.springer.com/journal/11280" rel="noopener" target="_blank">World Wide Web Journal</a>, etc.</li>
+</ul>
+</div>
+</section>
+<section class="section-block" id="publications">
+<h2 class="section-title">_publications</h2>
+<div class="section-content">
+<ul class="item-list publications-list">
+<li>Fekete J.-D., Freire J., Hu Y., Moritz D., Nandi A., Roy S. B., Wu E., Bikakis N., Papastefanatos G., Chrysanthis P. K., Li G., Yu L.: <a href="/papers/Human-Data Interaction, Exploration, and Visualization in the AI Era Challenges and Opportunities_2026.pdf" rel="noopener" target="_blank"> <strong>Human-Data Interaction, Exploration, and Visualization in the AI Era: Challenges and Opportunities</strong></a>, 2026 <b> [<a href="/Human-Data Interaction in the AI Era Challenges and Opportunities.html" rel="noopener" target="_blank"> page</a>] </b> <b> [infographic: <a href="/papers/Human-Data Interaction, Exploration, and Visualization in the AI Era Challenges and Opportunities_2026_Infographic.pdf" rel="noopener" target="_blank"> /.pdf</a> <a href="/papers/Human-Data Interaction, Exploration, and Visualization in the AI Era Challenges and Opportunities_2026_Infographic.png" rel="noopener" target="_blank"> /.png</a>] </b> [under review] <span class="smallColorText2"><strong>new</strong></span></li>
+
+
+<li>Spiliopoulos G., Troupiotis-Kapeliaris A., Patroumpas K., Liapis N., Skoutas D., Zissis D., Bikakis N.: <a href="/papers/Data-Driven Trajectory Imputation for Vessel Mobility Analysis_EDBT_2026.pdf" rel="noopener" target="_blank"> <strong>Data-Driven Trajectory Imputation for Vessel Mobility Analysis</strong></a>, 29th intl. conf. on extending database technology <b>(EDBT '26)</b> <b>[<a href="/vessel_trajectory_imputation.html" rel="noopener" target="_blank">page</a>]</b> <b>[<a href="https://github.com/M3-Archimedes/HABIT" rel="noopener" target="_blank">GitHub</a>]</b> <span class="smallColorText2"><strong>new</strong></span></li>
+
+
+<li>Patroumpas K., Troupiotis-Kapeliaris A., Spiliopoulos G., Betchavas P., Skoutas D., Zissis D., Bikakis N.: <a href="/papers/Context-Enriched Natural Language Descriptions of Vessel Trajectories_2026.pdf" rel="noopener" target="_blank"> <strong>Context-Enriched Natural Language Descriptions of Vessel Trajectories</strong></a>, 27th ΙΕΕΕ intl. conf. on mobile data management <b>(ΙΕΕΕ MDM '26)</b> <b>[<a href="/ais_data_and_LLM.html" rel="noopener" target="_blank">page</a>]</b> <b> [<a href="https://github.com/M3-Archimedes/AIS-semantic-trajectories" rel="noopener" target="_blank">GitHub 1</a>] [<a href="https://github.com/M3-Archimedes/AIS-trajectory-annotation" rel="noopener" target="_blank">GitHub 2</a>] </b> <span class="smallColorText2"><strong>new</strong></span></li>
+
+
+<li>Betchavas P, Troupiotis-Kapeliaris A., Patroumpas K., Spiliopoulos G., Skoutas D., Zissis D., Bikakis N.: <a href="/papers/Trajectory Imputation Using Computer Vision Models_2026.pdf" rel="noopener" target="_blank"> <strong>Trajectory Imputation Using Computer Vision Models</strong></a>, Intl. Workshop on Multi-Sensor Trajectory Knowledge Discovery &amp; Extraction <b>(MuseKDE 2026)</b> <b>[<a href="/trajectory_imputation_vision_models.html" rel="noopener" target="_blank">page</a>]</b> <b>[<a href="https://github.com/M3-Archimedes/IMaGe-based-ImputatioN-of-Trajectories" rel="noopener" target="_blank">GitHub</a>]</b> <span class="smallColorText2"><strong>new</strong></span></li>
+
+
+<li>Stratigi M., Bikakis N., Stefanidis K.: <a href="/papers/Explaining_Group_Recommendations_via_Counterfactuals_2025.pdf" rel="noopener" target="_blank"> <strong>Explaining Group Recommendations via Counterfactuals</strong></a>, 2026 [under review] <span class="smallColorText2"><strong>new</strong></span></li>
+
+
+<li>Betchavas P., Troupiotis-Kapeliaris A., Patroumpas K., Spiliopoulos G., Skoutas D., Zissis D., Bikakis N.: <a href="/papers/Multimodal Maritime Foundation Models_Challenges and Opportunities_2026.pdf" rel="noopener" target="_blank"> <strong>Multimodal Maritime Foundation Models: Challenges and Opportunities</strong></a>, 2026 [under review] <span class="smallColorText2"><strong>new</strong></span></li>
+
+
+<li>Maroulis S., Bikakis N., Stamatopoulos V., Papastefanatos G.: <a href="https://arxiv.org/pdf/2505.19872" rel="noopener" target="_blank"> <strong>Adaptive Indexing for Approximate Query Processing in Exploratory Data Analysis</strong></a>, 2025 [under review] <span class="smallColorText2"><strong>new</strong></span></li>
+
+
+<li>Bikakis N., Chrysanthis P., Li G., Papastefanatos G., Yu L.: <a href="/papers/Visual Analytics Challenges and Trends in the Age of AI_SIGMOD Record_2025.pdf" rel="noopener" target="_blank"> <strong>Visual Analytics Challenges and Trends in the Age of AI: The BigVis Community Perspective</strong></a>, <b>SIGMOD Record 2025</b> <b>[<a href="/Visual_Analytics_Challenges_Trends_AI_ERA.html" rel="noopener" target="_blank">page</a>]</b> <span class="smallColorText2"><strong>new</strong></span></li>
+
+
+<li>Bikakis N., Papastefanatos G., Chrysanthis P.K., Papemmanuil O., Auber D., Frey S., Fujishiro I., Hauptmann H., Liu S., Ma K-L., Schreck T., Sedlmair M., Sharaf M.: <a href="/papers/bigdata_visualization_sigmod_record_2024.pdf" rel="noopener" target="_blank"> <strong>Visualizing, Exploring &amp; Analyzing Big Data: A 6-Year Story</strong></a>, <b>SIGMOD Record 2024</b></li>
+
+
+<li>Stratigi M., Bikakis N., Stefanidis K.: <a href="/papers/Counterfactual_Explanations_for_Group_Recomemndations_2025.pdf" rel="noopener" target="_blank"> <strong>Counterfactual Explanations for Group Recommendations</strong></a>, 27th intl. workshop on design, optimization, languages &amp; analytical processing of big data <b>(DOLAP '25)</b></li>
+
+
+<li>Maroulis S., Bikakis N., Stamatopoulos V., Papastefanatos G.: <a href="/papers/partial_adaptive_index_approximate_query_processing_bigvis2024.pdf" rel="noopener" target="_blank"> <strong>Partial Adaptive Indexing for Approximate Query Answering</strong></a>, intl. workshop on big data visual exploration &amp; analytics <b>(BigVis '24)</b></li>
+
+
+<li>Maroulis S., Bikakis N., Papastefanatos G., Vassiliadis P., Vassiliou Y.: <a href="/papers/Resource_Aware_Adaptive_Indexing_for_In_situ_Visual_Exploration_and_Analytics_VLDBJ_2022.pdf" rel="noopener" target="_blank"> <strong>Resource-Aware Adaptive Indexing for In-situ Visual Exploration and Analytics</strong></a>, <b>VLDB Journal 2023</b> <a href="/papers/rawvis_poster.pdf" rel="noopener" target="_blank">[poster]</a> <a href="https://github.com/visualfacts/rawvis" rel="noopener" target="_blank">[code]</a> <a href="http://www.rawvis.net" rel="noopener" target="_blank">[home]</a></li>
+
+
+<li>Bikakis N., Giannopoulos G., Sidiropoulos N., Flouda C., Doupas A., Giouli V., Karioris P., Botini P., Vacalopoulou A., Stainhaouer G.: <a href="/papers/exposing_geospatial_cultural_heritage_content_in_map_based_applications.pdf" rel="noopener" target="_blank"><strong>Exposing Geospatial Cultural Heritage Content in Map-based Applications</strong></a>, intl. workshop on big data visual exploration &amp; analytics <b>(BigVis '23)</b></li>
+
+
+<li>Giouli V., Vacalopoulou A., Sidiropoulos N., Flouda C., Doupas A., Giannopoulos G., Bikakis N.,Kaffes V., Stainhaouer G.: <a href="/papers/placing_multimodal_multilingual_data_in_the_humanities_domain_on_the_Map_the_Mythotopia_geotagged_corpus.pdf" rel="noopener" target="_blank"><strong>Placing multi-modal, and multi-lingual Data in the Humanities Domain on the Map: the Mythotopia Geo-tagged Corpus</strong></a>, 13th intl. conf. on language resources &amp; evaluation <b>(LREC 22)</b></li>
+
+
+<li>Papastefanatos G., Alexiou G., Bikakis N., Maroulis S., Stamatopoulos V.: <a href="/papers/in-situ_visual_exploration_and_real-time_entity_resolution.pdf" rel="noopener" target="_blank"><strong>VisualFacts: A Platform for In-Situ Visual Exploration and Real-time Entity Resolution</strong></a>, intl. workshop on big data visual exploration &amp; analytics <b>(BigVis '22)</b></li>
+
+
+<li>Maroulis S., Bikakis N., Papastefanatos G., Vassiliadis P., Vassiliou Y.: <a href="/papers/RawVis_A_System_for_Efficient_In-situ_Visual_Analytics_SIGMOD2021.pdf" rel="noopener" target="_blank"> <strong>RawVis: A System for Efficient In-situ Visual Analytics</strong></a>, intl. conf. on Management of Data <b>(ACM SIGMOD/PODS '21)</b> <a href="/papers/rawvis_poster.pdf" rel="noopener" target="_blank">[poster]</a> <a href="https://github.com/visualfacts/rawvis" rel="noopener" target="_blank">[code]</a> <a href="https://vimeo.com/500596816" rel="noopener" target="_blank">[video]</a> <a href="http://www.rawvis.net" rel="noopener" target="_blank">[home]</a></li>
+
+
+<li>Bikakis N., Maroulis S., Papastefanatos G., Vassiliadis P.: <a href="/papers/in_situ_big_data_visual_analytics_indexing_IS_2020.pdf" rel="noopener" target="_blank"><strong>In-Situ Visual Exploration over Big Raw Data</strong></a>, information systems, Elsevier, 2021 <a href="/papers/rawvis_poster.pdf" rel="noopener" target="_blank">[poster]</a> <a href="https://github.com/visualfacts/rawvis" rel="noopener" target="_blank">[code]</a> <a href="http://www.rawvis.net" rel="noopener" target="_blank">[home]</a></li>
+
+
+<li>Bikakis N.: <a href="/papers/Big_Data_Visualization_Tools-Encyclopedia_of_Big_Data_Technologies-2nd_Edition-2021.pdf" rel="noopener" target="_blank"><strong>Big Data Visualization Tools</strong></a>, <b>Encyclopedia of big data technologies</b>, 2nd ed, Springer 2022 <b>[<a href="https://doi.org/10.1007/978-3-319-63962-8_109-2" rel="noopener" target="_blank">springer</a>]</b></li>
+
+
+<li>Maroulis S., Bikakis N., Papastefanatos G., Vassiliadis P., Vasiliou Y.: <a href="/papers/RawVis_Adaptive_Indexing_for_In-situ_Visual_Exploration_and_Analytics_DOLAP2021.pdf" rel="noopener" target="_blank"><strong>Adaptive Indexing for In-situ Visual Exploration and Analytics</strong></a>, 23rd intl. workshop on design, optimization, languages and analytical processing of big data <b>(DOLAP '21)</b></li>
+
+
+<li>Andrienko G., Andrienko N., Drucker S., Fekete J.-D., Fisher D., Idreos S., Kraska T., Li G., Ma K.-L., Mackinlay J.D., Oulasvirta A., Schreck A., Schmann H., Stonebraker M., Auber D., Bikakis N., Chrysanthis P.K., Papastefanatos G., Sharaf M.: <a href="/papers/Big Data Visualization and Analytics Future Research Challenges and Emerging Applications.pdf" rel="noopener" target="_blank"><b>Big Data Visualization and Analytics: Future Research Challenges and Emerging Applications</b></a> 3rd intl. workshop on big data visual exploration &amp; analytics <b>(BigVis '20)</b> <b>&gt; SIGMOD Blog Posts</b> <a href="http://wp.sigmod.org/?p=3037" rel="noopener" target="_blank">[Part 1]</a> <a href="http://wp.sigmod.org/?p=3123" rel="noopener" target="_blank">[Part 2]</a></li>
+
+
+<li>Po L., Bikakis N., Desimoni F., Papastefanatos G.: <a href="http://www.linkeddatavisualization.com" rel="noopener" target="_blank"><b>Linked Data Visualization: Techniques, Tools and Big Data</b></a>, Springer / Morgan &amp; Claypool 2020 [<a href="http://www.linkeddatavisualization.com" rel="noopener" target="_blank">home</a>] [<a href="http://www.linkeddatavisualization.com/resources/book_sample.pdf" rel="noopener" target="_blank">sample</a>] [<a href="http://www.linkeddatavisualization.com/pobdp20.bib" rel="noopener" target="_blank">BibTeX</a>] <span class="smallColorText2"><strong>[Among the top-5 most downloaded book (in 2020) in the Data, Semantics, and Knowledge series, Morgan &amp; Claypool Publishers, 2021]</strong></span></li>
+
+
+<li>Desimoni F., Bikakis N., Po L., Papastefanatos G.: <a href="/papers/A_Comparative_Study_of_State-of-The-Art_Linked_Data_Visualization_Tools.pdf" rel="noopener" target="_blank"><strong>A Comparative Study of State-of-The-Art Linked Data Visualization Tools</strong></a>, visualization and interaction for ontologies and linked data intl. workshop <b>(VOILA '20)</b></li>
+
+
+<li>Bikakis N., Kalogeraki V., Gunopulos D.: <strong><a href="/papers/Attendance.Maximization.for.Successful.Social.Event.Planning.EDBT18.pdf" rel="noopener" target="_blank">Attendance Maximization for Successful Social Event Planning</a></strong>, 22nd intl. conf. on extending database technology <b>(EDBT '19)</b></li>
+
+
+<li>Bikakis N.: <strong><a href="/papers/Big.Data.Visualization.Tools.Survey.Encyclopedia.pdf" rel="noopener" target="_blank">Big Data Visualization Tools</a></strong>, encyclopedia of big data technologies, Springer 2019</li>
+
+
+<li>Bikakis N., Kalogeraki V., Gunopulos D.: <strong><a href="/papers/Social.Event.Scheduling_ICDE18.pdf" rel="noopener" target="_blank">Social Event Scheduling</a></strong>, 34th IEEE intl. conf. on data engineering <b>(ICDE '18)</b> [<a href="/papers/SES_Poster_ICDE18.pdf" rel="noopener" target="_blank">preview</a>]</li>
+
+
+<li>Bikakis N., Maroulis S., Papastefanatos G., Vassiliadis P.: <a href="/papers/RawVis.Visual.Exploration.over.Big.Raw.Data.pdf" rel="noopener" target="_blank"><strong>RawVis: Visual Exploration over Raw Data</strong></a>, 22nd european conf. on advances in databases &amp; information systems <b>(ADBIS 2018)</b> <span class="smallColorText2"><strong>[Best Paper Award]</strong></span></li>
+
+
+<li>Bikakis N., Liagouris J., Krommyda M., Papastefanatos G., Sellis T.: <strong><a href="/papers/graphVizdb.Scalable.Interactive.large.graph.network.visualization.pdf" rel="noopener" target="_blank">graphVizdb: A Scalable Platform for Interactive Large Graph Visualization</a></strong>, 32nd IEEE intl. conf. on data engineering <b>(ICDE '16)</b> [<a href="/papers/graphvizdb-poster.pdf" rel="noopener" target="_blank">preview</a>]</li>
+
+
+<li>Bikakis N., Sellis T.: <strong><a href="/papers/Big.Data.Exploration.Visualization.Survey.pdf" rel="noopener" target="_blank">Exploration and Visualization in the Web of Big Linked Data: A Survey of the State of the Art</a></strong>, 6th intl. workshop on linked web data management <b>(LWDM '16)</b></li>
+
+
+<li>Bikakis N., Papastefanatos G., Skourla M., Sellis T.: <strong><a href="/papers/Efficient.multilevel.visualization.pdf" rel="noopener" target="_blank">A Hierarchical Aggregation Framework for Efficient Multilevel Visual Exploration and Analysis</a></strong>, semantic web journal <b>(SWJ)</b>, 2016</li>
+
+
+<li>Bikakis N., Benouaret K., Sacharidis D.: <strong><a href="/papers/Preferable.Objects.Group.Preferences.pdf" rel="noopener" target="_blank">Finding Desirable Objects under Group Categorical Preferences</a></strong>, knowledge &amp; information systems journal <b>(KAIS)</b>, 2015</li>
+
+
+<li>Bikakis N., Liagouris J., Krommyda M., Papastefanatos G., Sellis T.: <strong><a href="/papers/graphvizdb.eswc.poster.pdf" rel="noopener" target="_blank">Towards Scalable Visual Exploration of Very Large RDF Graphs</a></strong>, 12th extended semantic web conference <b>(ESWC '15)</b> <span class="smallColorText2"><strong>[Best Poster/Short Paper Award]</strong></span></li>
+
+
+<li>Bouros P., Sacharidis D., Bikakis N.: <strong><a href="/papers/LASN-influence-GIS14.pdf" rel="noopener" target="_blank">Regionally Influential Users in Location-Aware Social Networks</a></strong>, 22nd ACM intl. conf. on advances in geographic information systems <b>(ACM GIS SIGSPATIAL '14)</b> [<a href="/papers/LASN-influence-GIS14-poster.pdf" rel="noopener" target="_blank">preview</a>]</li>
+
+
+<li>Bikakis N., Tsinaraki C., Stavrakantonakis I., Christodoulakis S.: <strong><a href="/papers/SPARQL2XQuery-SPARQLUpdate-ISWC14.pdf" rel="noopener" target="_blank">Supporting SPARQL Update Queries in RDF-XML Integration</a></strong>, 13th intl. semantic web conference <b>(ISWC '14)</b> [<a href="/papers/sparql2xquery-ISWC14-poster.pdf" rel="noopener" target="_blank">preview</a>]</li>
+
+
+<li>Bikakis N., Sacharidis D., Sellis T.: <strong><a href="/papers/skyline-DEXA14.pdf" rel="noopener" target="_blank">A Study on External Memory Scan-based Skyline Algorithms</a></strong>, 25th intl. conf. on database &amp; expert systems applications <b>(DEXA '14)</b></li>
+
+
+<li>Bikakis N., Skourla M., Papastefanatos G.: <strong><a href="/papers/synopsViz.pdf" rel="noopener" target="_blank">rdf:SynopsViz - A Framework for Hierarchical Linked Data Visual Exploration and Analysis</a></strong>, 11th extended semantic web conference <b>(ESWC '14)</b></li>
+
+
+<li>Bikakis N., Benouaret K., Sacharidis D.: <strong><a href="/papers/MCP-DASFAA.pdf" rel="noopener" target="_blank">Reconciling Multiple Categorical Preferences with Double Pareto-based Aggregation</a></strong>, 19th intl. conf. on database systems for advanced applications (<b>DASFAA '14</b>) [<a href="/MCP.pdf" rel="noopener" target="_blank">technical report</a>]</li>
+
+
+<li>Bikakis N., Tsinaraki C., Stavrakantonakis I., Gioldasis N., Christodoulakis S.: <strong><a href="/papers/SPARQL2XQuery.pdf" rel="noopener" target="_blank">The SPARQL2XQuery Interoperability Framework</a></strong>, world wide web journal (<b>WWWJ</b>), 2013 [<a href="/papers/SPARQL2XQueryTR2012.pdf" rel="noopener" target="_blank">technical report</a>]</li>
+
+
+<li>Bikakis N., Giannopoulos G., Liagouris J., Skoutas D., Dalamagas T., Sellis T.: <strong><a href="/papers/RDivF-TPDL13.pdf" rel="noopener" target="_blank">RDivF: Diversifying Keyword Search on RDF Graphs</a></strong>, 17th intl. conf. on theory &amp; practice of digital libraries <strong>(TPDL '13)</strong> [<a href="/papers/RDivF%20-%20TPDL%20-%20Poster.pdf" rel="noopener" target="_blank">preview</a>]</li>
+
+
+<li>Bikakis N., Tsinaraki C., Gioldasis N., Stavrakantonakis I., Christodoulakis S.: <strong><a href="/papers/XMLSemanticWebSurvey.pdf" rel="noopener" target="_blank">The XML and Semantic Web Worlds: Technologies, Interoperability and Integration. A survey of the State of the Art</a></strong>, semantic hyper/multi-media adaptation: schemes &amp; applications, Springer 2013</li>
+
+
+<li>Dalamagas T., Bikakis N., Papastefanatos G., Stavrakas Y., Hatzigeorgiou A.: <strong><a href="/papers/miRNALOD.pdf" rel="noopener" target="_blank">Publishing Life Science Data as Linked Open Data: the Case Study of miRBase</a></strong>, 1st intl. workshop on open data <strong>(WOD '12)</strong></li>
+
+
+<li>Makris K., Bikakis N., Gioldasis N., Christodoulakis S.: <strong><a href="/papers/SPARQL-RWTransparentQueryAccessoverMappedRDFDataSources@EDBT2012.pdf" rel="noopener" target="_blank">SPARQL-RW: Transparent Query Access over Mapped RDF Data Sources</a></strong>, 15th intl. conf. on extending database technology <strong>(EDBT '12)</strong> [<a href="/papers/SPARQL-RW%20-%20Poster%20-%20EDBT.pdf" rel="noopener" target="_blank">preview</a>]</li>
+
+
+<li>Stavrakantonakis I., Tsinaraki C., Bikakis N., Gioldasis N., Christodoulakis S.: <strong><a href="/papers/SPARQL2XQuery2.0SupportingSemanticBasedQueriesOverXMLDat.pdf" rel="noopener" target="_blank">SPARQL2XQuery 2.0: Supporting Semantic-based Queries over XML Data</a></strong>, 5th intl. workshop on semantic media adaptation &amp; personalization <strong>(SMAP '10)</strong></li>
+
+
+<li>Makris K., Gioldasis N., Bikakis N., Christodoulakis S.: <strong><a href="/papers/OntologyMappingandSPARQLRewriting@ODBASE10.pdf" rel="noopener" target="_blank">Ontology Mapping and SPARQL Rewriting for Querying Federated RDF Data Sources</a></strong>, 9th intl. conf. on ontologies, databases, &amp; applications of semantics <b>(ODBASE '10)</b> [<a href="/papers/TR-2010.SPARQLRewritingforQuery%20MediationoverMappedOntologies.pdf" rel="noopener" target="_blank">technical report</a>]</li>
+
+
+<li>Bikakis N., Giannopoulos G., Dalamagas T., Sellis T.: <strong><a href="/papers/GoNTogle@ODBASE10.pdf" rel="noopener" target="_blank">Integrating Keywords and Semantics on Document Annotation and Search</a></strong>, 9th intl. conf. on ontologies, databases, &amp; applications of semantics <b>(ODBASE '10)</b></li>
+
+
+<li>Giannopoulos G., Bikakis N., Dalamagas T., Sellis T.: <strong><a href="/papers/GoNTogle@ESWC10.pdf" rel="noopener" target="_blank">GoNTogle: A Tool for Semantic Annotation and Search</a></strong>, 7th extended semantic web conference <b>(ESWC '10)</b></li>
+
+
+<li>Bikakis N., Gioldasis N., Tsinaraki C., Christodoulakis S.: <strong><a href="/papers/DEXA09-QueryingXMLDataWithSPARQL.pdf" rel="noopener" target="_blank">Querying XML Data with SPARQL</a></strong>, 20th intl. conf. on database &amp; expert systems applications <strong>(DEXA '09)</strong></li>
+
+
+<li>Bikakis N., Gioldasis N., Tsinaraki C., Christodoulakis S.: <strong><a href="/papers/WSKS09--SemanticBasedAccessOverXMLData.pdf" rel="noopener" target="_blank">Semantic Based Access over XML Data</a></strong>, 2nd intl. summit on knowledge society <strong>(WSKS '09)</strong></li>
+
+
+<li>Makris K., Bikakis N., Gioldasis N., Tsinaraki C., Christodoulakis S.: <strong><a href="/papers/WSKS09-TowardsAMediatorbasedOnOWLandSPARQL.pdf" rel="noopener" target="_blank">Towards a Mediator based on OWL and SPARQL</a></strong>, 2nd intl. summit on the knowledge society <b>(WSKS '09)</b></li>
+</ul>
+</div>
+</section>
+<section class="section-block" id="projects">
+<h2 class="section-title">_projects</h2>
+<div class="section-content">
+<ul class="item-list">
+<li><b>M3: Multimodal Foundation Models for the Maritime Domain</b> [2025] <a href="https://github.com/M3-Archimedes" rel="noopener" target="_blank">[GitHub]</a></li>
+
+
+<li><a href="https://visualfacts.imsi.athenarc.gr/" rel="noopener" target="_blank"> <strong>VisualFacts</strong></a> <b>::</b> Democratizing Visual Analytics [Research Project for the support of Post-doctoral Researchers]</li>
+
+
+<li><a href="http://www.rawvis.net" rel="noopener" target="_blank"> <strong>RawVis</strong></a> <b>::</b> Progressive &amp; Adaptive Processing for In-situ Visualization &amp; Analytics over Big Raw Data [Nat/Eu Young Researchers Research Grant]</li>
+
+
+<li><a href="/social_event_scheduling.html" rel="noopener" target="_blank"> <strong>Social Event Organization</strong></a> <b>::</b> Successful Social Events Planning</li>
+
+
+<li><a href="/graphvizdb" rel="noopener" target="_blank"> <strong>graphVizdb</strong></a> <b>::</b> A Platform for Interactive Big Graph Data Visualization <strong> <a href="http://www.graphvizdb.com" rel="noopener" target="_blank">|: &gt;_ try</a></strong></li>
+
+
+<li><a href="http://www.synopsviz.com" rel="noopener" target="_blank"> <strong>synopsViz</strong></a> <b>::</b> A Hierarchical Aggregation Framework for Progressive Multi-level Visualization &amp; Analytics over Big Data</li>
+
+
+<li><a href="/RDivF.html" rel="noopener" target="_blank"> <strong>RDivF</strong></a> <b>::</b> Keyword Search Diversification over RDF Data</li>
+
+
+<li><a href="/SPARQL2XQuery.html" rel="noopener" target="_blank"> <strong>SPARQL2XQuery</strong></a> <b>::</b> Bridging the gap between the XML &amp; the Semantic Web</li>
+
+
+<li><a href="/SPARQL-RW.html" rel="noopener" target="_blank"><strong>SPARQL-RW</strong></a> <b>::</b> Querying the Web of Data through Ontology Mapping &amp; SPARQL Query Rewriting <span class="smallText"><strong>[<a href="/SPARQL-RW.html" rel="noopener" target="_blank">Online Demo</a></strong><strong>]</strong></span></li>
+
+
+<li><strong>miRNA LOD</strong> <b>::</b> Publishing &amp; Exploring Evolving Biological Linked Data</li>
+
+
+<li><strong>GoNTogle</strong> <b>::</b> Semantic-based Retrieval &amp; Annotation</li>
+</ul>
+</div>
+</section>
+<section class="section-block" id="misc">
+<h2 class="section-title">_misc</h2>
+<div class="section-content">
+<ul class="item-list">
+<li><b>SIGMOD Blog Post</b> :: <a href="https://wp.sigmod.org/?p=3820" rel="noopener" target="_blank"> Data Exploration and Visual Analytics Challenges in AI Era, January 2025 </a> <a href="/papers/Data Exploration and Visual Analytics Challenges in AI Era_SIGMOD_BLOG_2024.pdf" rel="noopener" target="_blank">[pdf] </a></li>
+
+
+<li><b>SIGMOD Blog Posts</b> :: Big Data Visualization &amp; Analytics: Future Research Challenges &amp; Emerging Applications, March &amp; June 2020 <b>&gt;_</b> <b>Post Part 1 (March 2020)</b> <a href="http://wp.sigmod.org/?p=3037" rel="noopener" target="_blank">[url]</a> <a href="/papers/Big_Data_Visualization_and_Analytics_Challenges_ACM_SIGMOD_Blog_Part_1.pdf" rel="noopener" target="_blank">[pdf]</a>  |  <b>Post Part 2 (June 2020)</b> <a href="http://wp.sigmod.org/?p=3123" rel="noopener" target="_blank">[url]</a> <a href="/papers/Big_Data_Visualization_and_Analytics_Challenges_ACM_SIGMOD_Blog_Part_2.pdf" rel="noopener" target="_blank">[pdf]</a>  |  <a href="/papers/Big Data Visualization and Analytics Future Research Challenges and Emerging Applications.pdf" rel="noopener" target="_blank"><b>Report</b></a></li>
+
+
+<li>Bikakis N., Chrysanthis P., Papastefanatos G., Schreck T.: <strong><a href="/papers/Machine Learning Approaches in Big Data Visualization_IEEE CGA 2022.pdf" rel="noopener" target="_blank"> Machine Learning Approaches in Big Data Visualization </a></strong>, IEEE Computer Graphics and Applications, 2022 [<a href="https://ieeexplore.ieee.org/xpl/tocresult.jsp?isnumber=9790004" rel="noopener" target="_blank">special issue</a>]</li>
+
+
+<li>Auber D., Bikakis N., Chrysanthis P.K., Papastefanatos G., Sharaf M. <strong><a href="/papers/Interactive Big Data Visualization and Analytics_BDJ_2024.pdf" rel="noopener" target="_blank"> Interactive big data visualization and analytics</a></strong>, Big Data Research Journal, Elsevier, 2024 [<a href="https://www.sciencedirect.com/journal/big-data-research/special-issue/1031CMCD086" rel="noopener" target="_blank">special issue</a>]</li>
+
+
+<li>Bikakis N., Papastefanatos G., Papaemmanouil O.: <strong><a href="/papers/Big.Data.Exploration.Visualization.Analytics.pdf" rel="noopener" target="_blank"> Big Data Exploration, Visualization and Analytics</a></strong>, Big Data Research Journal, Elsevier, 2019 [<a href="https://www.sciencedirect.com/journal/big-data-research/special-issue/1044SHCRL5W" rel="noopener" target="_blank">special issue</a>]</li>
+
+
+<li>Intl. Workshop on Big Data Visual Exploration &amp; Analytics <b>&gt;_</b> <b><a href="https://bigvis.imsi.athenarc.gr/bigvis2024" rel="noopener" target="_blank">BigVis 2024</a></b> | <b><a href="https://bigvis.imsi.athenarc.gr/bigvis2023" rel="noopener" target="_blank">BigVis 2023</a></b> | <b><a href="https://bigvis.imsi.athenarc.gr/bigvis2022" rel="noopener" target="_blank">BigVis 2022</a></b> | <b><a href="https://bigvis.imsi.athenarc.gr/bigvis2021" rel="noopener" target="_blank">BigVis 2021</a></b> | <b><a href="https://bigvis.imsi.athenarc.gr/bigvis2020" rel="noopener" target="_blank">BigVis 2020</a></b> | <b><a href="https://bigvis.imsi.athenarc.gr/bigvis2019/" rel="noopener" target="_blank">BigVis 2019</a></b> | <b><a href="http://bigvis2018.imis.athena-innovation.gr" rel="noopener" target="_blank">BigVis 2018</a></b></li>
+
+
+<li>Bikakis N.: <b><a href="/Bikakis-Phd-Thesis.pdf" rel="noopener" target="_blank">Personalized, Semantic and Exploratory Data Analysis</a></b>. PhD Thesis, NTUA 2016</li>
+
+
+<li>Linked Data Visualization Tools Timeline [<a href="/res/Data.Visualization.Tools.Timeline.pdf" rel="noopener" target="_blank"><strong>pdf</strong></a>] [<a href="/res/Data.Visualization.Tools.Timeline.svg" rel="noopener" target="_blank"><strong>svg</strong></a>] [<a href="/res/Data.Visualization.Tools.Timeline.png" rel="noopener" target="_blank"><strong>png</strong></a>]</li>
+
+
+<li>XML and Semantic Web W3C Standards Timeline (v.1.3) [<a href="/XMLSemanticWebW3CTimeline.pdf" rel="noopener" target="_blank"><strong>pdf</strong></a>] [<a href="/XMLSemanticWebW3CTimeline.svg" rel="noopener" target="_blank"><strong>svg</strong></a>] [<a href="/XMLSemanticWebW3CTimeline.png" rel="noopener" target="_blank"><strong>png</strong></a>]</li>
+
+
+<li><a href="/SPARQL2XQuery/SPARQL2XQuery-Dont.Mind.The.Gap.png" rel="noopener" target="_blank"><b>SPARQL2XQuery Teaser </b></a> :: Dont Mind The Gap! | ISWC 2014 Minute Madness</li>
+
+
+<li>graphVizdb tool alt domains &gt;_ <a href="http://www.graphvizdb.com" rel="noopener" target="_blank"> graphVizdb</a> | <a href="http://www.graphvisualisation.com" rel="noopener" target="_blank"> graphVizdb</a></li>
+
+
+<li><a href="/big-data-visualization" rel="noopener" target="_blank">Big data visualization tools</a></li>
+
+
+<li><a href="/social_event_scheduling.html" rel="noopener" target="_blank">Social event planning</a></li>
+</ul>
+</div>
+</section>
+</main>
+</div>
+<script>
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-11024030-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script');
+      ga.type = 'text/javascript';
+      ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+</body>
+</html>
