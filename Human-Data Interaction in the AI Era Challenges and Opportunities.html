@@ -4,11 +4,11 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-  <title>Human-Data Interaction, Exploration, and Visualization in the AI Era: Challenges and Opportunities</title>
-    <meta name="description" content="Page for paper: Human-Data Interaction, Exploration, and Visualization in the AI Era: Challenges and Opportunities.">
+  <title>Human-AI Collaboration, Exploration, and Visualization in the AI Era: Challenges and Opportunities</title>
+    <meta name="description" content="Page for paper: Human-Data Collaboration, Exploration, and Visualization in the AI Era: Challenges and Opportunities.">
   <meta name="keywords" content="Human-AI Collaboration, visual analytics, multimodal analytics, generative visualization, AI-guided exploration, foundation models, trustworthy AI">
   <meta property="og:title" content="Human-AI Collaboration, Exploration, and Visualization in the AI Era">
-  <meta property="og:description" content="Challenges and opportunities for human-centered,   systems.">
+  <meta property="og:description" content="Challenges and Trends for Human-centered Systems in the AI Era">
   
   
 <meta content="infographic_hdi_ai.png" property="og:image"/>
@@ -111,7 +111,8 @@ background: linear-gradient(90deg, #64748b, #cbd5e1);    }
     .figure-section .publication-banner {
       max-width: 760px;
       margin: 0 auto;
-      border-radius: 18px;
+      border-radius: 8px;
+      overflow: hidden;
       box-shadow: 0 18px 45px -28px rgb(15 23 42 / 0.55);
       transition: transform .2s ease, box-shadow .2s ease;
     }
@@ -214,29 +215,33 @@ background: linear-gradient(90deg, #64748b, #cbd5e1);    }
 
     .mini-icon {
       flex: 0 0 auto;
-      width: 1.6rem;
-      height: 1.6rem;
+      width: 1.25rem;
+      height: 1.18rem;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      border-radius: 50%;
-      font-size: .86rem;
+      background: transparent;
+      border: 0;
+      border-radius: 0;
+      font-size: .9rem;
       font-weight: 850;
       line-height: 1;
-      margin-top: .05rem;
+      margin-top: .02rem;
     }
 
     .challenge-icon {
-      background: var(--challenge-soft);
       color: var(--challenge);
-      border: 1px solid #fecdd3;
     }
 
     .opportunity-icon {
-      background: var(--opportunity-soft);
       color: var(--opportunity);
-      border: 1px solid #bfdbfe;
     }
+
+    /* Icon refinement: horizontal challenge triangle, aligned icons, slightly larger opportunity sparkle, no outer circle */
+    .mini-icon.opportunity-icon {
+      font-size: 1.25rem;
+    }
+
 
     .bibtex-header {
       align-items: flex-end;
@@ -957,7 +962,7 @@ background: linear-gradient(90deg, #64748b, #cbd5e1);    }
 </div>
 <div class="co-card-grid">
 <article class="card mini-insight-card">
-<span aria-hidden="true" class="mini-icon challenge-icon">▲</span>
+<span aria-hidden="true" class="mini-icon challenge-icon">▶</span>
 <div>
 <h3>Latency issues</h3>
 <p>Interactive systems need real-time response to preserve analytical flow.</p>
@@ -971,7 +976,7 @@ background: linear-gradient(90deg, #64748b, #cbd5e1);    }
 </div>
 </article>
 <article class="card mini-insight-card">
-<span aria-hidden="true" class="mini-icon challenge-icon">▲</span>
+<span aria-hidden="true" class="mini-icon challenge-icon">▶</span>
 <div>
 <h3>Scalability</h3>
 <p>Large datasets and high-velocity analysis require scalable data operations.</p>
@@ -985,7 +990,7 @@ background: linear-gradient(90deg, #64748b, #cbd5e1);    }
 </div>
 </article>
 <article class="card mini-insight-card">
-<span aria-hidden="true" class="mini-icon challenge-icon">▲</span>
+<span aria-hidden="true" class="mini-icon challenge-icon">▶</span>
 <div>
 <h3>AI uncertainty</h3>
 <p>Errors and bias require verification, provenance, and human oversight.</p>
@@ -999,7 +1004,7 @@ background: linear-gradient(90deg, #64748b, #cbd5e1);    }
 </div>
 </article>
 <article class="card mini-insight-card">
-<span aria-hidden="true" class="mini-icon challenge-icon">▲</span>
+<span aria-hidden="true" class="mini-icon challenge-icon">▶</span>
 <div>
 <h3>Multimodal complexity</h3>
 <p>Text, images, audio, video, and rich documents require new abstractions.</p>
