@@ -1,0 +1,1641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Multimodal Maritime Foundation Models: Challenges and Opportunities</title>
+  <meta name="description" content="Project page for the vision paper Multimodal Maritime Foundation Models: Challenges and Opportunities.">
+  <meta name="keywords" content="Maritime AI, Foundation Models,    Multimodal Learning, Large Language Models, Maritime Mobility, Spatiotemporal Embeddings, Maritime Analytics, Vessel Trajectories, Shipping Intelligence">
+  <meta property="og:title" content="Multimodal Maritime Foundation Models: Challenges and Opportunities">
+  <meta property="og:description" content="A vision paper on general-purpose multimodal foundation models for maritime analytics, navigation, monitoring, and shipping intelligence.">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+:root {
+  --primary-color: #2563eb;
+  --primary-hover: #1d4ed8;
+  --secondary-color: #64748b;
+  --accent-color: #0ea5e9;
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+  --text-light: #94a3b8;
+  --background-primary: #ffffff;
+  --background-secondary: #f8fafc;
+  --background-accent: #f1f5f9;
+  --border-color: #e2e8f0;
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --gradient-accent: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  --radius: 14px;
+  --radius-lg: 20px;
+  --max-width: 1080px;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  color: var(--text-primary);
+  background:
+    radial-gradient(circle at top left, rgba(37, 99, 235, 0.10), transparent 30rem),
+    radial-gradient(circle at top right, rgba(14, 165, 233, 0.10), transparent 26rem),
+    var(--background-primary);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  line-height: 1.65;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a { color: var(--primary-color); text-decoration: none; }
+a:hover { color: var(--primary-hover); text-decoration: underline; }
+
+.container { width: min(calc(100% - 32px), var(--max-width)); margin: 0 auto; }
+
+.publication-header {
+  padding: 5.5rem 0 3rem;
+  text-align: center;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .5rem .85rem;
+  margin-bottom: 1.35rem;
+  border: 1px solid rgba(37, 99, 235, 0.18);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.82);
+  color: #1e40af;
+  font-size: .9rem;
+  font-weight: 700;
+  box-shadow: var(--shadow-sm);
+}
+
+.publication-title {
+  max-width: 1000px;
+  margin: 0 auto 1.4rem;
+  color: var(--text-primary);
+font-size: clamp(1.8rem, 4.5vw, 3.8rem);
+  line-height: .98;
+  letter-spacing: -0.035em;
+  font-weight: 500;
+}
+
+.publication-subtitle {
+  max-width: 760px;
+  margin: 0 auto 1.6rem;
+  color: var(--text-secondary);
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+}
+
+.publication-authors {
+  max-width: 980px;
+  margin: 0 auto 1rem;
+  font-size: 1.02rem;
+  font-weight: 600;
+}
+
+.author-block { display: inline-block; margin: 0 .12rem .25rem; }
+
+.author-break {
+  display: block;
+  height: .08rem;
+}
+.author-block:not(:last-child)::after { content: " ·"; color: var(--text-light); }
+
+.publication-affiliations {
+  max-width: 500px;
+  margin: 0 auto 3.5rem; 
+  color: var(--text-secondary);
+  font-size: .92rem;
+}
+
+.publication-venue {
+  display: inline-block;
+  width: fit-content;
+  margin: .4rem auto 0;
+  padding: .55rem 1rem;
+  border-radius: var(--radius);
+  background: var(--background-accent);
+  color: var(--text-secondary);
+  font-weight: 700;
+}
+
+.link-blocks {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: .7rem;
+  margin-top: 2rem;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .45rem;
+  min-height: 44px;
+  padding: .4rem .9rem;
+  border: 2px solid transparent;
+  border-radius: var(--radius);
+  background: var(--text-primary);
+  color: #fff;
+  box-shadow: var(--shadow-md);
+  font-weight: 700;
+  font-size: .92rem;
+  line-height: 1.15;
+  text-decoration: none;
+  transition: all .25s cubic-bezier(0.4, 0, 0.2, 1);
+
+}
+.button:hover { transform: translateY(-2px); background: var(--primary-color); color: #fff; text-decoration: none; box-shadow: var(--shadow-lg); }
+.button.secondary { color: var(--text-primary); background: #fff; border-color: var(--border-color); box-shadow: var(--shadow-sm); }
+.button.secondary:hover { color: var(--primary-color); border-color: rgba(37, 99, 235, .34); }
+
+.hero.is-light {
+  padding: 3rem 0;
+  background: var(--background-primary);
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.publication-banner {
+  overflow: hidden;
+  max-width: 700px;
+  margin: 0 auto;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  background: #fff;
+  box-shadow: var(--shadow-xl);
+}
+.publication-banner img { display: block; width: 100%; height: auto; }
+.banner-caption {
+  padding: 1rem 1.25rem;
+  border-top: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  font-size: .95rem;
+  text-align: left;
+}
+
+.section2 {  padding: 4rem 0;    background: var(--background-secondary);
+}
+
+.section {  padding: 4rem 0; }
+.section + .section { border-top: 1px solid var(--border-color); }
+.title {
+  margin: 0 0 1.4rem;
+  color: var(--text-primary);
+  font-size: clamp(1.55rem, 3vw, 2.15rem);
+  line-height: 1.15;
+  letter-spacing: -0.035em;
+  font-weight: 800;
+  text-align: center;
+}
+.title::after {
+  content: "";
+  display: block;
+  width: 58px;
+  height: 3px;
+  margin: .85rem auto 0;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #64748b, #cbd5e1);
+}
+
+.content {
+  max-width: 860px;
+  margin: 0 auto;
+  color: var(--text-secondary);
+  font-size: 1.08rem;
+}
+.content p { margin: 0 0 1.15rem; }
+
+.keywords {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: .55rem;
+  max-width: 900px;
+  margin: 1.8rem auto 0;
+  padding: 0;
+  list-style: none;
+}
+.keywords li {
+  padding: .45rem .75rem;
+  border: 1px solid rgba(37, 99, 235, .14);
+  border-radius: 999px;
+  background: #eff6ff;
+  color: #1d4ed8;
+  font-size: .9rem;
+  font-weight: 700;
+}
+
+.grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+.grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.card {
+  padding: 1.2rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  background: #fff;
+  box-shadow: var(--shadow-sm);
+  transition: all .25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+.card h3 { margin: 0 0 .35rem; font-size: 1.03rem; line-height: 1.25; }
+.card p, .card li { color: var(--text-secondary); font-size: .96rem; }
+.card ul { margin: .7rem 0 0; padding-left: 1.1rem; }
+
+.takeaway { display: flex; gap: .8rem; }
+.number {
+  flex: 0 0 auto;
+  width: 2rem;
+  height: 2rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #eff6ff;
+  color: var(--primary-color);
+  font-weight: 850;
+}
+
+.bibtex-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  max-width: 900px;
+  margin: 0 auto .8rem;
+}
+.bibtex-header h2 { margin: 0; }
+.copy-bibtex-btn {
+  border: none;
+  border-radius: var(--radius);
+  background: var(--primary-color);
+  color: white;
+  padding: .7rem .9rem;
+  cursor: pointer;
+  font-weight: 750;
+  transition: all .2s ease;
+}
+.copy-bibtex-btn:hover { transform: translateY(-2px); background: var(--primary-hover); }
+.copy-bibtex-btn.copied { background: #10b981; }
+pre {
+  max-width: 900px;
+  margin: 0 auto;
+  overflow-x: auto;
+  padding: 1.25rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  background: #0f172a;
+  color: #dbeafe;
+  font-size: .9rem;
+  line-height: 1.55;
+  box-shadow: var(--shadow-md);
+}
+code { font-family: "SF Mono", Monaco, Cascadia Code, "Roboto Mono", Menlo, Consolas, monospace; }
+
+.footer {
+  padding: 2.5rem 0 3rem;
+  border-top: 1px solid var(--border-color);
+  background: var(--background-secondary);
+  color: var(--text-secondary);
+  font-size: .92rem;
+  text-align: center;
+}
+.footer p { max-width: 820px; margin: 0 auto .6rem; }
+
+.footer a {
+  color: var(--text-secondary);
+  text-decoration: none;
+ }
+
+.footer a:hover {
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+
+.scroll-to-top {
+  position: fixed;
+  right: 1.4rem;
+  bottom: 1.4rem;
+  width: 48px;
+  height: 48px;
+  border: none;
+  border-radius: 50%;
+  background: var(--primary-color);
+  color: #fff;
+  box-shadow: var(--shadow-lg);
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transition: all .2s ease;
+}
+.scroll-to-top.visible { opacity: 1; visibility: visible; }
+.scroll-to-top:hover { transform: translateY(-2px); background: var(--primary-hover); }
+
+@media (max-width: 900px) {
+  .publication-header { padding: 3.5rem 0 2rem; }
+  .grid, .grid.two { grid-template-columns: 1fr; }
+  .publication-title { letter-spacing: -0.035em; }
+  .section { padding: 3rem 0; }
+}
+@media (max-width: 560px) {
+  .publication-title { font-size: 2rem; }
+  .button { width: 100%; }
+  .bibtex-header { align-items: flex-start; flex-direction: column; }
+}
+@media print {
+  .link-blocks, .scroll-to-top { display: none; }
+  body { background: #fff; }
+  .card, .publication-banner { box-shadow: none; }
+}
+
+
+/* Tailored paper page refinements */
+:root {
+  --accent-blue: #2563eb;
+  --accent-cyan: #0ea5e9;
+  --ink-soft: #475569;
+  --panel: #ffffff;
+  --panel-soft: #f8fafc;
+  --line: #dbe3ef;
+}
+
+.publication-header { padding: 4.8rem 0 2.7rem; }
+.publication-title {
+  max-width: 1120px;
+  margin: 0 auto 1.25rem;
+      font-size: clamp(1.8rem, 4.5vw, 3.8rem);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  font-weight: 500;
+  text-wrap: balance;
+}
+.publication-subtitle {
+  max-width: 980px;
+  font-size: clamp(.98rem, 1.45vw, 1.12rem);
+  line-height: 1.5;
+  margin-bottom: 1.35rem;
+  text-wrap: balance;
+}
+@media (min-width: 980px) {
+  .publication-subtitle {
+    white-space: nowrap;
+  }
+}
+.publication-authors { max-width: 1040px; font-size: .98rem; line-height: 1.6; }
+.publication-affiliations { max-width: 820px; font-size: .88rem; line-height: 1.55; margin-bottom: 2.1rem; }
+.publication-venue {
+  margin-top: .2rem;
+  margin-bottom: .25rem;
+  background: #eff6ff;
+  color: #1d4ed8;
+  border: 1px solid #bfdbfe;
+  font-size: .88rem;
+  letter-spacing: .01em;
+}
+.link-blocks { margin-top: 1.35rem; align-items: center; }
+.button { min-height: 36px; padding: .42rem .9rem; font-size: .92rem; line-height: 1.15; }
+
+.section, .section2 { padding: 3.55rem 0; }
+.section + .section, .section2 + .section, .section + .section2 { border-top: 1px solid var(--border-color); }
+.title {
+  margin-bottom: 1.65rem;
+  font-size: clamp(1.42rem, 2.45vw, 1.95rem);
+  line-height: 1.22;
+  letter-spacing: -0.018em;
+  text-wrap: balance;
+}
+.title::after { width: 64px; height: 3px; background: linear-gradient(90deg, #64748b, #cbd5e1); }
+.content { max-width: 920px; font-size: 1.04rem; line-height: 1.78; }
+
+#trip-narratives {
+  padding-top: 6.4rem;
+  padding-bottom: 6.6rem;
+}
+
+#trip-narratives .title {
+  margin-bottom: 2.55rem;
+  font-size: clamp(1.58rem, 2.85vw, 2.15rem);
+  line-height: 1.18;
+  letter-spacing: -0.014em;
+}
+
+#trip-narratives .pipeline {
+  margin-top: .45rem;
+  gap: 1.05rem;
+}
+
+#trip-narratives .step {
+  padding: 1.45rem 1.18rem;
+  min-height: 185px;
+}
+
+#trip-narratives .step-number {
+  width: 1.95rem;
+  height: 1.95rem;
+  margin-bottom: .85rem;
+  font-size: .94rem;
+}
+
+#trip-narratives .step h3 {
+  font-size: 1.06rem;
+  line-height: 1.28;
+  margin-bottom: .48rem;
+}
+
+#trip-narratives .step p {
+  font-size: .96rem;
+  line-height: 1.58;
+}
+.content p { text-align: justify; text-justify: inter-word; hyphens: auto; }
+
+.topic-strip {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: .55rem;
+  max-width: 940px;
+  margin: 1.55rem auto 0;
+  padding: 0;
+  list-style: none;
+}
+.topic-strip li {
+  padding: .42rem .72rem;
+  border: 1px solid rgba(37, 99, 235, .14);
+  border-radius: 999px;
+  background: #eff6ff;
+  color: #1d4ed8;
+  font-size: .86rem;
+  font-weight: 750;
+}
+
+.glance {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 1.35rem;
+  border: 1px solid rgba(148, 163, 184, .28);
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, .92);
+  box-shadow: 0 18px 45px -34px rgb(15 23 42 / .55);
+}
+.glance-title { margin: 0 0 1rem; text-align: center; font-size: 1.08rem; font-weight: 850; letter-spacing: -0.02em; }
+.glance-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .85rem; }
+.glance-card { border: 1px solid rgba(148, 163, 184, .24); border-radius: var(--radius); background: var(--panel-soft); padding: .95rem .9rem; text-align: center; }
+.glance-card strong { display: block; color: var(--text-primary); font-size: 1.5rem; line-height: 1.05; margin-bottom: .25rem; }
+.glance-card span { display: block; color: var(--text-secondary); font-size: .84rem; line-height: 1.35; }
+
+.grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; align-items: stretch; }
+.grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.grid.four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.card { height: 100%; padding: 1.08rem 1.12rem; }
+.card h3 { font-size: 1rem; line-height: 1.28; margin-bottom: .45rem; }
+.card p, .card li { font-size: .94rem; line-height: 1.55; }
+.card .tag {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: .62rem;
+  padding: .22rem .48rem;
+  border-radius: 999px;
+  background: #f1f5f9;
+  color: var(--ink-soft);
+  font-size: .74rem;
+  font-weight: 850;
+  letter-spacing: .055em;
+  text-transform: uppercase;
+}
+.card .metric { display: block; color: var(--primary-color); font-size: 1.65rem; line-height: 1; font-weight: 850; margin-bottom: .35rem; }
+
+.pipeline {
+  max-width: 1040px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: .9rem;
+}
+.step {
+  position: relative;
+  padding: 1.1rem 1rem;
+  border: 1px solid rgba(148, 163, 184, .26);
+  border-radius: var(--radius-lg);
+  background: #fff;
+  box-shadow: var(--shadow-sm);
+}
+.step-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  margin-bottom: .65rem;
+  border-radius: 50%;
+  background: #eff6ff;
+  color: var(--primary-color);
+  font-size: .88rem;
+  font-weight: 850;
+}
+.step h3 { margin: 0 0 .35rem; font-size: .98rem; line-height: 1.28; }
+.step p { margin: 0; color: var(--text-secondary); font-size: .9rem; line-height: 1.5; }
+
+.evidence-list {
+  max-width: 960px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: .85rem;
+}
+.evidence-item {
+  display: grid;
+  grid-template-columns: 190px 1fr;
+  gap: 1rem;
+  padding: 1rem 1.05rem;
+  border: 1px solid rgba(148, 163, 184, .28);
+  border-radius: var(--radius-lg);
+  background: #fff;
+  box-shadow: var(--shadow-sm);
+}
+.evidence-item strong { color: var(--text-primary); font-size: .98rem; line-height: 1.3; }
+.evidence-item p { margin: 0; color: var(--text-secondary); font-size: .95rem; line-height: 1.58; }
+
+.bibtex-header { align-items: flex-end; }
+.bibtex-header .title::after { margin-left: 0; margin-right: 0; }
+.footer { font-size: .88rem; }
+.footer a { color: var(--text-secondary); text-decoration: none; }
+.footer a:hover { color: var(--text-primary); text-decoration: none; }
+
+
+
+/* Figure section and image modal */
+.figure-section {
+  padding: 2.3rem 0 2.4rem;
+  background: transparent;
+}
+
+.figure-section .publication-banner {
+  max-width: 820px;
+  margin: 0 auto;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 18px 45px -28px rgb(15 23 42 / 0.55);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.figure-section .publication-banner:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 24px 55px -30px rgb(15 23 42 / 0.65);
+}
+
+.figure-modal-trigger {
+  display: block;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  background: transparent;
+  cursor: zoom-in;
+}
+
+.figure-modal-trigger img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.figure-modal-trigger:focus-visible {
+  outline: 3px solid rgba(37, 99, 235, .45);
+  outline-offset: 4px;
+  border-radius: var(--radius-lg);
+}
+
+.image-modal[hidden] {
+  display: none;
+}
+
+.image-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: rgba(15, 23, 42, .82);
+  backdrop-filter: blur(4px);
+}
+
+.image-modal img {
+  max-width: min(95vw, 1200px);
+  max-height: 90vh;
+  width: auto;
+  height: auto;
+  border-radius: var(--radius-lg);
+  background: #fff;
+  box-shadow: var(--shadow-xl);
+}
+
+.image-modal-close {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(255, 255, 255, .35);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .96);
+  color: var(--text-primary);
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: var(--shadow-lg);
+}
+
+.image-modal-close:hover {
+  background: #fff;
+  transform: translateY(-1px);
+}
+
+body.modal-open {
+  overflow: hidden;
+}
+
+
+
+.paper-link {
+  color: var(--text-primary);
+  font-weight: 750;
+  text-decoration: none;
+}
+.paper-link:hover {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+.paper-link em {
+  color: inherit;
+}
+.references-details {
+  max-width: 980px;
+  margin: 0 auto;
+  overflow: hidden;
+  border: 1px solid rgba(148, 163, 184, .28);
+  border-radius: var(--radius-lg);
+  background: #fff;
+  box-shadow: var(--shadow-sm);
+}
+.references-details summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.05rem 1.15rem;
+  cursor: pointer;
+  color: var(--text-primary);
+  font-weight: 850;
+  list-style: none;
+}
+.references-details summary::-webkit-details-marker { display: none; }
+.references-details summary::after {
+  content: "+";
+  width: 1.75rem;
+  height: 1.75rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: #eff6ff;
+  color: #1d4ed8;
+  font-weight: 900;
+}
+.references-details[open] summary::after { content: "-"; }
+.reference-count {
+  color: var(--text-secondary);
+  font-size: .9rem;
+  font-weight: 700;
+}
+.extended-reference-list {
+  margin: 0;
+  padding: 1.05rem 1.35rem 1.25rem 2.6rem;
+  border-top: 1px solid rgba(148, 163, 184, .22);
+  color: var(--text-secondary);
+  font-size: .86rem;
+  line-height: 1.55;
+}
+.extended-reference-list li { margin: .55rem 0; }
+.extended-reference-list a { word-break: break-word; }
+.figure-card .figure-modal-trigger {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.figure-card .figure-modal-trigger img { display: block; width: 100%; height: auto; }
+@media (max-width: 980px) {
+  .grid, .grid.two, .grid.four { grid-template-columns: 1fr; }
+  .pipeline { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .glance-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .evidence-item { grid-template-columns: 1fr; }
+}
+@media (max-width: 560px) {
+  .publication-title {
+    font-size: 2rem;
+    line-height: 1.14;
+    letter-spacing: -0.018em;
+  }
+  .publication-subtitle {
+    white-space: normal;
+  }
+  .section, .section2 { padding: 2.8rem 0; }
+  #trip-narratives {
+    padding-top: 4.2rem;
+    padding-bottom: 4.35rem;
+  }
+  #trip-narratives .title {
+    font-size: 1.72rem;
+    margin-bottom: 1.9rem;
+  }
+  #trip-narratives .step {
+    min-height: 0;
+    padding: 1.22rem 1rem;
+  }
+  .content { font-size: 1rem; line-height: 1.7; }
+  .content p { text-align: left; }
+  .pipeline, .glance-grid { grid-template-columns: 1fr; }
+}
+
+
+/* External context sources */
+.sources-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: .85rem;
+  max-width: 1040px;
+  margin: 0 auto;
+}
+.source-card {
+  height: 100%;
+  padding: 1.45rem 1.25rem;
+  border: 1px solid rgba(148, 163, 184, .28);
+  border-radius: var(--radius-lg);
+  background: #fff;
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+  transition: all .25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.source-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+.source-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 4rem;
+  height: 4rem;
+  margin-bottom: 1rem;
+  border-radius: 50%;
+  background: #eff6ff;
+  color: #1d4ed8;
+  font-size: 2rem;
+  line-height: 1;
+}
+.source-card h3 { margin: 0 0 .35rem; font-size: .98rem; line-height: 1.25; }
+.source-card p { margin: 0; color: var(--text-secondary); font-size: .9rem; line-height: 1.48; }
+.sources-note {
+  max-width: 880px;
+  margin: 1.25rem auto 0;
+  color: var(--text-secondary);
+  font-size: .95rem;
+  line-height: 1.6;
+  text-align: center;
+}
+
+
+@media (max-width: 980px) {
+  .sources-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 560px) {
+  .sources-grid { grid-template-columns: 1fr; }
+}
+
+/* Related papers section */
+.related-paper-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  max-width: 980px;
+  margin: 0 auto;
+  align-items: stretch;
+}
+
+.related-paper-card {
+  height: 100%;
+}
+
+.related-paper-card h3 {
+  color: var(--text-primary);
+  font-size: 1.02rem;
+  line-height: 1.32;
+  letter-spacing: -0.01em;
+  margin: 0 0 .55rem;
+}
+
+.related-paper-card p {
+  margin: 0 0 .65rem;
+  color: var(--text-secondary);
+  font-size: .93rem;
+  line-height: 1.55;
+}
+
+.related-paper-card .tag {
+  background: #eff6ff;
+  color: #1d4ed8;
+  border: 1px solid #bfdbfe;
+}
+
+.related-paper-note {
+  margin-bottom: .8rem;
+  color: #475569;
+  font-weight: 650;
+}
+
+.related-paper-link {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  min-height: 26px;
+  padding: .24rem .58rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 7px;
+  background: #fff;
+  color: var(--text-primary);
+  font-size: .78rem;
+  line-height: 1.1;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.related-paper-link:hover {
+  color: #1d4ed8;
+  border-color: #94a3b8;
+  background: #f8fafc;
+  text-decoration: none;
+}
+
+.github-button {
+  border-color: #cbd5e1;
+}
+
+.github-button:hover {
+  color: #0f172a;
+  border-color: #94a3b8;
+}
+
+@media (max-width: 900px) {
+  .related-paper-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+  
+.related-paper-card .related-paper-link + .related-paper-link {
+  margin-left: .35rem;
+  margin-top: .25rem;
+}
+
+ 
+
+
+/* Multimodal Maritime Foundation Models page additions */
+:root {
+  --primary-color: #2563eb;
+  --primary-hover: #1d4ed8;
+  --accent-color: #0891b2;
+  --maritime-deep: #0f172a;
+  --maritime-blue: #0ea5e9;
+  --maritime-red: #ef4444;
+  --maritime-purple: #7c3aed;
+  --maritime-green: #16a34a;
+  --maritime-amber: #d97706;
+  --background-secondary: #f8fafc;
+}
+
+body {
+  background:
+    radial-gradient(circle at 10% 0%, rgba(14, 165, 233, .14), transparent 30rem),
+    radial-gradient(circle at 86% 4%, rgba(37, 99, 235, .12), transparent 28rem),
+    linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+}
+
+.publication-header { padding-top: 4.7rem; }
+.eyebrow { color: #075985; border-color: rgba(14, 165, 233, .24); background: rgba(240, 249, 255, .86); }
+.publication-title { max-width: 1180px; font-weight: 500; letter-spacing: -.035em; }
+.publication-subtitle { max-width: 1040px; }
+.publication-venue { background: #ecfeff; color: #0e7490; border-color: #a5f3fc; }
+
+.hero-note {
+  max-width: 820px;
+  margin: 1.25rem auto 0;
+  color: var(--text-secondary);
+  font-size: .98rem;
+  line-height: 1.65;
+}
+
+.figure-section .publication-banner { max-width: 920px; }
+.figure-section .publication-banner img { background: #fff; }
+.banner-caption strong { color: var(--text-primary); }
+
+.glance-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.glance-card strong { color: #0f172a; }
+.glance-card span { text-transform: none; }
+
+.layer-grid,
+.challenge-grid,
+.application-grid,
+.reading-grid {
+  display: grid;
+  gap: 1rem;
+  max-width: 1040px;
+  margin: 0 auto;
+}
+.layer-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.challenge-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.application-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.reading-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+.layer-card,
+.issue-card,
+.application-card,
+.reading-topic {
+  border: 1px solid rgba(148, 163, 184, .28);
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, .96);
+  box-shadow: var(--shadow-sm);
+}
+.layer-card,
+.issue-card,
+.application-card { padding: 1.18rem; }
+.layer-card:hover,
+.issue-card:hover,
+.application-card:hover,
+.reading-topic:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+.layer-card,
+.issue-card,
+.application-card,
+.reading-topic { transition: all .25s cubic-bezier(.4,0,.2,1); }
+
+.layer-label,
+.issue-label,
+.app-label {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: .65rem;
+  padding: .25rem .55rem;
+  border-radius: 999px;
+  background: #eff6ff;
+  color: #1d4ed8;
+  font-size: .75rem;
+  font-weight: 850;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+.layer-card h3,
+.issue-card h3,
+.application-card h3 { margin: 0 0 .48rem; font-size: 1.05rem; line-height: 1.28; }
+.layer-card p,
+.issue-card p,
+.application-card p { margin: 0; color: var(--text-secondary); font-size: .95rem; line-height: 1.58; }
+.application-card ul { margin: .75rem 0 0; padding-left: 1.1rem; color: var(--text-secondary); font-size: .94rem; line-height: 1.55; }
+.application-card li + li { margin-top: .18rem; }
+
+.pipeline-title-note {
+  max-width: 820px;
+  margin: -1rem auto 2rem;
+  color: var(--text-secondary);
+  text-align: center;
+  font-size: .98rem;
+  line-height: 1.62;
+}
+.pipeline .step { min-height: 190px; }
+.step-number { background: #ecfeff; color: #0e7490; }
+
+.source-card .source-icon { background: #ecfeff; color: #0e7490; }
+.sources-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+.issue-card.challenge { border-top: 4px solid var(--maritime-red); }
+.issue-card.opportunity { border-top: 4px solid var(--maritime-blue); }
+.issue-card h3 span { color: var(--text-light); font-weight: 700; }
+
+.application-card.nav { border-top: 4px solid var(--maritime-red); }
+.application-card.monitor { border-top: 4px solid var(--maritime-purple); }
+.application-card.intel { border-top: 4px solid var(--maritime-blue); }
+
+.figure-row {
+  display: grid;
+  grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr);
+  gap: 1.2rem;
+  align-items: center;
+  max-width: 1040px;
+  margin: 0 auto;
+}
+.figure-card {
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  background: #fff;
+  box-shadow: var(--shadow-md);
+}
+.figure-card img { display: block; width: 100%; height: auto; }
+.figure-copy { color: var(--text-secondary); font-size: 1.02rem; line-height: 1.7; }
+.figure-copy p { margin: 0 0 1rem; }
+
+.reading-topic {
+  overflow: hidden;
+  padding: 0;
+}
+.reading-topic summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.05rem 1.15rem;
+  cursor: pointer;
+  list-style: none;
+}
+.reading-topic summary::-webkit-details-marker { display: none; }
+.reading-topic summary::after {
+  content: "+";
+  width: 1.75rem;
+  height: 1.75rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: #eff6ff;
+  color: #1d4ed8;
+  font-weight: 900;
+}
+.reading-topic[open] summary::after { content: "-"; }
+.reading-topic h3 { margin: 0; font-size: 1rem; line-height: 1.28; }
+.reading-topic .reading-desc { color: var(--text-secondary); display: block; margin-top: .2rem; font-size: .86rem; line-height: 1.38; font-weight: 500; }
+.reading-topic .reading-body {
+  padding: 0 1.15rem 1.1rem;
+  color: var(--text-secondary);
+  border-top: 1px solid rgba(148, 163, 184, .22);
+}
+.reading-topic ul { margin: .85rem 0 0; padding-left: 1.1rem; }
+.reading-topic li { margin: .42rem 0; font-size: .92rem; line-height: 1.5; }
+.reading-topic em { color: var(--text-primary); font-style: normal; font-weight: 700; }
+
+.related-paper-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); max-width: 1040px; }
+.related-paper-card .tag { background: #ecfeff; color: #0e7490; border-color: #a5f3fc; }
+
+.reference-note { max-width: 920px; margin: 1rem auto 0; color: var(--text-secondary); text-align: center; font-size: .94rem; }
+
+
+@media (max-width: 980px) {
+  .glance-grid,
+  .sources-grid,
+  .layer-grid,
+  .challenge-grid,
+  .application-grid,
+  .reading-grid,
+  .related-paper-grid,
+  .figure-row { grid-template-columns: 1fr; }
+  .pipeline { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 560px) {
+  .pipeline { grid-template-columns: 1fr; }
+  .publication-title { font-size: 2rem; }
+}
+
+
+/* Requested figure refinements */
+.figure-section .publication-banner {
+  border-radius: 6px;
+}
+
+.figure-card {
+  border-radius: 4px;
+}
+
+.figure-section .figure-modal-trigger,
+.figure-section .figure-modal-trigger:focus-visible,
+#pipelineModal img {
+  border-radius: 6px;
+}
+
+.figure-card .figure-modal-trigger,
+.figure-card .figure-modal-trigger:focus-visible,
+#applicationsModal img {
+  border-radius: 4px;
+}
+
+section[aria-label="maritime foundation model training pipeline"] .publication-banner {
+  max-width:650px;
+}
+
+@media (min-width: 981px) {
+  #application-figure .figure-row {
+    max-width: 1180px;
+    grid-template-columns: minmax(0, 1.28fr) minmax(0, .72fr);
+    gap: 1.5rem;
+  }
+}
+
+#application-figure .figure-copy p {
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
+}
+
+</style>
+</head>
+<body>
+  <header class="publication-header">
+    <div class="container">
+       <h1 class="publication-title">Multimodal Maritime Foundation Models: Challenges and Opportunities</h1>
+      <p class="publication-subtitle">A Vision Report for Unified Maritime Intelligence across Vessel Mobility, Environmental Context, Regulations, Port Networks, and Market Dynamics</p>
+
+      <div class="publication-authors" aria-label="authors">
+        <span class="author-block">Giannis Spiliopoulos</span>
+        <span class="author-block">Alexandros Troupiotis Kapeliaris</span>
+        <span class="author-block">Kostas Patroumpas</span>
+        <span class="author-break" aria-hidden="true"></span>
+        <span class="author-block">Panagiotis Betchavas</span>
+        <span class="author-block">Dimitrios Skoutas</span>
+        <span class="author-block">Dimitris Zissis</span>
+        <span class="author-block">Nikos Bikakis</span>
+      </div>
+      <p class="publication-affiliations">University of the Aegean · Archimedes/Athena RC · Athena RC · Hellenic Mediterranean University</p>
+      <div class="publication-venue">Multimodal Maritime Foundation Models · Vision Report · 2026</div>
+
+      <nav class="link-blocks" aria-label="paper resources">
+        <a class="button" href="Multimodal_Maritime_Foundation_Models_Challenges_and_Opportunities_2026.pdf" target="_blank" rel="noopener">Paper PDF</a>
+        <a class="button secondary" href="#further-reading">Further Reading</a>
+        <a class="button secondary" href="#references">Bibliography</a>
+        <a class="button secondary" href="#citation">BibTeX</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="figure-section" aria-label="maritime foundation model training pipeline">
+      <div class="container">
+        <figure class="publication-banner">
+          <button class="figure-modal-trigger" type="button" aria-haspopup="dialog" aria-controls="pipelineModal" data-modal-target="pipelineModal" aria-label="Open training pipeline figure in larger view" title="Open larger view">
+            <img src="mmfm_training_pipeline.png" alt="STE-augmented Maritime Foundation Model training pipeline showing data sources, analyzed data, spatiotemporal embeddings, model training, and Maritime FM." loading="eager">
+          </button>
+          <figcaption class="banner-caption"><strong>STE-augmented Maritime FM training pipeline.</strong> Heterogeneous maritime sources are analyzed, fused into spatiotemporal embeddings, and used to train a Maritime Foundation Model.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section2" id="overview">
+      <div class="container">
+        <h2 class="title">Abstract</h2>
+        <div class="content">
+          <p>
+Existing modeling approaches for global maritime
+traffic are fragmented across narrowly scoped tasks and fail
+to provide unified representations spanning strategic, tactical,
+and operational planning layers while accounting for safety and
+efficiency.
+</p>
+
+<p>
+This vision paper outlines the foundations of a general-purpose
+multimodal model for the maritime domain, enabling
+predictive, analytical, and optimization-driven intelligence. By
+leveraging diverse maritime data, the model captures recurring
+mobility patterns and connects operational signals with sector-level
+dynamics. We contextualize such models within maritime
+analytics by identifying the planning layers they must represent.
+</p>
+
+<p>
+Additionally, we examine challenges and opportunities in multimodal integration
+and representation learning, including key resources and
+design considerations, and relate these to downstream tasks. The
+paper proposes a blueprint aligned with domain requirements
+and provides an extended bibliography.
+</p>
+        </div>
+     
+      </div>
+    </section>
+ 
+
+    <section class="section" id="key-insights">
+      <div class="container">
+        <h2 class="title">Key Insights</h2>
+        <div class="grid three">
+          <article class="card"><span class="tag">Unification</span><h3>Move beyond task-specific models</h3><p>Maritime systems often need trajectory prediction, anomaly detection, routing, ETA estimation, and market analytics under shared context. A single backbone can reduce fragmentation.</p></article>
+          <article class="card"><span class="tag">Multimodality</span><h3>Context matters as much as tracks</h3><p>AIS trajectories must be aligned with vessel particulars, ports, nautical maps, weather, hydrography, regulations, financial signals, and news-derived context.</p></article>
+          <article class="card"><span class="tag">Adaptation</span><h3>One backbone, many deployments</h3><p>After pretraining, the FM can be adapted through task heads, full fine-tuning, or parameter-efficient methods such as LoRA, adapters, and prefix tuning.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section2" id="operational-layers">
+      <div class="container">
+        <h2 class="title">Maritime Operation Layers</h2>
+        <div class="layer-grid">
+          <article class="layer-card"><span class="layer-label">Strategic</span><h3>Long-term network and market decisions</h3><p>Fleet deployment, contract allocation, multi-port service schedules, port hierarchies, and global supply-demand dynamics.</p></article>
+          <article class="layer-card"><span class="layer-label">Tactical</span><h3>Voyage-level planning</h3><p>Route design between ports while accounting for weather, vessel type, dimensions, ice-class constraints, port access rules, and piracy risk.</p></article>
+          <article class="layer-card"><span class="layer-label">Operational</span><h3>Real-time navigation and safety</h3><p>Speed adjustments, collision avoidance, COLREGs compliance, traffic separation schemes, and reactions to disruptions during a voyage.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="training-pipeline">
+      <div class="container">
+        <h2 class="title">From Maritime Data to Foundation Model</h2>
+        <p class="pipeline-title-note">The paper proposes an STE-augmented pipeline: data sources are analyzed, aligned spatially and temporally, embedded, and then used to train a Maritime FM.</p>
+        <div class="pipeline">
+          <article class="step"><span class="step-number">1</span><h3>Collect heterogeneous sources</h3><p>Combine AIS mobility data, weather, vessel particulars, port registries, financial data, news, and nautical-map polygons.</p></article>
+          <article class="step"><span class="step-number">2</span><h3>Analyze local patterns</h3><p>Derive trip analytics, fleet analytics, port network statistics, port analytics, finance signals, and news analytics.</p></article>
+          <article class="step"><span class="step-number">3</span><h3>Create STEs</h3><p>Use spatiotemporal embeddings as a first-level fusion mechanism that aligns and selectively retains relevant features.</p></article>
+          <article class="step"><span class="step-number">4</span><h3>Train and adapt the FM</h3><p>Pretrain on large-scale maritime history and adapt the backbone to navigation, monitoring, and shipping intelligence tasks.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section2" id="data-sources">
+      <div class="container">
+        <h2 class="title">Key Data Sources</h2>
+        <div class="sources-grid" aria-label="data sources for maritime foundation models">
+          <article class="source-card"><span class="source-icon" aria-hidden="true">📡</span><h3>Vessel mobility</h3><p>AIS tracks, speed, heading, destination, movement gaps, and trajectory patterns.</p></article>
+          <article class="source-card"><span class="source-icon" aria-hidden="true">🚢</span><h3>Vessel particulars</h3><p>Registry attributes such as type, dimensions, flag, age, ownership, and technical capabilities.</p></article>
+          <article class="source-card"><span class="source-icon" aria-hidden="true">⚓</span><h3>Ports &amp; infrastructure</h3><p>Port metadata, terminals, berths, facilities, access constraints, and regional organization.</p></article>
+          <article class="source-card"><span class="source-icon" aria-hidden="true">🗺️</span><h3>Nautical polygons</h3><p>Traffic schemes, maritime zones, regulated areas, coastlines, and navigational constraints.</p></article>
+          <article class="source-card"><span class="source-icon" aria-hidden="true">☁️</span><h3>Weather &amp; sea state</h3><p>Wind, waves, currents, tides, forecasts, and regional environmental patterns.</p></article>
+          <article class="source-card"><span class="source-icon" aria-hidden="true">🌊</span><h3>Hydrography</h3><p>Bathymetry, depth grids, coastal constraints, and static environmental context.</p></article>
+          <article class="source-card"><span class="source-icon" aria-hidden="true">📈</span><h3>Market indicators</h3><p>Freight benchmarks, commodity prices, financial time series, and sector-level demand signals.</p></article>
+          <article class="source-card"><span class="source-icon" aria-hidden="true">📰</span><h3>News &amp; events</h3><p>Disruptions, geopolitical developments, safety notices, and market sentiment signals.</p></article>
+        </div>
+        <p class="sources-note">These sources differ in modality, update frequency, availability, and quality, so the FM requires robust spatiotemporal alignment and missing-data handling.</p>
+      </div>
+    </section>
+
+    <section class="section" id="challenges-opportunities">
+      <div class="container">
+        <h2 class="title">Challenges &amp; Opportunities</h2>
+        <div class="challenge-grid">
+          <article class="issue-card challenge"><span class="issue-label">Challenge</span><h3>Data quality and integration</h3><p>AIS coverage gaps, spoofing, fragmented port metadata, coarse weather grids, and asynchronous update cycles can weaken model reliability.</p></article>
+          <article class="issue-card opportunity"><span class="issue-label">Opportunity</span><h3>Spatiotemporal embedding fusion</h3><p>STEs can align trajectory records with environmental, regulatory, operational, and market signals while masking irrelevant or missing features.</p></article>
+          <article class="issue-card challenge"><span class="issue-label">Challenge</span><h3>Dynamic temporal updating</h3><p>Maritime networks shift under crises, congestion, weather, geopolitical disruptions, and changing trade dynamics.</p></article>
+          <article class="issue-card opportunity"><span class="issue-label">Opportunity</span><h3>Continual and partial retraining</h3><p>Gradual retraining can keep the FM aligned with evolving maritime behavior without rebuilding the full model from scratch.</p></article>
+          <article class="issue-card challenge"><span class="issue-label">Challenge</span><h3>Explainability and accountability</h3><p>Captains, operators, companies, and authorities need recommendations that are understandable, actionable, and compliant with maritime rules.</p></article>
+          <article class="issue-card opportunity"><span class="issue-label">Opportunity</span><h3>Human-interpretable decision support</h3><p>Explainable maritime FMs can provide reasoning traces, confidence, provenance, and safer interaction with autonomous and remotely operated systems.</p></article>
+          <article class="issue-card challenge"><span class="issue-label">Challenge</span><h3>Privacy, copyright, and compliance</h3><p>Combining public AIS with proprietary market or operational data can expose sensitive commercial strategies.</p></article>
+          <article class="issue-card opportunity"><span class="issue-label">Opportunity</span><h3>Privacy-aware and compliant-by-design models</h3><p>Approaches such as differential privacy, attribution controls, and regulation-aware inference can support responsible deployment.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section2" id="applications">
+      <div class="container">
+        <h2 class="title">Downstream Tasks and Applications</h2>
+        <div class="application-grid">
+          <article class="application-card nav"><span class="app-label">Optimized navigation</span><h3>Safer, more efficient voyages</h3><p>The adapted model can support single-vessel and cooperative planning.</p><ul><li>Path planning</li><li>ETA estimation</li><li>Collision and grounding avoidance</li><li>Weather-aware and emission-aware routing</li></ul></article>
+          <article class="application-card monitor"><span class="app-label">Activity monitoring</span><h3>Maritime traffic intelligence</h3><p>Learned routine behavior can support monitoring at vessel and network scale.</p><ul><li>Flow prediction</li><li>Activity recognition</li><li>Anomaly detection</li><li>IUU fishing and sanction-risk monitoring</li></ul></article>
+          <article class="application-card intel"><span class="app-label">Shipping intelligence</span><h3>Market-aware analytics</h3><p>Trajectory data combined with market embeddings can support business and network analysis.</p><ul><li>Supply-demand signals</li><li>Commodity and freight dynamics</li><li>Port network analytics</li><li>Fleet and logistics-chain monitoring</li></ul></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="application-figure">
+      <div class="container">
+        <h2 class="title">Application View</h2>
+        <div class="figure-row">
+          <figure class="figure-card">
+            <button class="figure-modal-trigger" type="button" aria-haspopup="dialog" aria-controls="applicationsModal" data-modal-target="applicationsModal" aria-label="Open downstream applications figure in larger view" title="Open larger view">
+              <img src="mmfm_downstream_applications.png" alt="Downstream Maritime FM applications including supply demand, commodity trading, path planning, ETA estimation, collision avoidance, flow prediction, activity recognition, and anomaly detection." loading="lazy">
+            </button>
+          </figure>
+          <div class="figure-copy">
+            <p>The downstream view groups maritime FM use cases by the kind of context they require. Market-facing applications use port, fleet, finance, and news analytics; navigation applications combine vessel mobility, weather, vessel particulars, and regulations; monitoring applications combine mobility data, rules, and nautical-map polygons.</p>
+            <p>This makes the page easier to scan while preserving the paper's core message: the same multimodal backbone can serve very different maritime decisions.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section2" id="related-papers">
+      <div class="container">
+        <h2 class="title">Related Papers</h2>
+        <div class="related-paper-grid">
+          <article class="card related-paper-card"><span class="tag">Maritime narratives</span><h3>Context-Enriched Natural Language Descriptions of Vessel Trajectories</h3><p>Kostas Patroumpas, Alexandros Troupiotis-Kapeliaris, Giannis Spiliopoulos, Panagiotis Betchavas, Dimitrios Skoutas, Dimitris Zissis, and Nikos Bikakis.</p><p class="related-paper-note">IEEE International Conference on Mobile Data Management, MDM 2026.</p><a class="related-paper-link" href="https://www.nbikakis.com/papers/Context-Enriched%20Natural%20Language%20Descriptions%20of%20Vessel%20Trajectories_2026.pdf" target="_blank" rel="noopener">Paper PDF</a></article>
+          <article class="card related-paper-card"><span class="tag">Trajectory imputation</span><h3>Data-Driven Trajectory Imputation for Vessel Mobility Analysis</h3><p>Giannis Spiliopoulos, Alexandros Troupiotis-Kapeliaris, Kostas Patroumpas, Nikolaos Liapis, Dimitrios Skoutas, Dimitris Zissis, and Nikos Bikakis.</p><p class="related-paper-note">International Conference on Extending Database Technology, EDBT 2026.</p><a class="related-paper-link" href="https://www.nbikakis.com/papers/Data-Driven%20Trajectory%20Imputation%20for%20Vessel%20Mobility%20Analysis_EDBT_2026.pdf" target="_blank" rel="noopener">Paper PDF</a></article>
+          <article class="card related-paper-card"><span class="tag">Vision-based imputation</span><h3>Trajectory Imputation Using Computer Vision Models</h3><p>Panagiotis Betchavas, Alexandros Troupiotis-Kapeliaris, Kostas Patroumpas, Giannis Spiliopoulos, Dimitrios Skoutas, Dimitris Zissis, and Nikos Bikakis.</p><p class="related-paper-note">International Workshop on Multi-Sensor Trajectory Knowledge Discovery &amp; Extraction, MuseKDE 2026.</p><a class="related-paper-link" href="https://www.nbikakis.com/papers/Trajectory%20Imputation%20Using%20Computer%20Vision%20Models_2026.pdf" target="_blank" rel="noopener">Paper PDF</a></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="further-reading">
+      <div class="container">
+        <h2 class="title">Further Reading</h2>
+        <p class="pipeline-title-note">Landscape of Key Literature Across Core Topics.</p>
+        <div class="reading-grid">
+          <details class="reading-topic"><summary><span><h3>Maritime mobility analytics</h3><span class="reading-desc">AIS data, maritime spatiotemporal analytics, route networks, and GIS foundations.</span></span></summary><div class="reading-body"><ul><li><a class="paper-link" href="https://scholar.google.com/scholar?q=Exploiting+AIS+Data+for+Intelligent+Maritime+Navigation" target="_blank" rel="noopener"><em>Exploiting AIS Data for Intelligent Maritime Navigation</em></a> — Tu et al., IEEE T-ITS, 2017.</li><li><a class="paper-link" href="https://scholar.google.com/scholar?q=How+Big+Data+Enriches+Maritime+Research" target="_blank" rel="noopener"><em>How Big Data Enriches Maritime Research</em></a> — Yang et al., Transport Reviews, 2019.</li><li><a class="paper-link" href="https://scholar.google.com/scholar?q=Traffic+Pattern+Mining+and+Forecasting+Technologies+in+Maritime+Traffic+Service+Networks" target="_blank" rel="noopener"><em>Traffic Pattern Mining and Forecasting Technologies in Maritime Traffic Service Networks</em></a> — Xiao et al., IEEE T-ITS, 2019.</li><li><a class="paper-link" href="https://scholar.google.com/scholar?q=Application+of+GIS+in+the+Maritime-port+Sector" target="_blank" rel="noopener"><em>Application of GIS in the Maritime-port Sector</em></a> — Isbaex et al., Sustainability, 2025.</li></ul></div></details>
+          <details class="reading-topic"><summary><span><h3>Deep learning for maritime AI</h3><span class="reading-desc">Neural models for trajectories, forecasting, collision avoidance, safety, and risk.</span></span></summary><div class="reading-body"><ul><li><a class="paper-link" href="https://scholar.google.com/scholar?q=Big+Data+and+Artificial+Intelligence+in+the+Maritime+Industry" target="_blank" rel="noopener"><em>Big Data and Artificial Intelligence in the Maritime Industry</em></a> — Munim et al., Maritime Policy &amp; Management, 2020.</li><li><a class="paper-link" href="https://scholar.google.com/scholar?q=Harnessing+the+Power+of+Machine+Learning+for+AIS+Data-driven+Maritime+Research" target="_blank" rel="noopener"><em>Harnessing the Power of Machine Learning for AIS Data-driven Maritime Research</em></a> — Yang et al., Transportation Research Part E, 2024.</li><li><a class="paper-link" href="https://scholar.google.com/scholar?q=AIS+Data-driven+Maritime+Monitoring+Based+on+Transformer" target="_blank" rel="noopener"><em>AIS Data-driven Maritime Monitoring Based on Transformer</em></a> — Xie et al., 2025.</li><li><a class="paper-link" href="https://scholar.google.com/scholar?q=Artificial+Intelligence+in+Maritime+Transportation" target="_blank" rel="noopener"><em>Artificial Intelligence in Maritime Transportation</em></a> — Durlik et al., Applied Sciences, 2024.</li></ul></div></details>
+          <details class="reading-topic"><summary><span><h3>LLMs and maritime agents</h3><span class="reading-desc">LLM-based prediction, navigation assistance, compliance reasoning, and maritime-specific LLMs.</span></span></summary><div class="reading-body"><ul><li><a class="paper-link" href="https://scholar.google.com/scholar?q=AIS-LLM" target="_blank" rel="noopener"><em>AIS-LLM</em></a> — Park et al., 2025.</li><li><a class="paper-link" href="https://scholar.google.com/scholar?q=Leveraging+Large+Language+Models+for+Enhancing+Safety+in+Maritime+Operations" target="_blank" rel="noopener"><em>Leveraging Large Language Models for Enhancing Safety in Maritime Operations</em></a> — Miller et al., Applied Sciences, 2025.</li><li><a class="paper-link" href="https://scholar.google.com/scholar?q=Navigation-GPT" target="_blank" rel="noopener"><em>Navigation-GPT</em></a> — Ma et al., 2025.</li><li><a class="paper-link" href="https://scholar.google.com/scholar?q=Llamarine" target="_blank" rel="noopener"><em>Llamarine</em></a> — Nguyen et al., 2025.</li></ul></div></details>
+          <details class="reading-topic"><summary><span><h3>Spatiotemporal foundation models</h3><span class="reading-desc">Foundation models for mobility, geospatial data, transportation, and trajectories.</span></span></summary><div class="reading-body"><ul><li><a class="paper-link" href="https://scholar.google.com/scholar?q=Spatio-temporal+Foundation+Models%3A+Vision%2C+Challenges%2C+and+Opportunities" target="_blank" rel="noopener"><em>Spatio-temporal Foundation Models: Vision, Challenges, and Opportunities</em></a> — Goodge et al., 2025.</li><li><a class="paper-link" href="https://scholar.google.com/scholar?q=On+the+Opportunities+and+Challenges+of+Foundation+Models+for+GeoAI" target="_blank" rel="noopener"><em>On the Opportunities and Challenges of Foundation Models for GeoAI</em></a> — Mai et al., ACM TSAS, 2024.</li><li><a class="paper-link" href="https://scholar.google.com/scholar?q=Towards+a+Trajectory-powered+Foundation+Model+of+Mobility" target="_blank" rel="noopener"><em>Towards a Trajectory-powered Foundation Model of Mobility</em></a> — Choudhury et al., 2024.</li><li><a class="paper-link" href="https://scholar.google.com/scholar?q=Toward+Foundation+Models+for+Mobility+Enriched+Geospatially+Embedded+Objects" target="_blank" rel="noopener"><em>Toward Foundation Models for Mobility Enriched Geospatially Embedded Objects</em></a> — Siampou et al., 2025.</li></ul></div></details>
+          <details class="reading-topic"><summary><span><h3>Navigation, routing, and ETA</h3><span class="reading-desc">Weather routing, path planning, collision avoidance, and time-of-arrival prediction.</span></span></summary><div class="reading-body"><ul><li><a class="paper-link" href="https://scholar.google.com/scholar?q=Ship+Weather+Routing%3A+A+Taxonomy+and+Survey" target="_blank" rel="noopener"><em>Ship Weather Routing: A Taxonomy and Survey</em></a> — Zis et al., Ocean Engineering, 2020.</li><li><a class="paper-link" href="https://scholar.google.com/scholar?q=Path+Planning+and+Collision+Avoidance+for+Autonomous+Surface+Vehicles+II" target="_blank" rel="noopener"><em>Path Planning and Collision Avoidance for Autonomous Surface Vehicles II</em></a> — Vagale et al., 2021.</li><li><a class="paper-link" href="https://scholar.google.com/scholar?q=Vessel+Trajectory+Prediction+in+Maritime+Transportation" target="_blank" rel="noopener"><em>Vessel Trajectory Prediction in Maritime Transportation</em></a> — Zhang et al., IEEE T-ITS, 2022.</li><li><a class="paper-link" href="https://scholar.google.com/scholar?q=Prediction+of+Vessel+Arrival+Time+to+Port" target="_blank" rel="noopener"><em>Prediction of Vessel Arrival Time to Port</em></a> — Jiang et al., Maritime Policy &amp; Management, 2025.</li></ul></div></details>
+          <details class="reading-topic"><summary><span><h3>Monitoring, anomalies, and security</h3><span class="reading-desc">Activity recognition, anomaly detection, infrastructure monitoring, and protected-zone analytics.</span></span></summary><div class="reading-body"><ul><li><a class="paper-link" href="https://scholar.google.com/scholar?q=Anomaly+Detection+in+Maritime+AIS+Tracks" target="_blank" rel="noopener"><em>Anomaly Detection in Maritime AIS Tracks</em></a> — Wolsing et al., JMSE, 2022.</li><li><a class="paper-link" href="https://scholar.google.com/scholar?q=Maritime+Anomaly+Detection+for+Vessel+Traffic+Services" target="_blank" rel="noopener"><em>Maritime Anomaly Detection for Vessel Traffic Services</em></a> — Stach et al., JMSE, 2023.</li><li><a class="paper-link" href="https://scholar.google.com/scholar?q=AI+in+Maritime+Security" target="_blank" rel="noopener"><em>AI in Maritime Security</em></a> — Talpur et al., Information, 2025.</li><li><a class="paper-link" href="https://scholar.google.com/scholar?q=Monitoring+of+Critical+Undersea+Infrastructures" target="_blank" rel="noopener"><em>Monitoring of Critical Undersea Infrastructures</em></a> — Soldi et al., IEEE AESS Magazine, 2023.</li></ul></div></details>
+        </div>
+       </div>
+    </section>
+
+
+    <section class="section" id="references">
+      <div class="container">
+        <h2 class="title">Bibliography</h2>
+         <details class="references-details">
+          <summary><span>Show extended reference list</span></summary>
+          <ol class="extended-reference-list">
+            <li>A. Troupiotis-Kapeliaris, D. Zissis, S. Kohlbrenner, and C. Kastrisios, “Mobility Data Mining: the Maritime Use Case,” in Workshop on Metrology for Aerospace (metroaerospace), 2024.</li>
+            <li>Y. Kalinichenko, S. Rudenko, A. Holovan, N. Vasalatii, A. Zaiets, O. Koliesnik, L. O. Santana, and N. Dolynska, “Smart Routing for Sustainable Shipping: A Review of Trajectory Optimization Approaches in Waterborne Transport,” Sustainability, vol. 17, no. 18, 2025.</li>
+            <li>N. Newaliya and Y. Singh, “A Review of Maritime Spatio-temporal Data Analytics,” in Conference on Computational Performance Evaluation (compe), 2021.</li>
+            <li>P. Sarhadi, W. Naeem, and N. Athanasopoulos, “A Survey of Recent Machine Learning Solutions for Ship Collision Avoidance and Mission Planning,” IFAC-PapersOnLine, vol. 55, no. 31, 2022.</li>
+            <li>Y. Li, J. Cui, X. Zhang, and X. Yang, “A Ship Route Planning Method Under the Sailing Time Constraint,” Journal of Marine Science and Engineering, vol. 11, no. 6, 2023.</li>
+            <li>C. Isbaex, F. d. R. F. Costa, and T. Batista, “Application of GIS in the Maritime-port Sector: A Systematic Review,” Sustainability, 2025.</li>
+            <li>Z. H. Munim, M. Dushenko, V. J. Jimenez, M. H. Shakil, and M. Imset, “Big Data and Artificial Intelligence in the Maritime Industry: A Bibliometric Review and Future Research Directions,” Maritime Policy &amp; Management, vol. 47, no. 5, 2020.</li>
+            <li>N. Assani, P. Matić, N. Kaštelan, and I. R. Čavka, “A Review of Artificial Neural Networks Applications in Maritime Industry,” IEEE access, vol. 11, 2023.</li>
+            <li>Y. Yang, Y. Liu, G. Li, Z. Zhang, and Y. Liu, “Harnessing the Power of Machine Learning for AIS Data-driven Maritime Research: A Comprehensive Review,” Transportation research part E: logistics and transportation review, 2024.</li>
+            <li>Y. Chen, B. Sun, X. Xie, X. Li, Y. Li, and Y. Zhao, “Short-term Forecasting for Ship Fuel Consumption Based on Deep Learning,” Ocean engineering, vol. 301, 2024.</li>
+            <li>I. Durlik, T. Miller, E. Kostecka, and T. Tuński, “Artificial Intelligence in Maritime Transportation: A Comprehensive Review of Safety and Risk Management Applications,” Applied Sciences, vol. 14, no. 18, 2024.</li>
+            <li>M. Wang, X. Guo, Y. She, Y. Zhou, M. Liang, and Z. S. Chen, “Advancements in Deep Learning Techniques for Time Series Forecasting in Maritime Applications: A Comprehensive Review,” Information, vol. 15, no. 8, 2024.</li>
+            <li>H. Rong, A. Teixeira, and C. G. Soares, “Data Mining Approach to Shipping Route Characterization and Anomaly Detection Based on AIS Data,” Ocean Engineering, vol. 198, 2020.</li>
+            <li>K. Park, S. Sim, and H. Bae, “Vessel Estimated Time of Arrival Prediction System Based on A Path-finding Algorithm,” Maritime Transport Research, vol. 2, 2021.</li>
+            <li>D. Kaklis, I. Kontopoulos, I. Varlamis, I. Z. Emiris, and T. Varelas, “Trajectory Mining and Routing: A Cross-sectoral Approach,” Journal of Marine Science and Engineering, vol. 12, no. 1, 2024.</li>
+            <li>R. Bommasani, “on the Opportunities and Risks of Foundation Models,” arXiv:<a href="https://arxiv.org/abs/2108.07258" target="_blank" rel="noopener">2108.07258</a>, 2021.</li>
+            <li>W. Ruan, T. Yang, Y. Zhou, T. Liu, and J. Lu, “From Task-specific Models to Unified Systems: A Review of Model Merging Approaches,” arXiv:<a href="https://arxiv.org/abs/2503.08998" target="_blank" rel="noopener">2503.08998</a>, 2025.</li>
+            <li>A. Vaswani, N. Shazeer, N. Parmar, J. Uszkoreit, L. Jones, A. N. Gomez, Ł. Kaiser, and I. Polosukhin, “Attention is All You Need,” Advances in neural information processing systems, 2017.</li>
+            <li>C. Zhou, Q. Li, C. Li, J. Yu, Y. Liu, G. Wang, K. Zhang, C. Ji, Q. Yan, L. He, H. Peng, J. Li, J. Wu, Z. Liu, P. Xie, C. Xiong, J. Pei, P. S. Yu, and L. Sun, “A Comprehensive Survey on Pretrained Foundation Models: A History from BERT to Chatgpt,” Journal of Machine Learning and Cybernetics, 2025.</li>
+            <li>Y. Bian, J. Li, C. Ye, X. Jia, and Q. Yang, “Artificial Intelligence in Medical Imaging: from Task-specific Models to Large-scale Foundation Models,” Chinese Medical Journal, vol. 138, no. 06, 2025.</li>
+            <li>A. Trišović, A. Fogelson, J. Sivaloganathan, and N. Thompson, “The Rapid Growth of AI Foundation Model Usage in Science,” arXiv:<a href="https://arxiv.org/abs/2511.21739" target="_blank" rel="noopener">2511.21739</a>, 2025.</li>
+            <li>H. Chen, H. Chen, Z. Zhao, K. Han, G. Zhu, Y. Zhao, Y. Du, W. Xu, and Q. Shi, “An Overview of Domain-specific Foundation Model: Key Technologies, Applications and Challenges,” Science China Information Sciences, 2026.</li>
+            <li>Y. Zhang, J. Gao, Z. Tan, L. Zhou, K. Ding, M. Zhou, S. Zhang, and D. Wang, “Data-centric Foundation Models in Computational Healthcare: A Survey,” arXiv:<a href="https://arxiv.org/abs/2401.02458" target="_blank" rel="noopener">2401.02458</a>, 2024.</li>
+            <li>M. Awais, M. Naseer, S. Khan, R. M. Anwer, H. Cholakkal, M. Shah, M.-H. Yang, and F. S. Khan, “Foundation Models Defining A New Era in Vision: A Survey and Outlook,” IEEE Transactions on Pattern Analysis and Machine Intelligence, 2025.</li>
+            <li>Y. Yin, Y. Yang, J. Yang, and Q. Liu, “Finpt: Financial Risk Prediction with Profile Tuning on Pretrained Foundation Models,” arXiv:<a href="https://arxiv.org/abs/2308.00065" target="_blank" rel="noopener">2308.00065</a>, 2023.</li>
+            <li>X.-Y. L. Yanglet, Y. Cao, and L. Deng, “Multimodal Financial Foundation Models (mffms): Progress, Prospects, and Challenges,” arXiv:<a href="https://arxiv.org/abs/2506.01973" target="_blank" rel="noopener">2506.01973</a>, 2025.</li>
+            <li>A. Goodge, W. S. Ng, B. Hooi, and S. K. Ng, “Spatiotemporal Foundation Models: Vision, Challenges, and Opportunities,” arXiv:<a href="https://arxiv.org/abs/2501.09045" target="_blank" rel="noopener">2501.09045</a>, 2025.</li>
+            <li>Y. Fang, H. Miao, Y. Liang, L. Deng, Y. Cui, X. Zeng, Y. Xia, Y. Zhao, T. B. Pedersen, C. S. Jensen, X. Zhou, and K. Zheng, “Unraveling Spatio-temporal Foundation Models Via the Pipeline Lens: A Comprehensive Review,” IEEE Transactions on Knowledge and Data Engineering, 2026.</li>
+            <li>Y. Zhu, J. J. Yu, X. Zhao, X. Zhou, L. Han, X. Wei, and Y. Liang, “Unitraj: Learning A Universal Trajectory Foundation Model from Billion-scale Worldwide Traces,” arXiv:<a href="https://arxiv.org/abs/2411.03859" target="_blank" rel="noopener">2411.03859</a>, 2024.</li>
+            <li>S. Choudhury, A. R. Kreidieh, I. Kuznetsov, and N. Arora, “Towards A Trajectory-powered Foundation Model of Mobility,” in SIGSPATIAL Workshop on Spatial Big Data and AI for Industrial Applications, 2024.</li>
+            <li>M. Musleh, M. F. Mokbel, and S. Abbar, “Let’s Speak Trajectories,” in ACM Intl. Conf. on Advances in Geographic Information Systems (SIGSPATIAL), 2022.</li>
+            <li>M. D. Siampou, S.-L. Hsu, S. Choudhury, N. Arora, and C. Shahabi, “Toward Foundation Models for Mobility Enriched Geospatially Embedded Objects,” in ACM Intl. Conf. on Advances in Geographic Information Systems (SIGSPATIAL), 2025.</li>
+            <li>G. Mai, W. Huang, J. Sun, S. Song, D. Mishra, N. Liu, S. Gao, T. Liu, G. Cong, Y. Hu, C. Cundy, Z. Li, R. Zhu, and N. Lao, “On the Opportunities and Challenges of Foundation Models for Geoai (Vision Paper),” ACM Trans. Spatial Algorithms Syst. (TSAS), 2024.</li>
+            <li>M. R. Shoaib, H. M. Emara, and J. Zhao, “A Survey on the Applications of Frontier AI, Foundation Models, and Large Language Models to Intelligent Transportation Systems,” in Conference on Computer and Applications (ICCA), 2023.</li>
+            <li>Z. Li, Z. Cui, H. Liao, J. Ash, G. Zhang, C. Xu, and Y. Wang, “Steering the Future: Redefining Intelligent Transportation Systems with Foundation Models,” Chain, 2024.</li>
+            <li>Z. Zhou, Z. Gu, X. Qu, P. Liu, Z. Liu, and W. Yu, “Urban Mobility Foundation Model: A Literature Review and Hierarchical Perspective,” Transportation Research Part E: Logistics and Transportation Review, 2024.</li>
+            <li>W. Zhang, J. Han, Z. Xu, H. Ni, H. Liu, and H. Xiong, “Urban Foundation Models: A Survey,” in ACM Intl. Conf. on Knowledge Discovery and Data Mining (KDD), 2024.</li>
+            <li>X. Wu, H. He, Y. Wang, and Q. Wang, “Pretrained Mobility Transformer: A Foundation Model for Human Mobility,” arXiv:<a href="https://arxiv.org/abs/2406.02578" target="_blank" rel="noopener">2406.02578</a>, 2024.</li>
+            <li>C. Chu, H. Zhang, and F. Lu, “Trajgdm: A New Trajectory Foundation Model for Simulating Human Mobility,” in ACM Intl. Conf. on Advances in Geographic Information Systems (SIGSPATIAL), 2023.</li>
+            <li>W. Li, J. Wu, X. L. J. Chen, and C. Chen, “Aviationlmm: A Large Multimodal Foundation Model for Civil Aviation,” arXiv:<a href="https://arxiv.org/abs/2601.09105" target="_blank" rel="noopener">2601.09105</a>, 2026.</li>
+            <li>Z. Xie, E. Tu, X. Fu, G. Yuan, and Y. Han, “AIS Data-driven Maritime Monitoring Based on Transformer: A Comprehensive Review,” arXiv:<a href="https://arxiv.org/abs/2505.07374" target="_blank" rel="noopener">2505.07374</a>, 2025.</li>
+            <li>H. Park, J. Jung, M. Seo, H. Choi, D. Cho, S. Park, and D.-G. Choi, “AIS-LLM: A Unified Framework for Maritime Trajectory Prediction, Anomaly Detection, and Collision Risk Assessment with Explainable Forecasting,” arXiv:<a href="https://arxiv.org/abs/2508.07668" target="_blank" rel="noopener">2508.07668</a>, 2025.</li>
+            <li>Anonymous, “A Diffusion-based Foundation Model for Irregular Spatio-temporal Trajectories,” 2026, preprint on OpenReview. [Online]. Available: <a href="https://openreview.net/forum?id=w7xpNeFIbb" target="_blank" rel="noopener">https://openreview.net/forum?id=w7xpNeFIbb</a></li>
+            <li>T. Miller, I. Durlik, E. Kostecka, A. Łobodzińska, K. Łazuga, and P. Kozlovska, “Leveraging Large Language Models for Enhancing Safety in Maritime Operations,” Applied Sciences, 2025.</li>
+            <li>F. Ma, X.-m. Wang, C. Chen, X.-b. Xu, and X.-p. Yan, “Navigation-gpt: A Robust and Adaptive Framework Utilizing Large Language Models for Navigation Applications,” arXiv:<a href="https://arxiv.org/abs/2502.16402" target="_blank" rel="noopener">2502.16402</a>, 2025.</li>
+            <li>D. Pei, J. He, K. Liu, M. Chen, and S. Zhang, “Application of Large Language Models and Assessment of Their Ship-handling Theory Knowledge and Skills for Connected Maritime Autonomous Surface Ships,” Mathematics, 2024.</li>
+            <li>W. Nguyen, A. Phan, K. Kimura, H. Maeno, M. Tanaka, Q. Le, W. Poucher, and C. Nguyen, “Llamarine: Open-source Maritime Industry-specific Large Language Model,” arXiv:<a href="https://arxiv.org/abs/2503.00203" target="_blank" rel="noopener">2503.00203</a>, 2025.</li>
+            <li>K. A. Christensen, A. G. Tufte, A. Gusev, R. Sinha, M. Ganai, O. A. Alsos, M. Pavoned, and M. Steinert, “Foundation Models on the Bridge: Semantic Hazard Detection and Safety Maneuvers for Maritime Autonomy with Vision-language Models,” arXiv:<a href="https://arxiv.org/abs/2512.24470" target="_blank" rel="noopener">2512.24470</a>, 2025.</li>
+            <li>S. Wang, K. Wu, R. Qiao, R. Wang, and C. Cai, “Towards Maritime Safety with Industrial Multimodal Models: Compliance Reasoning from Heterogeneous Maritime Data,” Applied Soft Computing, 2026.</li>
+            <li>E. Tu, G. Zhang, L. Rachmawati, E. Rajabally, and G.-B. Huang, “Exploiting AIS Data for Intelligent Maritime Navigation: A Comprehensive Survey from Data to Methodology,” IEEE Transactions on Intelligent Transportation Systems, vol. 19, no. 5, 2017.</li>
+            <li>Z. Xiao, X. Fu, L. Zhang, and R. S. M. Goh, “Traffic Pattern Mining and Forecasting Technologies in Maritime Traffic Service Networks: A Comprehensive Survey,” IEEE Transactions on Intelligent Transportation Systems, vol. 21, no. 5, 2019.</li>
+            <li>D. Yang, L. Wu, S. Wang, H. Jia, and K. X. Li, “How Big Data Enriches Maritime Research–a Critical Review of Automatic Identification System (AIS) Data Applications,” Transport reviews, 2019.</li>
+            <li>T. P. Zis, H. N. Psaraftis, and L. Ding, “Ship Weather Routing: A Taxonomy and Survey,” Ocean Engineering, vol. 213, 2020.</li>
+            <li>A. Vagale, R. T. Bye, R. Oucheikh, O. L. Osen, and T. I. Fossen, “Path Planning and Collision Avoidance for Autonomous Surface Vehicles II: A Comparative Study of Algorithms,” Journal of Marine Science and Technology, vol. 26, no. 4, 2021.</li>
+            <li>K. Wolsing, L. Roepert, J. Bauer, and K. Wehrle, “Anomaly Detection in Maritime AIS Tracks: A Review of Recent Approaches,” Journal of Marine Science and Engineering, vol. 10, no. 1, 2022.</li>
+            <li>H. Yu, Q. Meng, Z. Fang, J. Liu, and L. Xu, “A Review of Ship Collision Risk Assessment, Hotspot Detection and Path Planning for Maritime Traffic Control in Restricted Waters,” The Journal of Navigation, vol. 75, no. 6, 2022.</li>
+            <li>X. Zhang, X. Fu, Z. Xiao, H. Xu, and Z. Qin, “Vessel Trajectory Prediction in Maritime Transportation: Current Approaches and Beyond,” IEEE Transactions on Intelligent Transportation Systems, vol. 23, no. 11, 2022.</li>
+            <li>B. Xing, M. Yu, Z. Liu, Y. Tan, Y. Sun, and B. Li, “A Review of Path Planning for Unmanned Surface Vehicles,” Journal of Marine Science and Engineering, vol. 11, no. 8, 2023.</li>
+            <li>T. Stach, Y. Kinkel, M. Constapel, and H.-C. Burmeister, “Maritime Anomaly Detection for Vessel Traffic Services: A Survey,” Journal of Marine Science and Engineering, vol. 11, no. 6, 2023.</li>
+            <li>L. Huang, C. Wan, Y. Wen, R. Song, and P. van Gelder, “Generation and Application of Maritime Route Networks: Overview and Future Research Directions,” IEEE Transactions on Intelligent Transportation Systems, vol. 26, no. 1, 2024.</li>
+            <li>W. Z. Zhang, J. Pan, J. C. Sanchez, X. B. Li, and M. C. Xu, “Review on the Protective Technologies of Bridge Against Vessel Collision,” Thin-Walled Structures, vol. 201, 2024.</li>
+            <li>S. Jiang, L. Liu, P. Peng, M. Xu, and R. Yan, “Prediction of Vessel Arrival Time to Port: A Review of Current Studies,” Maritime Policy &amp; Management, 2025.</li>
+            <li>A. A. Noman, A. Heuermann, S. Wiesner, and K.-D. Thoben, “A Review of Vessel Time of Arrival Prediction on Waterway Networks: Current Trends, Open Issues, and Future Directions,” Computers, vol. 14, no. 2, 2025.</li>
+            <li>Y. Chen, C. Zhang, Y. Guo, Y. Wang, X. Lang, M. Zhang, and W. Mao, “State-of-the-art Optimization Algorithms in Weather Routing—ship Decision Support Systems: Challenge, Taxonomy, and Review,” Ocean Engineering, vol. 331, 2025.</li>
+            <li>G. C. Kessler and D. M. Zorri, “AIS Spoofing: A Tutorial for Researchers,” in IEEE Conference on Local Computer Networks (LCN), 2024.</li>
+            <li>E. Veitch and O. A. Alsos, “Human-centered Explainable Artificial Intelligence for Marine Autonomous Surface Vehicles,” Journal of Marine Science and Engineering, vol. 9, no. 11, 2021.</li>
+            <li>E. Chondrodima, P. Mandalis, N. Pelekis, and Y. Theodoridis, “Machine learning models for vessel route forecasting: An experimental comparison,” in IEEE Intl. Conf. on Mobile Data Management (MDM), 2022.</li>
+            <li>H. Li, H. Jiao, and Z. Yang, “Ship Trajectory Prediction Based on Machine Learning and Deep Learning: A Systematic Review and Methods Analysis,” Engineering Applications of Artificial Intelligence, vol. 126, 2023.</li>
+            <li>C. Gamage, R. Dinalankara, J. Samarabandu, and A. Subasinghe, “A Comprehensive Survey on the Applications of Machine Learning Techniques on Maritime Surveillance to Detect Abnormal Maritime Vessel Behaviors,” WMU Journal of Maritime Affairs, vol. 22, no. 4, 2023.</li>
+            <li>K. Gao, M. Gao, M. Zhou, and Z. Ma, “Artificial Intelligence Algorithms in Unmanned Surface Vessel Task Assignment and Path Planning: A Survey,” Swarm and evolutionary computation, vol. 86, 2024.</li>
+            <li>K. Talpur, R. Hasan, I. Gocer, S. Ahmad, and Z. Bhuiyan, “AI in Maritime Security: Applications, Challenges, Future Directions, and Key Data Sources,” Information, vol. 16, no. 8, 2025.</li>
+            <li>Z. Zhang and H. Xu, “Explainable AI for Maritime Autonomous Surface Ships (MASS): Adaptive Interfaces and Trustworthy Human- AI Collaboration,” arXiv:<a href="https://arxiv.org/abs/2509.15959" target="_blank" rel="noopener">2509.15959</a>, 2025.</li>
+            <li>M. Lambrou, Artificial Intelligence in Shipping: The State of Digital Innovation. Taylor &amp; Francis, 2025.</li>
+            <li>I. Durlik, T. Miller, E. Kostecka, P. Kozlovska, and W. Ślkaczka, “Enhancing Safety in Autonomous Maritime Transportation Systems with Real-time AI Agents,” Applied Sciences, vol. 15, no. 9, 2025.</li>
+            <li>N. Chen, A. Yang, H. Wu, L. Chen, W. Xiong, and N. Jing, “Semint: an llm-empowered long-term vessel trajectory prediction framework,” International Journal of Geographical Information Science, vol. 39, no. 9, 2025.</li>
+            <li>K. Agyei, P. Sarhadi, and W. Naeem, “Corall: A colregs-guided riskaware llm for decision-making in maritime autonomous surface ships,” Authorea Preprints, 2025.</li>
+            <li>G. Merten, G. Dejaegere, and M. Sakr, “Using llms for analyzing ais data,” in IEEE Symposium on Maritime Informatics and Robotics (MARIS), 2025.</li>
+            <li>Z. You and Y. Lin, “Interpretable vessel behavior inference from ais trajectories via cot-enhanced llms,” in International Conference on Big Data &amp; Artificial Intelligence &amp; Software Engineering (ICBASE), 2025.</li>
+            <li>H. Liu, T. Li, H. Wang, K. Torp, T. Zhang, Y. Li, and C. S. Jensen, “VISTA: Knowledge-driven Interpretable Vessel Trajectory Imputation Via Large Language Models,” arXiv:<a href="https://arxiv.org/abs/2601.06940" target="_blank" rel="noopener">2601.06940</a>, 2026.</li>
+            <li>S. Lee, Y. Jeon, and W. Kim, “Llm-driven predictive–adaptive guidance for autonomous surface vessels under environmental disturbances,” Journal of Marine Science and Engineering, vol. 14, no. 2, 2026.</li>
+            <li>S. Chen, G. Long, J. Jiang, D. Liu, and C. Zhang, “Foundation models for weather and climate data understanding: A comprehensive survey,” arXiv:<a href="https://arxiv.org/abs/2312.03014" target="_blank" rel="noopener">2312.03014</a>, 2023.</li>
+            <li>Y. Mao, H. Zhou, L. Chen, R. Qi, Z. Sun, Y. Rong, X. He, M. Chen, S. Mumtaz, V. Frascolla et al., “A survey on spatio-temporal prediction: From transformers to foundation models,” ACM Computing Surveys, vol. 58, no. 4, 2025.</li>
+            <li>Y. Liang, H. Wen, Y. Xia, M. Jin, B. Yang, F. Salim, Q. Wen, S. Pan, and G. Cong, “Foundation models for spatio-temporal data science: A tutorial and survey,” in ACM Intl. Conf. on Knowledge Discovery and Data Mining (KDD), 2025.</li>
+            <li>K. Janowicz, G. Mai, W. Huang, R. Zhu, N. Lao, and L. Cai, “Geofm: how will geo-foundation models reshape spatial data science and geoai?” International Journal of Geographical Information Science, vol. 39, no. 9, 2025.</li>
+            <li>H. Gao, Z. Wang, Y. Li, K. Long, M. Yang, and Y. Shen, “A Survey for Foundation Models in Autonomous Driving,” in Conference on Computer Vision and Data Mining (ICCVDM), 2025.</li>
+            <li>S. B. Yang, Y. Sun, Y. Cheng, Y. Lin, K. Torp, and J. Hu, “Spatiotemporal Trajectory Foundation Model-recent Advances and Future Directions,” arXiv:<a href="https://arxiv.org/abs/2511.20729" target="_blank" rel="noopener">2511.20729</a>, 2025.</li>
+            <li>M. Christiansen, K. Fagerholt, B. Nygreen, and D. Ronen, “Chapter 4 Maritime Transportation,” in Transportation, 2007.</li>
+            <li>R. Yan, S. Wang, L. Zhen, and G. Laporte, “Emerging Approaches Applied to Maritime Transport Research: Past and Future,” Communications in Transportation Research, vol. 1, 2021.</li>
+            <li>C. Ducruet and T. Notteboom, “the Worldwide Maritime Network of Container Shipping: Spatial Structure and Regional Dynamics,” Global Networks, 2012.</li>
+            <li>United Nations Conference on Trade and Development (UNC- TAD), “Review of Maritime Transport,” <a href="https://unctad.org/publication/" target="_blank" rel="noopener">https://unctad.org/publication/</a> review-maritime-transport-2023, 2023.</li>
+            <li>M. Mokbel, M. Sakr, L. Xiong, A. Züfle, J. Almeida, T. Anderson, W. Aref, G. Andrienko, N. Andrienko, and e. a. Cao, Yang, “Mobility Data Science: Perspectives and Challenges,” ACM Trans. Spatial Algorithms Syst. (TSAS), 2024.</li>
+            <li>W. Y. Yap, Z. Xiao, Z. Fan, and H. Feng, “Shipping Network Disruption, Vulnerability and Resilience Amidst Geopolitical Tensions,” Maritime Business Review, vol. 10, no. 3, 2025.</li>
+            <li>J. Chen, H. Jiang, J. Xu, C. Pang, J. Shi, and Z. Tan, “Resilience Analysis from the Perspective of Global Container Shipping Network Evolution: Fine-grained Modeling Based on AIS Data,” Journal of Transport Geography, vol. 129, 2025.</li>
+            <li>G. Spiliopoulos, C. Ducruet, L. M. Millefiori, P. Braca, and D. Zissis, “Detecting the Spatiotemporal Characteristics of the Supply-chain Disruption and Estimating Its Short Term Effects.” in EDBT/ICDT Workshops, 2024.</li>
+            <li>H. Feng, Q. Lin, X. Zhang, J. S. L. Lam, and W. Y. Yap, “Port Selection by Container Ships: A Big AIS Data Analytics Approach,” Research in Transportation Business &amp; Management, vol. 52, 2024.</li>
+            <li>J.-P. Rodrigue, “Maritime Transport,” International Encyclopedia of Geography, 2017.</li>
+            <li>Z. Zhang, D. Huisingh, and M. Song, “Exploitation of Trans-arctic Maritime Transportation,” Journal of Cleaner Production, vol. 212, 2019.</li>
+            <li>P. Xiao and H. Wang, “Ship Type Selection and Cost Optimization of Marine Container Ships Based on Genetic Algorithm,” Applied Sciences, vol. 14, no. 21, 2024.</li>
+            <li>L. Yang, G. Chen, J. Zhao, and N. G. M. Rytter, “Ship Speed Optimization Considering Ocean Currents to Enhance Environmental Sustainability in Maritime Shipping,” Sustainability, vol. 12, no. 9, 2020.</li>
+            <li>H. Fan, J. Lyu, Z. Chang, X. He, and S. Guo, “Spatial Patterns and Characteristics of Global Piracy Analyzed Using A Geographic Information System,” Marine Policy, vol. 157, 2023.</li>
+            <li>M. Tsioufis, A. Fytopoulos, D. Kalaitzi, and T. A. Alexopoulos, “Discovering Maritime-piracy Hotspots: A Study Based on AHP and Spatio-temporal Analysis,” Annals of Operations Research, vol. 335, no. 2, 2024.</li>
+            <li>T. S. United Nations, “Convention on the International Regulations for Preventing Collisions As Sea (colregs),” 1972. [Online]. Available: <a href="https://treaties.un.org/doc/Publication/" target="_blank" rel="noopener">https://treaties.un.org/doc/Publication/</a> UNTS/Volume%201050/volume-1050-I-15824-English.pdf</li>
+            <li>R. Szlapczynski, “Evolutionary Sets of Safe Ship Trajectories Within Traffic Separation Schemes,” The Journal of Navigation, vol. 66, no. 1, 2013.</li>
+            <li>C. Lee, H. Cho, and S. Lee, “Analysis of Bi-lstm CRF Series Models for Semantic Classification of NAVTEX Navigational Safety Messages,” Journal of Marine Science and Engineering, vol. 12, no. 9, 2024.</li>
+            <li>Z. Wan, Y. Su, Z. Li, X. Zhang, Q. Zhang, and J. Chen, “Analysis of the Impact of Suez Canal Blockage on the Global Shipping Network,” Ocean &amp; Coastal Management, vol. 245, 2023.</li>
+            <li>P.-L. Sanchez-Gonzalez, D. Dı́az-Gutiérrez, T. J. Leo, and L. R. Núñez- Rivas, “Toward Digitalization of Maritime Transport?” Sensors, 2019.</li>
+            <li>K. Bereta, K. Chatzikokolakis, and D. Zissis, “Maritime reporting systems,” in Guide to Maritime Informatics. Springer, 2021.</li>
+            <li>“Solas Chapter V. Regulation 19 - Carriage Requirements for Shipborne Navigational Systems and Equipment,” <a href="https://assets.publishing.service.gov.uk/media/5a7f0081ed915d74e33f3c6e/" target="_blank" rel="noopener">https://assets.publishing.service.gov.uk/media/5a7f0081ed915d74e33f3c6e/</a> solas v on safety of navigation.pdf, 2002, [Accessed: 11-Feb-2026].</li>
+            <li>K. Chatzikokolakis, D. Zissis, G. Spiliopoulos, and K. Tserpes, “A Comparison of Supervised Learning Schemes for the Detection of Search and Rescue (SAR) Vessel Patterns,” GeoInformatica, 2021.</li>
+            <li>I. Kontopoulos, A. Makris, and K. Tserpes, “A Deep Learning Streaming Methodology for Trajectory Classification,” ISPRS Journal of Geo- Information, 2021.</li>
+            <li>D. Zissis, K. Chatzikokolakis, G. Spiliopoulos, and M. Vodas, “A Distributed Spatial Method for Modeling Maritime Routes,” IEEE Access, 2020.</li>
+            <li>A. Troupiotis-Kapeliaris, E. Tsili, M. Kaliorakis, G. Spiliopoulos, and D. Zissis, “Scalable framework for ais data exploration through effective density visualizations,” in OCEANS, 2023.</li>
+            <li>K. Chatzikokolakis, D. Zissis, M. Vodas, G. Spiliopoulos, and I. Kontopoulos, “A Distributed Lightning Fast Maritime Anomaly Detection Service,” in OCEANS 2019, 2019.</li>
+            <li>K. Tserpes, K. Chatzikokolakis, D. Zissis, G. Spiliopoulos, and I. Kontopoulos, “Real-time Maritime Anomaly Detection: Detecting Intentional AIS Switch-off,” Journal of Big Data Intelligence, 2020.</li>
+            <li>F. Li, K. Yu, C. Yuan, Y. Tian, G. Yang, K. Yin, and Y. Li, “Dark ship detection via optical and sar collaboration: An improved multifeature association method between remote sensing images and ais data,” Remote Sensing, vol. 17, no. 13, 2025.</li>
+            <li>Lloyd’s List: Maritime Intelligence. [Online]. Available: <a href="https://www.lloydslist.com" target="_blank" rel="noopener">https://www.lloydslist.com</a></li>
+            <li>Equasis: The Information System on Maritime Safety and Quality. European Maritime Safety Agency (EMSA). [Online]. Available: <a href="https://www.equasis.org" target="_blank" rel="noopener">https://www.equasis.org</a></li>
+            <li>International Maritime Organization, “Fourth IMO Greenhouse Gas Study 2020,” International Maritime Organization, London, Tech. Rep., 2020. [Online]. Available: <a href="https://www.imo.org/en/OurWork/" target="_blank" rel="noopener">https://www.imo.org/en/OurWork/</a> Environment/Pages/Fourth-IMO-Greenhouse-Gas-Study-2020.aspx</li>
+            <li>National Geospatial-Intelligence Agency, “World Port Index (pub. 150),” maritime Safety Information. [Online]. Available: <a href="https://msi.nga.mil/Publications/WPI" target="_blank" rel="noopener">https://msi.nga.mil/Publications/WPI</a></li>
+            <li>C. Makris, A. Papadimitriou, V. Baltikas, G. Spiliopoulos, Y. Kontos, A. Metallinos, Y. Androulidakis, M. Chondros, G. Klonaris, D. Malliouri, N. Nagkoulis, D. Zissis, V. Tsoukala, T. Karambas, and C. Memos, “Validation and application of the accu-waves operational platform for wave forecasts at ports,” Journal of Marine Science and Engineering, vol. 12, no. 2, 2024.</li>
+            <li>M. Yasir, H. Sheng, H. Fan, S. Nazir, A. J. Niang, M. Salauddin, and S. Khan, “Automatic Coastline Extraction and Changes Analysis Using Remote Sensing and GIS Technology,” IEEE Access, vol. 8, 2020.</li>
+            <li>G. Spiliopoulos, D. Zissis, J. de La Cueva, and I. Kontopoulos, “Modelling and Simulating Vessel Emissions in Real Time Based on Terrestrial AIS Data,” in Global Oceans 2020: Singapore – U.S. Gulf Coast, 2020.</li>
+            <li>C. Kastrisios, N. M. Dyer, T. Nada, B. R. Calder, B. Martinez, C. Ence, L. De Floriani, G. Masetti, S. Contarinis, P. Holmberg et al., “Sailing the rough seas of automated electronic navigational charts compilation,” Advances in Cartography and GIScience of the ICA, vol. 5, 2025.</li>
+            <li>Openstreetmap. [Online]. Available: <a href="https://www.openstreetmap.org" target="_blank" rel="noopener">https://www.openstreetmap.org</a></li>
+            <li>Flanders Marine Institute. Marineregions.org. [Online]. Available: <a href="https://www.marineregions.org" target="_blank" rel="noopener">https://www.marineregions.org</a></li>
+            <li>National Centers for Environmental Prediction (NCEP), “Noaa/ncep global forecast system (gfs) atmospheric model,” 2011, updated 2023. [Online]. Available: <a href="https://www.ncei.noaa.gov/products/" target="_blank" rel="noopener">https://www.ncei.noaa.gov/products/</a> weather-climate-models/global-forecast</li>
+            <li>Copernicus Marine Service, “European union’s copernicus marine service information.” [Online]. Available: <a href="https://marine.copernicus.eu/" target="_blank" rel="noopener">https://marine.copernicus.eu/</a></li>
+            <li>General Bathymetric Chart of the Oceans (GEBCO). IHO-IOC. [Online]. Available: <a href="https://www.gebco.net" target="_blank" rel="noopener">https://www.gebco.net</a></li>
+            <li>“Baltic Exchange Indices – Baltic Dry Index (BDI),” <a href="https://www.balticexchange.com/en/data-services/market-information0/" target="_blank" rel="noopener">https://www.balticexchange.com/en/data-services/market-information0/</a> indices.html.</li>
+            <li>“Freightos Baltic Index (FBX) – Global Container Pricing Index,” <a href="https://www.freightos.com/enterprise/terminal/" target="_blank" rel="noopener">https://www.freightos.com/enterprise/terminal/</a> freightos-baltic-index-global-container-pricing-index/.</li>
+            <li>A. Deihim, E. Alonso, and D. Apostolopoulou, “STTRE: A Spatiotemporal Transformer with Relative Embeddings for Multivariate Time Series Forecasting,” Neural Networks, vol. 168, 2023.</li>
+            <li>M. D. Siampou, S. Choudhury, S.-L. Hsu, N. Arora, and C. Shahabi, “Mobility-embedded Pois: Learning What A Place is and How It is Used from Human Movement,” arXiv:<a href="https://arxiv.org/abs/2601.21149" target="_blank" rel="noopener">2601.21149</a>, 2026.</li>
+            <li>G. Spiliopoulos, M. Vodas, G. Grigoropoulos, K. Bereta, and D. Zissis, “Patterns of Life: Global Inventory for Maritime Mobility Patterns.” in EDBT, 2024.</li>
+            <li>A. Troupiotis-Kapeliaris, G. Grigoropoulos, M. Vodas, and K. Bereta, “Dynamic Weather-resilient Vessel Routing Using Big AIS Data [industry],” in ACM Intl. Conf. on Advances in Geographic Information Systems (SIGSPATIAL), 2025.</li>
+            <li>X. Cui and H. Lv, “STEFT: Spatio-temporal Embedding Fusion Transformer for Traffic Prediction,” Electronics, vol. 13, no. 19, 2024.</li>
+            <li>H. Wang, Y. Li, W. Zhao, H. Zhu, J. Zhang, and X. Wu, “GSF-LLM: Graph-enhanced Spatio-temporal Fusion-based Large Language Model for Traffic Prediction,” Sensors, vol. 25, no. 21, 2025.</li>
+            <li>S. Levy, E. Gudes, and D. Hendler, “A Survey of Security Challenges in Automatic Identification System (AIS) protocol,” in International Symposium on Cyber Security, Cryptology, and Machine Learning, 2023.</li>
+            <li>RIN Maritime GNSS Interference Working Group, “Impacts of GNSS Interference on Maritime Safety,” 2026. [Online]. Available: <a href="https://rin.org.uk/page/RIN" target="_blank" rel="noopener">https://rin.org.uk/page/RIN</a> Maritime Report</li>
+            <li>L. M. Millefiori, P. Braca, D. Zissis, G. Spiliopoulos, S. Marano, P. K. Willett, and S. Carniel, “COVID-19 Impact on Global Maritime Mobility,” Scientific reports, 2021.</li>
+            <li>G. Spiliopoulos, K. Bereta, D. Zissis, C. Memos, C. Makris, A. Metallinos, T. Karambas, M. Chondros, M. Emmanouilidou, A. Papadimitriou, V. Baltikas, Y. Kontos, G. Klonaris, Y. Androulidakis, and V. Tsoukala, “A Big Data Framework for Modelling and Simulating High-resolution Hydrodynamic Models in Sea Harbours,” in Global Oceans 2020, 2020.</li>
+            <li>R. Buizza and M. Leutbecher, “The Forecast Skill Horizon,” Quarterly Journal of the Royal Meteorological Society, vol. 141, no. 693, 2015.</li>
+            <li>R. Bhadani, “A Survey on Differential Privacy for Spatiotemporal Data in Transportation Research,” arXiv:<a href="https://arxiv.org/abs/2407.15868" target="_blank" rel="noopener">2407.15868</a>, 2024.</li>
+            <li>F. Ezzeddine, “Privacy Implications of Explainable AI in Data-driven Systems,” arXiv:<a href="https://arxiv.org/abs/2406.15789" target="_blank" rel="noopener">2406.15789</a>, 2024.</li>
+            <li>European Parliament and Council, “Regulation (EU) 2024/1689 (artificial Intelligence Act),” Official Journal of the European Union, L 2024/1689, 2024. [Online]. Available: <a href="http://data.europa.eu/eli/reg/" target="_blank" rel="noopener">http://data.europa.eu/eli/reg/</a> 2024/1689/oj</li>
+            <li>H. Dong, M. Liu, K. Zhou, E. Chatzi, J. Kannala, C. Stachniss, and O. Fink, “Advances in Multimodal Adaptation and Generalization: From Traditional Approaches to Foundation Models,” IEEE Transactions on Pattern Analysis and Machine Intelligence, 2026.</li>
+            <li>J. Yu, Y. Dai, X. Liu, J. Huang, Y. Shen, K. Zhang, R. Zhou, E. Adhikarla, W. Ye, Y. Liu, Z. Kong, K. Zhang, Y. Yin, V. Namboodiri, B. D. Davison, J. H. Moore, and Y. Chen, “Unleashing the Power of Multitask Learning: A Comprehensive Survey Spanning Traditional, Deep, and Pretrained Foundation Model Eras,” arXiv:<a href="https://arxiv.org/abs/2404.18961" target="_blank" rel="noopener">2404.18961</a>, 2024.</li>
+            <li>L. Ciernik, M. Morik, L. Thede, L. Eyring, S. Nakajima, Z. Akata, and L. Muttenthaler, “Beyond the Final Layer: Attentive Multilayer Fusion for Vision Transformers,” arXiv:<a href="https://arxiv.org/abs/2601.09322" target="_blank" rel="noopener">2601.09322</a>, 2026.</li>
+            <li>A. Tomihari and I. Sato, “Understanding Linear Probing Then Finetuning Language Models from Ntk Perspective,” Advances in Neural Information Processing Systems, vol. 37, 2024.</li>
+            <li>L. Ren, H. Wang, J. Dong, Z. Jia, S. Li, Y. Wang, Y. Laili, D. Huang, L. Zhang, and B. Li, “Industrial Foundation Model,” IEEE Transactions on Cybernetics, 2025.</li>
+            <li>M. E. Peters, S. Ruder, and N. A. Smith, “To Tune Or Not to Tune? Adapting Pretrained Representations to Diverse Tasks,” in Workshop on Representation Learning for NLP (repl4nlp-2019), 2019.</li>
+            <li>C. Lee and S. Lee, “A Risk Identification Method for Ensuring AIintegrated System Safety for Remotely Controlled Ships with Onboard Seafarers,” Journal of Marine Science and Engineering, vol. 12, no. 10, 2024.</li>
+            <li>G. H. Dinh, H. T. Pham, L. C. Nguyen, H. Q. Dang, and N. D. K. Pham, “Leveraging Artificial Intelligence to Enhance Port Operation Efficiency,” Polish Maritime Research, 2024.</li>
+            <li>Z. Han, C. Gao, J. Liu, J. Zhang, and S. Q. Zhang, “Parameterefficient Fine-tuning for Large Models: A Comprehensive Survey,” arXiv:<a href="https://arxiv.org/abs/2403.14608" target="_blank" rel="noopener">2403.14608</a>, 2024.</li>
+            <li>D. Zhang, T. Feng, L. Xue, Y. Wang, Y. Dong, and J. Tang, “Parameterefficient Fine-tuning for Foundation Models,” arXiv:<a href="https://arxiv.org/abs/2501.13787" target="_blank" rel="noopener">2501.13787</a>, 2025.</li>
+            <li>L. Chang, J. Qiu, W. Yang, Y. Jia, Y. Shufen, J. Yin, and S. Zhihao, “Making Foundation Models Adaptable: A Review of Parameterefficient Fine-tuning Approaches,” Authorea Preprints, 2025.</li>
+            <li>F. Marti Escofet, B. Blumenstiel, L. Scheibenreif, P. Fraccaro, and K. Schindler, “Fine-tune Smarter, Not Harder: Parameter-efficient Finetuning for Geospatial Foundation Models,” in Joint European Conference on Machine Learning and Knowledge Discovery in Databases, 2025.</li>
+            <li>L. Xu, H. Xie, S. J. Qin, X. Tao, and F. L. Wang, “Parameter-efficient Fine-tuning Methods for Pretrained Language Models: A Critical Review and Assessment,” IEEE Transactions on Pattern Analysis and Machine Intelligence, 2026.</li>
+            <li>M. Yang, J. Chen, J. Tao, Y. Zhang, J. Liu, J. Zhang, Q. Ma, H. Verma, R. Zhang, M. Zhou, I. King, and R. Ying, “Low-rank Adaptation for Foundation Models: A Comprehensive Review,” arXiv:<a href="https://arxiv.org/abs/2501.00365" target="_blank" rel="noopener">2501.00365</a>, 2024.</li>
+            <li>Y. Gang, J. Shun, and M. Qing, “Smarter Fine-tuning: How Lora Enhances Large Language Models,” Technical Report, 2025.</li>
+            <li>M. Huan and J. Shun, “Fine-tuning Transformers Efficiently: A Survey on Lora and Its Impact,” 2025.</li>
+            <li>Z. Hu, L. Wang, Y. Lan, W. Xu, E.-P. Lim, L. Bing, X. Xu, S. Poria, and R. Lee, “LLM-adapters: An Adapter Family for Parameter-efficient Fine-tuning of Large Language Models,” in Conference on Empirical Methods in Natural Language Processing, 2023.</li>
+            <li>M. Li, P. Ye, Y. Huang, L. Zhang, T. Chen, T. He, J. Fan, and W. Ouyang, “Adapter-x: A Novel General Parameter-efficient Finetuning Framework for Vision,” arXiv:<a href="https://arxiv.org/abs/2406.03051" target="_blank" rel="noopener">2406.03051</a>, 2024.</li>
+            <li>D. Kim, G. Lee, K. Shim, and B. Shim, “Preserving Pre-trained Representation Space: on Effectiveness of Prefix-tuning for Large Multi-modal Models,” in Findings of the Association for Computational Linguistics: EMNLP 2024, 2024.</li>
+            <li>N. Bahrami, “Optimizing Ship Voyages: A Review on Gas Emissions, Fuel Consumption, and Prediction,” Journal of Ocean Engineering and Marine Energy, 2026.</li>
+            <li>G. Mannarini, D. N. Subramani, P. F. Lermusiaux, and N. Pinardi, “Graph-search and Differential Equations for Time-optimal Vessel Route Planning in Dynamic Ocean Waves,” IEEE Transactions on Intelligent Transportation Systems, vol. 21, no. 8, 2019.</li>
+            <li>I. Venkatesan, M. Dharanish, S. M. Lakshmi, and S. Pavithra, “Adaptive Weather Routing for Advanced Ship Navigation: A Comprehensive Review,” in Conference on Intelligent Data Communication Technologies and Internet of Things , 2025.</li>
+            <li>Y. Xie, Z. Zhang, J. Liu, and Z. Song, “Vessel-risk-aware: A Decision Support Model for Vessel Routing Based on Multicriteria Decision Analysis and An Advanced Dijkstra Algorithm,” Maritime Policy &amp; Management, 2025.</li>
+            <li>A. Bakdi, I. K. Glad, E. Vanem, and Ø. Engelhardtsen, “AIS-based Multiple Vessel Collision and Grounding Risk Identification Based on Adaptive Safety Domain,” Journal of Marine Science and Engineering, vol. 8, no. 1, 2019.</li>
+            <li>M. Akdağ, T. A. Pedersen, T. I. Fossen, and T. A. Johansen, “A Decision Support System for Autonomous Ship Trajectory Planning,” Ocean Engineering, vol. 292, 2024.</li>
+            <li>Y. Wang and L. Luo, “IB-DARP: An Algorithm for Multi-vessel Collaborative Task and Path Planning.” Journal of Marine Science &amp; Engineering, vol. 14, no. 2, 2026.</li>
+            <li>S. El Mekkaoui, L. Benabbou, and A. Berrado, “Deep Learning Models for Vessel’s ETA Prediction: Bulk Ports Perspective,” Flexible Services and Manufacturing Journal, vol. 35, no. 1, 2023.</li>
+            <li>I. Kontopoulos, I. Varlamis, and K. Tserpes, “A Distributed Framework for Extracting Maritime Traffic Patterns,” Journal of Geographical Information Science, 2021.</li>
+            <li>M. Liang, R. W. Liu, Y. Zhan, H. Li, F. Zhu, and F.-Y. Wang, “Fine-grained Vessel Traffic Flow Prediction with A Spatio-temporal Multigraph Convolutional Network,” IEEE Transactions on Intelligent Transportation Systems, vol. 23, no. 12, 2022.</li>
+            <li>D. Chen, C. Huang, T. Fan, H. C. Lau, and X. Yan, “Predictive Modelling for Vessel Traffic Flow: A Comprehensive Survey from Statistics to AI,” Transportation Safety and Environment, vol. 7, no. 3, 2025.</li>
+            <li>P. Mandalis, E. Chondrodima, Y. Kontoulis, N. Pelekis, and Y. Theodoridis, “A Transformer-based Method for Vessel Traffic Flow Forecasting,” GeoInformatica, vol. 29, no. 1, 2025.</li>
+            <li>I. Kontopoulos, K. Chatzikokolakis, K. Tserpes, and D. Zissis, “Classification of Vessel Activity in Streaming Data,” in ACM International Conference on Distributed and Event-based Systems, 2020.</li>
+            <li>X. Cheng, F. Zhang, X. Chen, and J. Wang, “Application of Artificial Intelligence in the Study of Fishing Vessel Behavior,” Fishes, vol. 8, no. 10, 2023.</li>
+            <li>E. L. Hague, A. Walters, A. Moscrop, E. Steel, K. Dyke, L. Hartny- Mills, A. Lomax, J. Lehmann, S. Olias, C. Hilgenfeld, D. Cole, S. MacDonald-Taylor, C. Davis, B. Siddle, J. Tozer, W. Kilroe, Á. P. Milton, R. Olaleye, and L. H. McWhinnie, “AIS Underrepresents Vessel Traffic in Scotland’s Marine Protected Areas,” Ocean &amp; Coastal Management, vol. 272, 2026.</li>
+            <li>Z. Zhang, Z. Fan, Z. Lv, X. Song, and R. Shibasaki, “Long-term Vessel Trajectory Imputation with Physics-guided Diffusion Probabilistic Model,” in ACM Intl. Conf. on Knowledge Discovery and Data Mining (KDD), 2024.</li>
+            <li>G. Spiliopoulos, A. Troupiotis-Kapeliaris, K. Patroumpas, N. Liapis, D. Skoutas, D. Zissis, and N. Bikakis, “Data-Driven Trajectory Imputation for Vessel Mobility Analysis,” in Intl. Conf. on Extending Database Technology (EDBT), 2026.</li>
+            <li>M. Musleh and M. F. Mokbel, “Kamel: A Scalable Bert-based System for Trajectory Imputation,” VLDB Endowment (PVLDB), vol. 17, no. 3, 2023.</li>
+            <li>G. Soldi, D. Gaglione, S. Raponi, N. Forti, E. d’Afflisio, P. Kowalski, L. M. Millefiori, D. Zissis, P. Braca, P. Willett, A. Maguer, S. Carniel, G. Sembenini, and C. Warner, “Monitoring of Critical Undersea Infrastructures: The Nord Stream and Other Recent Case Studies,” IEEE Aerospace and Electronic Systems Magazine, vol. 38, no. 10, 2023.</li>
+            <li>C. Bueger and T. Liebetrau, “Critical Maritime Infrastructure Protection: What’s the Trouble?” Marine policy, vol. 155, 2023.</li>
+            <li>Z. Cao, T. Qian, S. Zhang, H. Song, and Y. Tian, “Multi-port Liner Ship Routing and Scheduling Optimization Using Machine Learning Forecast and Branch-and-price Algorithm,” Journal of Marine Science and Engineering, vol. 13, no. 11, 2025.</li>
+            <li>S. Li, L. Tang, J. Liu, T. Zhao, and X. Xiong, “Vessel Schedule Recovery Strategy in Liner Shipping Considering Expected Disruption,” Ocean &amp; Coastal Management, vol. 237, 2023.</li>
+            <li>K. Spyrou-Sioula, I. Kontopoulos, D. Kaklis, A. Makris, K. Tserpes, P. Eirinakis, and F. Oikonomou, “AIS-enabled Weather Routing for Cargo Loss Prevention,” Journal of marine science and engineering, vol. 10, no. 11, 2022.</li>
+            <li>C. Ducruet, “Port Specialization and Connectivity in the Global Maritime Network,” Maritime Policy &amp; Management, vol. 49, no. 1, 2022.</li>
+            <li>Q. Liu, Y. Yang, L. Ke, and A. K. Ng, “Structures of Port Connectivity, Competition, and Shipping Networks in Europe,” Journal of Transport Geography, vol. 102, 2022.</li>
+            <li>L. Jin, J. Chen, Z. Chen, X. Sun, and B. Yu, “Impact of COVID-19 on China’s International Liner Shipping Network Based on AIS Data,” Transport Policy, vol. 121, 2022.</li>
+            <li>C. Pais-Montes, J.-C. Thill, and D. Guerrero, “Identification of Shipping Schedule Cancellations with AIS Data: An Application to the Europe-far East Route Before and During the COVID-19 Pandemic,” Maritime Economics &amp; Logistics, vol. 26, no. 3, 2024.</li>
+            <li>T. Notteboom, H. Haralambides, and K. Cullinane, “The Red Sea Crisis: Ramifications for Vessel Operations, Shipping Networks, and Maritime Supply Chains,” Maritime Economics &amp; Logistics, vol. 26, no. 1, 2024.</li>
+            <li>B. P. Martin, M.-A. Faure, F. Cremaschini, and C. Ducruet, “Shipping Trade and Geopolitical Turmoil: The Case of the Ukrainian Maritime Network,” Journal of Transport Geography, vol. 128, 2025.</li>
+          </ol>
+        </details>
+      </div>
+    </section>
+
+    <section class="section" id="citation">
+      <div class="container">
+        <div class="bibtex-header">
+          <h2 class="title" style="text-align:left;margin-bottom:0">BibTeX</h2>
+          <button class="copy-bibtex-btn" type="button" onclick="copyBibtex()"><span class="copy-text">Copy</span></button>
+        </div>
+        <pre><code id="bibtex">@misc{spiliopoulos2026multimodalmaritimefm,
+  title  = {Multimodal Maritime Foundation Models: Challenges and Opportunities},
+  author = {Spiliopoulos, Giannis and Troupiotis Kapeliaris, Alexandros and Patroumpas, Kostas and Betchavas, Panagiotis and Skoutas, Dimitrios and Zissis, Dimitris and Bikakis, Nikos},
+  year   = {2026}
+}</code></pre>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+     <p>This page uses as base the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template">Academic Project Page Template</a></p>
+
+    </div>
+  </footer>
+
+  <button class="scroll-to-top" id="scrollTop" type="button" aria-label="Scroll to top">↑</button>
+
+  <div class="image-modal" id="pipelineModal" role="dialog" aria-modal="true" aria-label="Training pipeline larger view" hidden>
+    <button class="image-modal-close" type="button" aria-label="Close enlarged training pipeline">×</button>
+    <img src="mmfm_training_pipeline.png" alt="Large STE-augmented Maritime Foundation Model training pipeline figure.">
+  </div>
+
+
+  <div class="image-modal" id="applicationsModal" role="dialog" aria-modal="true" aria-label="Downstream applications larger view" hidden>
+    <button class="image-modal-close" type="button" aria-label="Close enlarged downstream applications figure">×</button>
+    <img src="mmfm_downstream_applications.png" alt="Large downstream Maritime Foundation Model applications figure.">
+  </div>
+
+  <script>
+    function copyBibtex() {
+      const text = document.getElementById('bibtex').innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = document.querySelector('.copy-bibtex-btn');
+        const label = btn.querySelector('.copy-text');
+        label.textContent = 'Copied';
+        btn.classList.add('copied');
+        setTimeout(() => { label.textContent = 'Copy'; btn.classList.remove('copied'); }, 1700);
+      });
+    }
+
+    const scrollBtn = document.getElementById('scrollTop');
+    window.addEventListener('scroll', () => {
+      scrollBtn.classList.toggle('visible', window.scrollY > 400);
+    });
+    scrollBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    document.querySelectorAll('[data-modal-target]').forEach((trigger) => {
+      const modal = document.getElementById(trigger.dataset.modalTarget);
+      const closeButton = modal ? modal.querySelector('.image-modal-close') : null;
+      if (!modal || !closeButton) return;
+
+      function openModal() {
+        modal.hidden = false;
+        document.body.classList.add('modal-open');
+        closeButton.focus();
+      }
+
+      function closeModal() {
+        modal.hidden = true;
+        const anyOpen = Array.from(document.querySelectorAll('.image-modal')).some((item) => !item.hidden);
+        if (!anyOpen) document.body.classList.remove('modal-open');
+        trigger.focus();
+      }
+
+      trigger.addEventListener('click', openModal);
+      closeButton.addEventListener('click', closeModal);
+      modal.addEventListener('click', (event) => {
+        if (event.target === modal) closeModal();
+      });
+      window.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && !modal.hidden) closeModal();
+      });
+    });
+  </script>
+</body>
+</html>
