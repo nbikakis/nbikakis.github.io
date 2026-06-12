@@ -31,8 +31,7 @@
     .publication-header {
       padding: 4.75rem 0 2.65rem;
     }
-
-    .publication-title {
+.publication-title {
       max-width: 1000px;
       margin: 0 auto 1.4rem;
       font-size: clamp(1.8rem, 4.5vw, 3.8rem);
@@ -851,6 +850,36 @@ background: linear-gradient(90deg, #64748b, #cbd5e1);    }
       color: #1d4ed8;
       border-bottom-color: #1d4ed8;
     }
+
+    /* Strong override: remove any blue/gradient top background */
+    html,
+    body {
+      background: #ffffff !important;
+      background-image: none !important;
+    }
+
+    .publication-header,
+    header.publication-header,
+    body > header,
+    body > .publication-header {
+      background: #ffffff !important;
+      background-color: #ffffff !important;
+      background-image: none !important;
+      box-shadow: none;
+    }
+
+    .publication-header::before,
+    .publication-header::after,
+    header.publication-header::before,
+    header.publication-header::after,
+    body > header::before,
+    body > header::after {
+      content: none !important;
+      display: none !important;
+      background: transparent !important;
+      background-image: none !important;
+    }
+
 </style>
 <script type="application/ld+json">
   {
@@ -1260,7 +1289,7 @@ background: linear-gradient(90deg, #64748b, #cbd5e1);    }
 <div class="container">
 <h2 class="title">References</h2>
  <details class="references-collapsible">
-<summary>Show extended reference list <span class="references-summary-count">141 items</span></summary>
+<summary>Show extended reference list </summary>
 <ol aria-label="extended reference list" class="reference-list">
 <li id="ref-1">B. Shneiderman, Human-Centered AI, Oxford University Press, 2022.</li>
 <li id="ref-2">M. Raees, I. Meijerink, I. Lykourentzou, V. Khan, K. Papangelis, From Explainable to Interactive AI: a Literature Review on Current Trends in Human-AI Interaction, Int. J. Hum. Comput. Stud. (2024).</li>
