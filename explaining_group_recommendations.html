@@ -1,0 +1,1625 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Towards Fair and Explainable Group Recommendations via Counterfactuals</title>
+<meta content="Project page for the paper Explaining Group Recommendations via Counterfactuals, presenting a framework for group counterfactual explanations in recommender systems." name="description"/>
+<meta content="Explainable AI, Counterfactual Reasoning, Model-agnostic Explanations, Fairness in Recommendation, Group Fairness, Group Recommender Systems, Explainable Recommender Systems, Explainability in Recommendations" name="keywords"/>
+<meta content="Towards Fair and Explainable Group Recommendations via Counterfactuals" property="og:title"/>
+<meta content="Towards Fair and Explainable Group Recommendations via Counterfactuals" property="og:description"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<style>
+
+:root {
+  --primary-color: #2563eb;
+  --primary-hover: #1d4ed8;
+  --secondary-color: #64748b;
+  --accent-color: #0ea5e9;
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+  --text-light: #94a3b8;
+  --background-primary: #ffffff;
+  --background-secondary: #f8fafc;
+  --background-accent: #f1f5f9;
+  --border-color: #e2e8f0;
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --gradient-accent: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  --radius: 14px;
+  --radius-lg: 20px;
+  --max-width: 1080px;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  color: var(--text-primary);
+  background: var(--background-primary);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  line-height: 1.65;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a { color: var(--primary-color); text-decoration: none; }
+a:hover { color: var(--primary-hover); text-decoration: underline; }
+
+.container { width: min(calc(100% - 32px), var(--max-width)); margin: 0 auto; }
+
+.publication-header {
+  padding: 5.5rem 0 3rem;
+  text-align: center;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .5rem .85rem;
+  margin-bottom: 1.35rem;
+  border: 1px solid rgba(37, 99, 235, 0.18);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.82);
+  color: #1e40af;
+  font-size: .9rem;
+  font-weight: 700;
+  box-shadow: var(--shadow-sm);
+}
+
+.publication-title {
+  max-width: 1000px;
+  margin: 0 auto 1.4rem;
+  color: var(--text-primary);
+font-size: clamp(1.8rem, 4.5vw, 3.8rem);
+  line-height: .98;
+  letter-spacing: -0.035em;
+  font-weight: 500;
+}
+
+.publication-subtitle {
+  max-width: 760px;
+  margin: 0 auto 1.6rem;
+  color: var(--text-secondary);
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+}
+
+.publication-authors {
+  max-width: 980px;
+  margin: 0 auto 1rem;
+  font-size: 1.02rem;
+  font-weight: 600;
+}
+
+.author-block { display: inline-block; margin: 0 .12rem .25rem; }
+
+.author-break {
+  display: block;
+  height: .08rem;
+}
+.author-block:not(:last-child)::after { content: " ·"; color: var(--text-light); }
+
+.publication-affiliations {
+  max-width: 500px;
+  margin: 0 auto 3.5rem; 
+  color: var(--text-secondary);
+  font-size: .92rem;
+}
+
+.publication-venue {
+  display: inline-block;
+  width: fit-content;
+  margin: .4rem auto 0;
+  padding: .55rem 1rem;
+  border-radius: var(--radius);
+  background: var(--background-accent);
+  color: var(--text-secondary);
+  font-weight: 700;
+}
+
+.link-blocks {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: .7rem;
+  margin-top: 2rem;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .45rem;
+  min-height: 44px;
+  padding: .4rem .9rem;
+  border: 2px solid transparent;
+  border-radius: var(--radius);
+  background: var(--text-primary);
+  color: #fff;
+  box-shadow: var(--shadow-md);
+  font-weight: 700;
+  font-size: .92rem;
+  line-height: 1.15;
+  text-decoration: none;
+  transition: all .25s cubic-bezier(0.4, 0, 0.2, 1);
+
+}
+.button:hover { transform: translateY(-2px); background: var(--primary-color); color: #fff; text-decoration: none; box-shadow: var(--shadow-lg); }
+.button.secondary { color: var(--text-primary); background: #fff; border-color: var(--border-color); box-shadow: var(--shadow-sm); }
+.button.secondary:hover { color: var(--primary-color); border-color: rgba(37, 99, 235, .34); }
+
+.hero.is-light {
+  padding: 3rem 0;
+  background: var(--background-primary);
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.publication-banner {
+  overflow: hidden;
+  max-width: 700px;
+  margin: 0 auto;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  background: #fff;
+  box-shadow: var(--shadow-xl);
+}
+.publication-banner img { display: block; width: 100%; height: auto; }
+.banner-caption {
+  padding: 1rem 1.25rem;
+  border-top: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  font-size: .95rem;
+  text-align: left;
+}
+
+.section2 {  padding: 4rem 0;    background: var(--background-secondary);
+}
+
+.section {  padding: 4rem 0; }
+.section + .section { border-top: 1px solid var(--border-color); }
+.title {
+  margin: 0 0 1.4rem;
+  color: var(--text-primary);
+  font-size: clamp(1.55rem, 3vw, 2.15rem);
+  line-height: 1.15;
+  letter-spacing: -0.035em;
+  font-weight: 800;
+  text-align: center;
+}
+.title::after {
+  content: "";
+  display: block;
+  width: 58px;
+  height: 3px;
+  margin: .85rem auto 0;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #64748b, #cbd5e1);
+}
+
+.content {
+  max-width: 860px;
+  margin: 0 auto;
+  color: var(--text-secondary);
+  font-size: 1.08rem;
+}
+.content p { margin: 0 0 1.15rem; }
+
+.keywords {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: .55rem;
+  max-width: 900px;
+  margin: 1.8rem auto 0;
+  padding: 0;
+  list-style: none;
+}
+.keywords li {
+  padding: .45rem .75rem;
+  border: 1px solid rgba(37, 99, 235, .14);
+  border-radius: 999px;
+  background: #eff6ff;
+  color: #1d4ed8;
+  font-size: .9rem;
+  font-weight: 700;
+}
+
+.grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+.grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.card {
+  padding: 1.2rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  background: #fff;
+  box-shadow: var(--shadow-sm);
+  transition: all .25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+.card h3 { margin: 0 0 .35rem; font-size: 1.03rem; line-height: 1.25; }
+.card p, .card li { color: var(--text-secondary); font-size: .96rem; }
+.card ul { margin: .7rem 0 0; padding-left: 1.1rem; }
+
+.takeaway { display: flex; gap: .8rem; }
+.number {
+  flex: 0 0 auto;
+  width: 2rem;
+  height: 2rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #eff6ff;
+  color: var(--primary-color);
+  font-weight: 850;
+}
+
+.bibtex-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  max-width: 900px;
+  margin: 0 auto .8rem;
+}
+.bibtex-header h2 { margin: 0; }
+.copy-bibtex-btn {
+  border: none;
+  border-radius: var(--radius);
+  background: var(--primary-color);
+  color: white;
+  padding: .7rem .9rem;
+  cursor: pointer;
+  font-weight: 750;
+  transition: all .2s ease;
+}
+.copy-bibtex-btn:hover { transform: translateY(-2px); background: var(--primary-hover); }
+.copy-bibtex-btn.copied { background: #10b981; }
+pre {
+  max-width: 900px;
+  margin: 0 auto;
+  overflow-x: auto;
+  padding: 1.25rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  background: #0f172a;
+  color: #dbeafe;
+  font-size: .9rem;
+  line-height: 1.55;
+  box-shadow: var(--shadow-md);
+}
+code { font-family: "SF Mono", Monaco, Cascadia Code, "Roboto Mono", Menlo, Consolas, monospace; }
+
+.footer {
+  padding: 2.5rem 0 3rem;
+  border-top: 1px solid var(--border-color);
+  background: var(--background-secondary);
+  color: var(--text-secondary);
+  font-size: .92rem;
+  text-align: center;
+}
+.footer p { max-width: 820px; margin: 0 auto .6rem; }
+
+.footer a {
+  color: var(--text-secondary);
+  text-decoration: none;
+ }
+
+.footer a:hover {
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+
+.scroll-to-top {
+  position: fixed;
+  right: 1.4rem;
+  bottom: 1.4rem;
+  width: 48px;
+  height: 48px;
+  border: none;
+  border-radius: 50%;
+  background: var(--primary-color);
+  color: #fff;
+  box-shadow: var(--shadow-lg);
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transition: all .2s ease;
+}
+.scroll-to-top.visible { opacity: 1; visibility: visible; }
+.scroll-to-top:hover { transform: translateY(-2px); background: var(--primary-hover); }
+
+@media (max-width: 900px) {
+  .publication-header { padding: 3.5rem 0 2rem; }
+  .grid, .grid.two { grid-template-columns: 1fr; }
+  .publication-title { letter-spacing: -0.035em; }
+  .section { padding: 3rem 0; }
+}
+@media (max-width: 560px) {
+  .publication-title { font-size: 2rem; }
+  .button { width: 100%; }
+  .bibtex-header { align-items: flex-start; flex-direction: column; }
+}
+@media print {
+  .link-blocks, .scroll-to-top { display: none; }
+  body { background: #fff; }
+  .card, .publication-banner { box-shadow: none; }
+}
+
+
+/* Tailored paper page refinements */
+:root {
+  --accent-blue: #2563eb;
+  --accent-cyan: #0ea5e9;
+  --ink-soft: #475569;
+  --panel: #ffffff;
+  --panel-soft: #f8fafc;
+  --line: #dbe3ef;
+}
+
+.publication-header { padding: 4.8rem 0 2.7rem; }
+.publication-title {
+  max-width: 1120px;
+  margin: 0 auto 1.25rem;
+      font-size: clamp(1.8rem, 4.5vw, 3.8rem);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  font-weight: 500;
+  text-wrap: balance;
+}
+.publication-subtitle {
+  max-width: 980px;
+  font-size: clamp(.98rem, 1.45vw, 1.12rem);
+  line-height: 1.5;
+  margin-bottom: 1.35rem;
+  text-wrap: balance;
+}
+@media (min-width: 980px) {
+  .publication-subtitle {
+    white-space: nowrap;
+  }
+}
+.publication-authors { max-width: 1040px; font-size: .98rem; line-height: 1.6; }
+.publication-affiliations { max-width: 820px; font-size: .88rem; line-height: 1.55; margin-bottom: 2.1rem; }
+.publication-venue {
+  margin-top: .2rem;
+  margin-bottom: .25rem;
+  background: #eff6ff;
+  color: #1d4ed8;
+  border: 1px solid #bfdbfe;
+  font-size: .88rem;
+  letter-spacing: .01em;
+}
+.link-blocks { margin-top: 1.35rem; align-items: center; }
+.button { min-height: 36px; padding: .42rem .9rem; font-size: .92rem; line-height: 1.15; }
+
+.section, .section2 { padding: 3.55rem 0; }
+.section + .section, .section2 + .section, .section + .section2 { border-top: 1px solid var(--border-color); }
+.title {
+  margin-bottom: 1.65rem;
+  font-size: clamp(1.42rem, 2.45vw, 1.95rem);
+  line-height: 1.22;
+  letter-spacing: -0.018em;
+  text-wrap: balance;
+}
+.title::after { width: 64px; height: 3px; background: linear-gradient(90deg, #64748b, #cbd5e1); }
+.content { max-width: 920px; font-size: 1.04rem; line-height: 1.78; }
+
+#trip-narratives {
+  padding-top: 6.4rem;
+  padding-bottom: 6.6rem;
+}
+
+#trip-narratives .title {
+  margin-bottom: 2.55rem;
+  font-size: clamp(1.58rem, 2.85vw, 2.15rem);
+  line-height: 1.18;
+  letter-spacing: -0.014em;
+}
+
+#trip-narratives .pipeline {
+  margin-top: .45rem;
+  gap: 1.05rem;
+}
+
+#trip-narratives .step {
+  padding: 1.45rem 1.18rem;
+  min-height: 185px;
+}
+
+#trip-narratives .step-number {
+  width: 1.95rem;
+  height: 1.95rem;
+  margin-bottom: .85rem;
+  font-size: .94rem;
+}
+
+#trip-narratives .step h3 {
+  font-size: 1.06rem;
+  line-height: 1.28;
+  margin-bottom: .48rem;
+}
+
+#trip-narratives .step p {
+  font-size: .96rem;
+  line-height: 1.58;
+}
+.content p { text-align: justify; text-justify: inter-word; hyphens: auto; }
+
+.topic-strip {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: .55rem;
+  max-width: 940px;
+  margin: 1.55rem auto 0;
+  padding: 0;
+  list-style: none;
+}
+.topic-strip li {
+  padding: .42rem .72rem;
+  border: 1px solid rgba(37, 99, 235, .14);
+  border-radius: 999px;
+  background: #eff6ff;
+  color: #1d4ed8;
+  font-size: .86rem;
+  font-weight: 750;
+}
+
+.glance {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 1.35rem;
+  border: 1px solid rgba(148, 163, 184, .28);
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, .92);
+  box-shadow: 0 18px 45px -34px rgb(15 23 42 / .55);
+}
+.glance-title { margin: 0 0 1rem; text-align: center; font-size: 1.08rem; font-weight: 850; letter-spacing: -0.02em; }
+.glance-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .85rem; }
+.glance-card { border: 1px solid rgba(148, 163, 184, .24); border-radius: var(--radius); background: var(--panel-soft); padding: .95rem .9rem; text-align: center; }
+.glance-card strong { display: block; color: var(--text-primary); font-size: 1.5rem; line-height: 1.05; margin-bottom: .25rem; }
+.glance-card span { display: block; color: var(--text-secondary); font-size: .84rem; line-height: 1.35; }
+
+.grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; align-items: stretch; }
+.grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.grid.four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.card { height: 100%; padding: 1.08rem 1.12rem; }
+.card h3 { font-size: 1rem; line-height: 1.28; margin-bottom: .45rem; }
+.card p, .card li { font-size: .94rem; line-height: 1.55; }
+.card .tag {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: .62rem;
+  padding: .22rem .48rem;
+  border-radius: 999px;
+  background: #f1f5f9;
+  color: var(--ink-soft);
+  font-size: .74rem;
+  font-weight: 850;
+  letter-spacing: .055em;
+  text-transform: uppercase;
+}
+.card .metric { display: block; color: var(--primary-color); font-size: 1.65rem; line-height: 1; font-weight: 850; margin-bottom: .35rem; }
+
+.pipeline {
+  max-width: 1040px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: .9rem;
+}
+.step {
+  position: relative;
+  padding: 1.1rem 1rem;
+  border: 1px solid rgba(148, 163, 184, .26);
+  border-radius: var(--radius-lg);
+  background: #fff;
+  box-shadow: var(--shadow-sm);
+}
+.step-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  margin-bottom: .65rem;
+  border-radius: 50%;
+  background: #eff6ff;
+  color: var(--primary-color);
+  font-size: .88rem;
+  font-weight: 850;
+}
+.step-number.phase-marker {
+  width: auto;
+  min-width: 4.8rem;
+  height: 1.85rem;
+  padding: 0 .72rem;
+  border-radius: 999px;
+  font-size: .78rem;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+}
+.step h3 { margin: 0 0 .35rem; font-size: .98rem; line-height: 1.28; }
+.step p { margin: 0; color: var(--text-secondary); font-size: .9rem; line-height: 1.5; }
+
+.evidence-list {
+  max-width: 960px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: .85rem;
+}
+.evidence-item {
+  display: grid;
+  grid-template-columns: 190px 1fr;
+  gap: 1rem;
+  padding: 1rem 1.05rem;
+  border: 1px solid rgba(148, 163, 184, .28);
+  border-radius: var(--radius-lg);
+  background: #fff;
+  box-shadow: var(--shadow-sm);
+}
+.evidence-item strong { color: var(--text-primary); font-size: .98rem; line-height: 1.3; }
+.evidence-item p { margin: 0; color: var(--text-secondary); font-size: .95rem; line-height: 1.58; }
+
+.bibtex-header { align-items: flex-end; }
+.bibtex-header .title::after { margin-left: 0; margin-right: 0; }
+.footer { font-size: .88rem; }
+.footer a { color: var(--text-secondary); text-decoration: none; }
+.footer a:hover { color: var(--text-primary); text-decoration: none; }
+
+
+
+/* Figure section and image modal */
+.figure-section {
+  padding: 2.3rem 0 2.4rem;
+  background: transparent;
+}
+
+.figure-section .publication-banner {
+  max-width: 820px;
+  margin: 0 auto;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 18px 45px -28px rgb(15 23 42 / 0.55);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.figure-section .publication-banner:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 24px 55px -30px rgb(15 23 42 / 0.65);
+}
+
+.figure-modal-trigger {
+  display: block;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  background: transparent;
+  cursor: zoom-in;
+}
+
+.figure-modal-trigger img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.figure-modal-trigger:focus-visible {
+  outline: 3px solid rgba(37, 99, 235, .45);
+  outline-offset: 4px;
+  border-radius: var(--radius-lg);
+}
+
+.image-modal[hidden] {
+  display: none;
+}
+
+.image-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: rgba(15, 23, 42, .82);
+  backdrop-filter: blur(4px);
+}
+
+.image-modal img {
+  max-width: min(95vw, 1200px);
+  max-height: 90vh;
+  width: auto;
+  height: auto;
+  border-radius: var(--radius-lg);
+  background: #fff;
+  box-shadow: var(--shadow-xl);
+}
+
+.image-modal-close {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(255, 255, 255, .35);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .96);
+  color: var(--text-primary);
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: var(--shadow-lg);
+}
+
+.image-modal-close:hover {
+  background: #fff;
+  transform: translateY(-1px);
+}
+
+body.modal-open {
+  overflow: hidden;
+}
+
+@media (max-width: 980px) {
+  .grid, .grid.two, .grid.four { grid-template-columns: 1fr; }
+  .pipeline { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .glance-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .evidence-item { grid-template-columns: 1fr; }
+}
+@media (max-width: 560px) {
+  .publication-title {
+    font-size: 2rem;
+    line-height: 1.14;
+    letter-spacing: -0.018em;
+  }
+  .publication-subtitle {
+    white-space: normal;
+  }
+  .section, .section2 { padding: 2.8rem 0; }
+  #trip-narratives {
+    padding-top: 4.2rem;
+    padding-bottom: 4.35rem;
+  }
+  #trip-narratives .title {
+    font-size: 1.72rem;
+    margin-bottom: 1.9rem;
+  }
+  #trip-narratives .step {
+    min-height: 0;
+    padding: 1.22rem 1rem;
+  }
+  .content { font-size: 1rem; line-height: 1.7; }
+  .content p { text-align: left; }
+  .pipeline, .glance-grid { grid-template-columns: 1fr; }
+}
+
+
+/* External context sources */
+.sources-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: .85rem;
+  max-width: 1040px;
+  margin: 0 auto;
+}
+.source-card {
+  height: 100%;
+  padding: 1.45rem 1.25rem;
+  border: 1px solid rgba(148, 163, 184, .28);
+  border-radius: var(--radius-lg);
+  background: #fff;
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+  transition: all .25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.source-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+.source-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 4rem;
+  height: 4rem;
+  margin-bottom: 1rem;
+  border-radius: 50%;
+  background: #eff6ff;
+  color: #1d4ed8;
+  font-size: 2rem;
+  line-height: 1;
+}
+.source-card h3 { margin: 0 0 .35rem; font-size: .98rem; line-height: 1.25; }
+.source-card p { margin: 0; color: var(--text-secondary); font-size: .9rem; line-height: 1.48; }
+.sources-note {
+  max-width: 880px;
+  margin: 1.25rem auto 0;
+  color: var(--text-secondary);
+  font-size: .95rem;
+  line-height: 1.6;
+  text-align: center;
+}
+
+@media (max-width: 980px) {
+  .sources-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 560px) {
+  .sources-grid { grid-template-columns: 1fr; }
+}
+
+/* Related papers section */
+.related-paper-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  max-width: 980px;
+  margin: 0 auto;
+  align-items: stretch;
+}
+
+.related-paper-card {
+  height: 100%;
+}
+
+.related-paper-card h3 {
+  color: var(--text-primary);
+  font-size: 1.02rem;
+  line-height: 1.32;
+  letter-spacing: -0.01em;
+  margin: 0 0 .55rem;
+}
+
+.related-paper-card p {
+  margin: 0 0 .65rem;
+  color: var(--text-secondary);
+  font-size: .93rem;
+  line-height: 1.55;
+}
+
+.related-paper-card .tag {
+  background: #eff6ff;
+  color: #1d4ed8;
+  border: 1px solid #bfdbfe;
+}
+
+.related-paper-note {
+  margin-bottom: .8rem;
+  color: #475569;
+  font-weight: 650;
+}
+
+.related-paper-link {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  min-height: 26px;
+  padding: .24rem .58rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 7px;
+  background: #fff;
+  color: var(--text-primary);
+  font-size: .78rem;
+  line-height: 1.1;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.related-paper-link:hover {
+  color: #1d4ed8;
+  border-color: #94a3b8;
+  background: #f8fafc;
+  text-decoration: none;
+}
+
+.github-button {
+  border-color: #cbd5e1;
+}
+
+.github-button:hover {
+  color: #0f172a;
+  border-color: #94a3b8;
+}
+
+@media (max-width: 900px) {
+  .related-paper-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+  
+.related-paper-card .related-paper-link + .related-paper-link {
+  margin-left: .35rem;
+  margin-top: .25rem;
+}
+
+ 
+
+
+
+/* Group recommendation counterfactual page refinements */
+:root {
+  --recommendation-green: #22c55e;
+  --warning-orange: #f97316;
+  --counter-red: #ef4444;
+  --paper-purple: #7c3aed;
+}
+
+.publication-title {
+  max-width: 1100px;
+}
+
+.publication-subtitle {
+  max-width: 930px;
+}
+
+.publication-venue {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+.meta-dot {
+  width: .38rem;
+  height: .38rem;
+  border-radius: 999px;
+  background: #93c5fd;
+  display: inline-block;
+}
+
+.figure-svg-wrap {
+  padding: 1.25rem;
+  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+}
+
+.process-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.svg-label {
+  font: 700 16px Inter, Arial, sans-serif;
+  fill: #1e293b;
+}
+
+.svg-small {
+  font: 600 12px Inter, Arial, sans-serif;
+  fill: #475569;
+}
+
+.svg-mini {
+  font: 700 10px Inter, Arial, sans-serif;
+  fill: #64748b;
+}
+
+.svg-item-text {
+  font: 800 13px Inter, Arial, sans-serif;
+  fill: #0f172a;
+}
+
+.svg-note {
+  font: 700 12px Inter, Arial, sans-serif;
+  fill: #dc2626;
+}
+
+.flow-callout {
+  display: grid;
+  grid-template-columns: 1.2fr .8fr;
+  gap: 1rem;
+  max-width: 1040px;
+  margin: 1.8rem auto 0;
+}
+
+.callout-panel {
+  border: 1px solid rgba(148, 163, 184, .28);
+  border-radius: var(--radius-lg);
+  background: #fff;
+  box-shadow: var(--shadow-sm);
+  padding: 1.2rem 1.25rem;
+}
+
+.callout-panel h3 {
+  margin: 0 0 .55rem;
+  font-size: 1.02rem;
+  line-height: 1.25;
+}
+
+.callout-panel p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: .95rem;
+  line-height: 1.6;
+}
+
+.metric-strip {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: .55rem;
+  max-width: 880px;
+  margin: 1.2rem auto 0;
+}
+
+.metric-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  padding: .42rem .7rem;
+  border: 1px solid rgba(124, 58, 237, .16);
+  border-radius: 999px;
+  background: #f5f3ff;
+  color: #5b21b6;
+  font-size: .86rem;
+  font-weight: 800;
+}
+
+.metric-pill::before {
+  content: "";
+  width: .45rem;
+  height: .45rem;
+  border-radius: 999px;
+  background: #8b5cf6;
+}
+
+.algorithm-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: .9rem;
+  max-width: 1060px;
+  margin: 0 auto;
+}
+
+.algorithm-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.algorithm-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 4px;
+  background: linear-gradient(90deg, #2563eb, #7c3aed);
+}
+
+.dataset-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  max-width: 1020px;
+  margin: 0 auto;
+}
+
+.dataset-card strong {
+  display: block;
+  color: var(--primary-color);
+  font-size: 1.55rem;
+  line-height: 1;
+  margin-bottom: .4rem;
+}
+
+.dataset-card .dataset-name {
+  display: block;
+  color: var(--text-primary);
+  font-weight: 850;
+  margin-bottom: .25rem;
+}
+
+.result-highlight {
+  max-width: 930px;
+  margin: 1.4rem auto 0;
+  padding: 1rem 1.1rem;
+  border: 1px solid #bfdbfe;
+  border-radius: var(--radius-lg);
+  background: #eff6ff;
+  color: #1e3a8a;
+  font-size: .98rem;
+  line-height: 1.6;
+}
+
+.result-highlight strong {
+  color: #1d4ed8;
+}
+
+.image-modal .svg-modal-card {
+  width: min(95vw, 1240px);
+  max-height: 90vh;
+  overflow: auto;
+  border-radius: var(--radius-lg);
+  background: #fff;
+  box-shadow: var(--shadow-xl);
+  padding: 1rem;
+}
+
+.image-modal .svg-modal-card .process-svg {
+  min-width: 960px;
+}
+
+@media (max-width: 1080px) {
+  .algorithm-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .dataset-grid { grid-template-columns: 1fr; }
+  .flow-callout { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 560px) {
+  .algorithm-grid { grid-template-columns: 1fr; }
+  .figure-svg-wrap { padding: .5rem; }
+}
+
+  
+
+/* Revised figure/photo and paper-frame sections */
+.figure-photo-wrap {
+  padding: 1.15rem;
+  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+}
+.figure-photo-wrap img {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: #fff;
+}
+
+.figure-step-caption ul {
+  margin: .7rem 0 0;
+  padding-left: 1.15rem;
+}
+.figure-step-caption li {
+  margin: .24rem 0;
+  color: var(--text-secondary);
+  font-size: .92rem;
+  line-height: 1.48;
+}
+.figure-step-caption li::marker {
+  color: var(--primary-color);
+}
+.figure-section .publication-banner { max-width: 980px; }
+.counterfactual-prompt {
+  max-width: 940px;
+  margin: 1.45rem auto 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  gap: .85rem;
+  align-items: stretch;
+}
+.prompt-card {
+  position: relative;
+  overflow: hidden;
+  padding: 1.2rem 1.3rem;
+  border: 1px solid rgba(148, 163, 184, .30);
+  border-radius: var(--radius-lg);
+  background: #fff;
+  box-shadow: var(--shadow-sm);
+  text-align: left;
+}
+.prompt-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 4px;
+  background: linear-gradient(90deg, #2563eb, #7c3aed);
+}
+.prompt-label {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  margin-bottom: .7rem;
+  padding: .25rem .6rem;
+  border: 1px solid #bfdbfe;
+  border-radius: 999px;
+  background: #eff6ff;
+  color: #1d4ed8;
+  font-size: .78rem;
+  line-height: 1.1;
+  font-weight: 850;
+  letter-spacing: .045em;
+  text-transform: uppercase;
+}
+.prompt-card p {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 1.04rem;
+  line-height: 1.55;
+  font-style: italic;
+}
+.prompt-arrow {
+  align-self: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.35rem;
+  height: 2.35rem;
+  border: 1px solid #bfdbfe;
+  border-radius: 999px;
+  background: #eff6ff;
+  color: #1d4ed8;
+  font-weight: 900;
+  box-shadow: var(--shadow-sm);
+}
+@media (max-width: 760px) {
+  .counterfactual-prompt {
+    grid-template-columns: 1fr;
+  }
+  .prompt-arrow {
+    justify-self: center;
+    transform: rotate(90deg);
+  }
+}
+.steps-detailed {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+.step-detail {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: .85rem;
+  padding: 1.15rem;
+  border: 1px solid rgba(148, 163, 184, .28);
+  border-radius: var(--radius-lg);
+  background: #fff;
+  box-shadow: var(--shadow-sm);
+}
+.step-detail .number {
+  width: 2.5rem;
+  height: 2.5rem;
+  font-size: 1rem;
+}
+.step-detail h3 {
+  margin: 0 0 .35rem;
+  font-size: 1.02rem;
+  line-height: 1.28;
+}
+.step-detail p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: .96rem;
+  line-height: 1.58;
+}
+.contribution-list {
+  max-width: 980px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+.contribution-card {
+  height: 100%;
+}
+.contribution-card .tag {
+  background: #eff6ff;
+  color: #1d4ed8;
+  border: 1px solid #bfdbfe;
+}
+.image-modal .figure-modal-img {
+  max-width: min(96vw, 1500px);
+  max-height: 90vh;
+  width: auto;
+  height: auto;
+  border-radius: var(--radius-lg);
+  background: #fff;
+  box-shadow: var(--shadow-xl);
+}
+@media (max-width: 900px) {
+  .steps-detailed, .contribution-list { grid-template-columns: 1fr; }
+}
+
+
+/* Footer social sharing */
+.footer-share {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: .45rem;
+  margin-top: 1rem;
+}
+.footer-share-label {
+  color: var(--text-primary);
+  font-weight: 800;
+  margin-right: .15rem;
+}
+.footer-share-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 30px;
+  padding: .28rem .62rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 999px;
+  background: #fff;
+  color: var(--text-primary);
+  font-size: .78rem;
+  line-height: 1.1;
+  font-weight: 750;
+  text-decoration: none;
+  box-shadow: var(--shadow-sm);
+  transition: all .2s ease;
+}
+.footer-share-link:hover {
+  transform: translateY(-1px);
+  border-color: #94a3b8;
+  background: #f8fafc;
+  color: #1d4ed8;
+  text-decoration: none;
+}
+
+
+/* Simple preliminary paper note */
+.preliminary-endnote {
+  padding: .6rem 0 2.2rem;
+  background: var(--background-primary);
+}
+.preliminary-note {
+  max-width: 900px;
+  margin: 0 auto;
+  padding-top: .95rem;
+  border-top: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  font-size: .88rem;
+  line-height: 1.55;
+  text-align: center;
+}
+.preliminary-note strong {
+  color: var(--text-primary);
+  font-weight: 750;
+}
+.preliminary-note a {
+  color: var(--primary-color);
+  font-weight: 750;
+}
+@media (max-width: 560px) {
+  .preliminary-note {
+    text-align: left;
+  }
+}
+
+/* Icon-only footer social sharing */
+.footer-share {
+  gap: .55rem;
+}
+.footer-share-label {
+  margin-right: .25rem;
+}
+.footer-share-link.social-icon-link {
+  width: 38px;
+  height: 38px;
+  min-height: 38px;
+  padding: 0;
+  border-radius: 50%;
+  color: var(--text-secondary);
+}
+.footer-share-link.social-icon-link svg {
+  width: 18px;
+  height: 18px;
+  display: block;
+  fill: currentColor;
+}
+.footer-share-link.social-icon-link:hover {
+  color: #1d4ed8;
+}
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+
+
+/* Final visual refinements */
+.figure-section .publication-banner {
+  border-radius: 8px;
+}
+.figure-photo-wrap {
+  border-radius: 8px 8px 0 0;
+}
+.figure-modal-trigger:focus-visible {
+  border-radius: 8px;
+}
+.image-modal img,
+.image-modal .figure-modal-img {
+  border-radius: 8px;
+}
+
+</style>
+</head>
+<body>
+<header class="publication-header">
+<div class="container">
+<h1 class="publication-title">Explaining Group Recommendations via Counterfactuals</h1>
+<p class="publication-subtitle">Towards Fair and Explainable Group Recommendations via Counterfactuals.</p>
+<div aria-label="authors" class="publication-authors">
+<span class="author-block">Maria Stratigi</span>
+<span class="author-block">Nikos Bikakis</span>
+<span class="author-block">Kostas Stefanidis</span>
+</div>
+<p class="publication-affiliations">Data Science Research Centre, Tampere University · Hellenic Mediterranean University &amp; Archimedes/Athena RC</p>
+<p class="publication-venue"><span>arXiv:2601.16882 · 2026</span></p>
+<nav aria-label="paper resources" class="link-blocks">
+<a class="button" href="https://arxiv.org/pdf/2601.16882" rel="noopener" target="_blank">Paper PDF</a>
+<a class="button secondary" href="https://arxiv.org/abs/2601.16882" rel="noopener" target="_blank">arXiv Page</a>
+ <a class="button secondary" href="#citation">BibTeX</a>
+</nav>
+</div>
+</header>
+<main>
+<section aria-label="paper figure teaser" class="figure-section">
+<div class="container">
+<figure class="publication-banner">
+<button aria-controls="processModal" aria-haspopup="dialog" aria-label="Open Figure 1 in larger view" class="figure-modal-trigger" title="Open larger view" type="button">
+<div class="figure-photo-wrap">
+<img alt="Figure 1 from the paper showing the counterfactual explanation process: original recommendation list, interacted items, removed items, updated interacted items, recommender, new recommendation list, and final explanation." loading="eager" src="explaining_group_recommendations.png"/>
+</div>
+</button>
+<figcaption class="banner-caption figure-step-caption">
+<strong>Explanation Process: Finding Counterfactual Explanations</strong>
+<ul class="figure-bullet-list">
+<li>The group recommender produces an initial ranked list from the interaction histories of all group members; the target item is the recommendation to be explained.</li>
+<li>A candidate explanation is formed by removing a selected set of previously interacted items from the members' histories.</li>
+<li>The recommender is invoked again on the modified histories, treating the recommender as a black box.</li>
+<li>If the target item no longer appears in the new ranked list, the removed items constitute a valid group counterfactual explanation.</li>
+</ul>
+</figcaption>
+</figure>
+</div>
+</section>
+<section class="section2" id="overview">
+<div class="container">
+<h2 class="title">Abstract</h2>
+<div class="content">
+<p>
+Group recommender systems help users make collective choices but often lack transparency, leaving group
+members uncertain about why items are suggested. Existing explanation methods focus on individuals, offering
+limited support for groups where multiple preferences interact. 
+</p>
+<p>
+In this paper, we propose a framework for
+group counterfactual explanations, which reveal how removing specific past interactions would change a
+group recommendation. We formalize this concept, introduce utility and fairness measures tailored to groups,
+and design heuristic algorithms, such as Pareto-based filtering and grow-and-prune strategies, for efficient
+explanation discovery. Experiments on MovieLens and Amazon datasets show clear trade-offs: low-cost
+methods produce larger, less fair explanations, while other approaches yield concise and balanced results at
+higher cost. Furthermore, the Pareto-filtering heuristic demonstrates significant efficiency improvements in
+sparse settings.
+</p>
+</div>
+</div>
+</section>
+<section class="section" id="paper-question">
+<div class="container">
+<h2 class="title">Explanations for Group Recommender Systems</h2>
+<div class="content">
+<p>The essence of a counterfactual explanation lies in identifying the set of previously interacted
+items that, if removed, would prevent the appearance of a specific item (the target item) in the
+recommendation list. The problem can be described through the following question and its explanation.</p>
+</div>
+<div aria-label="question and explanation text from the paper" class="counterfactual-prompt">
+<div class="prompt-card">
+<span class="prompt-label">Question</span>
+<p>“Why does the target item <em>t</em> appear in the group recommendation list?”</p>
+</div>
+<div aria-hidden="true" class="prompt-arrow">→</div>
+<div class="prompt-card">
+<span class="prompt-label">Explanation</span>
+<p>“If the group had not interacted with the items <em>X</em>, item <em>t</em> would not have been recommended.”</p>
+</div>
+</div>
+</div>
+</section>
+<section class="section2" id="pipeline">
+<div class="container">
+<h2 class="title">Finding Counterfactual Explanations</h2>
+<div class="pipeline">
+<article class="step"><span class="step-number phase-marker">Phase A</span><h3>Collect group history</h3><p>Start with the items previously interacted with by any member of the group and select the target recommendation that needs to be explained.</p></article>
+<article class="step"><span class="step-number phase-marker">Phase B</span><h3>Rank candidate removals</h3><p>Use item metrics such as recognition, rating, influence, and explanatory power to identify interactions that are most likely to affect the target item.</p></article>
+<article class="step"><span class="step-number phase-marker">Phase C</span><h3>Re-run the recommender</h3><p>Remove a candidate set from the group history and invoke the group recommender again on the updated interaction set.</p></article>
+<article class="step"><span class="step-number phase-marker">Phase D</span><h3>Validate the explanation</h3><p>Return the removed set as a counterfactual explanation only if the target item is absent from the new recommendation list.</p></article>
+</div>
+</div>
+</section>
+<section class="section" id="metrics-used">
+<div class="container">
+<h2 class="title">Item-level &amp; Explanation-level Metrics</h2>
+<div class="content">
+<p>The framework uses metrics at two levels. Item-level metrics help rank candidate interacted items for removal, 
+while Explanation-level metrics evaluate whether a generated counterfactual is concise, interpretable, efficient, useful, and fair.</p>
+</div>
+<div class="grid two">
+<article class="card">
+<span class="tag">Item-level metrics</span>
+<h3>Signals for selecting candidate removals</h3>
+<ul>
+<li><strong>Group item recognition:</strong> how many group members have interacted with an item.</li>
+<li><strong>Public item recognition:</strong> how widely the item is known outside the group.</li>
+<li><strong>Group item rating:</strong> the group members' average rating for the item.</li>
+<li><strong>Public item rating:</strong> the average rating among users outside the group.</li>
+<li><strong>Influence:</strong> how strongly the item affects the target recommendation in a model-agnostic way.</li>
+<li><strong>Explanatory power:</strong> how much removing a set of items lowers the target item's rank or removes it entirely.</li>
+</ul>
+</article>
+<article class="card">
+<span class="tag">Explanation-level metrics</span>
+<h3>Criteria for evaluating generated explanations</h3>
+<ul>
+<li><strong>Minimality:</strong> favors smaller explanations with fewer removed items.</li>
+<li><strong>Interpretability:</strong> favors explanations containing items that are familiar to the group or to the wider user base.</li>
+<li><strong>Cost:</strong> counts the recommender calls required to discover the explanation.</li>
+<li><strong>Utility:</strong> combines minimality and interpretability into an overall explanation-quality score.</li>
+<li><strong>Fairness:</strong> checks whether the explanation burden is balanced across group members.</li>
+</ul>
+</article>
+</div>
+</div>
+</section>
+<section class="section2" id="fairness">
+<div class="container">
+<h2 class="title">Fairness in Group Counterfactual Explanations</h2>
+<div class="content">
+<p>In a group setting, an explanation should not place the entire burden on one member's interaction history. The paper treats the removed items as an explanation burden and evaluates whether that burden is distributed evenly across the group.</p>
+</div>
+<div class="grid">
+<article class="card">
+<span class="tag">Intuition</span>
+<h3>Avoid one-sided explanations</h3>
+<p>An explanation can feel biased if it says that only one member's past interactions caused the target item to be recommended. Fairness asks whether the explanatory removals are shared across members instead of concentrating on a single profile.</p>
+</article>
+<article class="card">
+<span class="tag">Measurement</span>
+<h3>Balance member contributions</h3>
+<p>For each group member, the framework counts how many of that member's interacted items appear in the explanation. It then compares these counts across members: more similar counts indicate a fairer explanation.</p>
+</article>
+<article class="card">
+<span class="tag">Interpretation</span>
+<h3>Lower imbalance means higher fairness</h3>
+<p>The paper measures imbalance using the standard deviation of the per-member contribution counts. A lower standard deviation means the burden is more balanced; perfect fairness occurs when all members contribute equally.</p>
+</article>
+</div>
+</div>
+</section>
+<section class="section" id="algorithms">
+<div class="container">
+<h2 class="title">Algorithms</h2>
+<div class="algorithm-grid">
+<article class="card algorithm-card"><h3>Pareto-filtering</h3><p>Uses Pareto dominance over item metrics as a preprocessing step. It removes non-dominated, high-impact candidates first and gradually relaxes the dominance threshold until the target item disappears.</p></article>
+<article class="card algorithm-card"><h3>GreedyGrow</h3><p>Sorts items by total score and adds them one by one to a removal set. It is fast, but the resulting explanation can be larger than necessary because no pruning is applied.</p></article>
+<article class="card algorithm-card"><h3>Grow&amp;Prune</h3><p>Starts with a GreedyGrow counterfactual and then removes unnecessary items while preserving the counterfactual condition, producing a smaller and usually fairer explanation.</p></article>
+<article class="card algorithm-card"><h3>ExpRebuild</h3><p>Uses explanatory power to reorder the items in an initial counterfactual and rebuilds the explanation from the most influential candidates.</p></article>
+<article class="card algorithm-card"><h3>FixedWindow</h3><p>Moves a fixed-size window over the ranked candidate list, tests each window, and then searches inside a successful window to find a compact subset.</p></article>
+</div>
+</div>
+</section><section class="section" id="citation">
+<div class="container">
+<div class="bibtex-header">
+<h2 class="title" style="text-align:left;margin-bottom:0">BibTeX</h2>
+<button class="copy-bibtex-btn" onclick="copyBibtex()" type="button"><span class="copy-text">Copy</span></button>
+</div>
+<pre><code id="bibtex">@article{stratigi2026GroupRecExplanations,
+  title   = {Explaining Group Recommendations via Counterfactuals},
+  author  = {Stratigi, Maria and Bikakis, Nikos and Stefanidis, Kostas},
+  journal = {arXiv:2601.16882},
+  year    = {2026}
+}</code></pre>
+</div>
+</section>
+<aside class="preliminary-endnote" aria-label="preliminary version of this work">
+<div class="container">
+<p class="preliminary-note"><strong>Preliminary version:</strong> Stratigi M., Bikakis N., Stefanidis K.: <em>Counterfactual Explanations for Group Recommendations</em>, 27th International Workshop on Design, Optimization, Languages and Analytical Processing of Big Data (DOLAP '25), 2025. <a href="https://ceur-ws.org/Vol-3931/paper3.pdf" rel="noopener" target="_blank">[pdf]</a></p>
+</div>
+</aside>
+</main>
+<footer class="footer">
+<div class="container">
+<p>This page uses as base the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template">Academic Project Page Template</a></p>
+<div aria-label="Share this page" class="footer-share">
+ <a aria-label="Share on X" class="footer-share-link social-icon-link" data-share="x" href="#" rel="noopener" target="_blank">
+<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.657l-5.214-6.817-5.967 6.817H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.45-6.231Zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77Z"></path></svg>
+<span class="visually-hidden">X</span>
+</a>
+<a aria-label="Share on LinkedIn" class="footer-share-link social-icon-link" data-share="linkedin" href="#" rel="noopener" target="_blank">
+<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.85-3.037-1.853 0-2.136 1.447-2.136 2.943v5.663H9.354V9h3.414v1.561h.049c.476-.9 1.637-1.85 3.37-1.85 3.602 0 4.267 2.371 4.267 5.455v6.286h-.007ZM5.337 7.433a2.063 2.063 0 1 1 0-4.126 2.063 2.063 0 0 1 0 4.126ZM7.114 20.452H3.559V9h3.555v11.452ZM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.226.792 24 1.771 24h20.451C23.2 24 24 23.226 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003Z"></path></svg>
+<span class="visually-hidden">LinkedIn</span>
+</a>
+<a aria-label="Share on Facebook" class="footer-share-link social-icon-link" data-share="facebook" href="#" rel="noopener" target="_blank">
+<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.313 0 2.686.236 2.686.236v2.971H15.83c-1.491 0-1.956.931-1.956 1.887v2.266h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073Z"></path></svg>
+<span class="visually-hidden">Facebook</span>
+</a>
+<a aria-label="Share by email" class="footer-share-link social-icon-link" data-share="email" href="#">
+<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M20 4H4C2.895 4 2 4.895 2 6v12c0 1.105.895 2 2 2h16c1.105 0 2-.895 2-2V6c0-1.105-.895-2-2-2Zm0 4.236-8 5-8-5V6l8 5 8-5v2.236Z"></path></svg>
+<span class="visually-hidden">Email</span>
+</a>
+</div></div>
+</footer>
+<button aria-label="Scroll to top" class="scroll-to-top" id="scrollTop" type="button">↑</button>
+<div aria-label="Figure 1 larger view" aria-modal="true" class="image-modal" hidden="" id="processModal" role="dialog">
+<button aria-label="Close enlarged figure" class="image-modal-close" type="button">×</button>
+<img alt="Large version of Figure 1 showing the counterfactual explanation process." class="figure-modal-img" src="explaining_group_recommendations.png"/>
+</div>
+<script>
+    function copyBibtex() {
+      const text = document.getElementById('bibtex').innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = document.querySelector('.copy-bibtex-btn');
+        const label = btn.querySelector('.copy-text');
+        label.textContent = 'Copied';
+        btn.classList.add('copied');
+        setTimeout(() => { label.textContent = 'Copy'; btn.classList.remove('copied'); }, 1700);
+      });
+    }
+
+    const scrollBtn = document.getElementById('scrollTop');
+    window.addEventListener('scroll', () => {
+      scrollBtn.classList.toggle('visible', window.scrollY > 400);
+    });
+    scrollBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    const processTrigger = document.querySelector('.figure-modal-trigger');
+    const processModal = document.getElementById('processModal');
+    const processClose = processModal ? processModal.querySelector('.image-modal-close') : null;
+
+    function openProcessModal() {
+      if (!processModal || !processClose) return;
+      processModal.hidden = false;
+      document.body.classList.add('modal-open');
+      processClose.focus();
+    }
+
+    function closeProcessModal() {
+      if (!processModal || !processTrigger) return;
+      processModal.hidden = true;
+      document.body.classList.remove('modal-open');
+      processTrigger.focus();
+    }
+
+    if (processTrigger && processModal && processClose) {
+      processTrigger.addEventListener('click', openProcessModal);
+      processClose.addEventListener('click', closeProcessModal);
+      processModal.addEventListener('click', (event) => {
+        if (event.target === processModal) closeProcessModal();
+      });
+      window.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && !processModal.hidden) closeProcessModal();
+      });
+    }
+  
+
+    function updateShareLinks() {
+      const pageUrl = encodeURIComponent(window.location.href);
+      const pageTitle = encodeURIComponent(document.title);
+      document.querySelectorAll('[data-share]').forEach((link) => {
+        const target = link.getAttribute('data-share');
+        if (target === 'x') {
+          link.href = `https://twitter.com/intent/tweet?url=${pageUrl}&text=${pageTitle}`;
+        } else if (target === 'linkedin') {
+          link.href = `https://www.linkedin.com/sharing/share-offsite/?url=${pageUrl}`;
+        } else if (target === 'facebook') {
+          link.href = `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`;
+        } else if (target === 'email') {
+          link.href = `mailto:?subject=${pageTitle}&body=${pageUrl}`;
+        }
+      });
+    }
+    updateShareLinks();
+</script>
+</body>
+</html>
