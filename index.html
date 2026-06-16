@@ -305,6 +305,35 @@
       .site-nav { display: none; }
       .page { width: 100%; padding: 0; }
     }
+  
+    .profile-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .profile-badges a {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px 9px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.015em;
+    }
+
+    .profile-badges a:hover,
+    .profile-badges a:focus {
+      border-color: var(--accent);
+    }
+
+  
+    .mail-domain {
+      unicode-bidi: isolate;
+    }
+
   </style>
 </head>
 <body>
@@ -316,8 +345,12 @@
 <p class="affiliation">Hellenic Mediterranean University | Greece</p><p class="affiliation">ATHENA Research Center | Greece</p>
 <div class="contact-block">
 <span class="contact-label"><b>conταcτ</b></span>
-<span>bikakis |_ατ_| <img alt="" height="12px" src="h.png"/></span>
-<span>bikakis |_ατ_| <img alt="" height="12px" src="a.png"/></span>
+<span>bikakis |_ατ_| <span class="mail-domain" data-domain="aG11Lmdy"></span></span>
+<span>bikakis |_ατ_| <span class="mail-domain" data-domain="YXRoZW5hcmMuZ3I="></span></span>
+</div>
+<div class="profile-badges" aria-label="Academic profiles">
+<a href="https://dblp.org/pid/57/7247" rel="noopener" target="_blank">DBLP</a>
+<a href="https://scholar.google.com/citations?hl=en&user=euz_VZMAAAAJ" rel="noopener" target="_blank">Google Scholar</a>
 </div>
 </div>
 <div class="portrait"><img height="160px" src="pic.png"/></div>
@@ -365,6 +398,12 @@ I received my PhD in Computer Science in 2016 from the <a href="http://www.ntua.
 <h2 class="section-title">_news</h2>
 <div class="section-content">
 <ul class="item-list">
+
+
+<li><b>Services 2027</b> [highlights] <b>::</b> KDD 2027, EDBT 2027 </li>
+
+
+
 <li><b>New Preprint :: </b> <b><a href="/papers/Human-Data Interaction, Exploration, and Visualization in the AI Era Challenges and Opportunities_2026.pdf" rel="noopener" target="_blank">Human-Data Interaction, Exploration, and Visualization in the AI Era: Challenges and Opportunities</a></b>, Jean-Daniel Fekete, Yifan Hu, Dominik Moritz, Arnab Nandi, Senjuti Basu Roy, Eugene Wu, Nikos Bikakis, George Papastefanatos, Panos K. Chrysanthis, Guoliang Li, Lingyun Yu <b> [<a href="/Human-Data Interaction in the AI Era Challenges and Opportunities.html" rel="noopener" target="_blank">page</a>] </b> <b> [infographic: <a href="/papers/Human-Data Interaction, Exploration, and Visualization in the AI Era Challenges and Opportunities_2026_Infographic.pdf" rel="noopener" target="_blank"> /.pdf</a> <a href="/papers/Human-Data Interaction, Exploration, and Visualization in the AI Era Challenges and Opportunities_2026_Infographic.png" rel="noopener" target="_blank"> /.png</a>] </b></li>
 
 
@@ -375,6 +414,7 @@ I received my PhD in Computer Science in 2016 from the <a href="http://www.ntua.
 
 
 <li><b> MuseKDE 2026 Paper :: </b> <a href="/papers/Trajectory%20Imputation%20Using%20Computer%20Vision%20Models_2026.pdf" rel="noopener" target="_blank"> <strong>Trajectory Imputation Using Computer Vision Models</strong></a> <b>[<a href="/trajectory_imputation_vision_models.html" rel="noopener" target="_blank">page</a>]</b> <b>[<a href="https://github.com/M3-Archimedes/IMaGe-based-ImputatioN-of-Trajectories" rel="noopener" target="_blank">GitHub</a>]</b></li>
+
 
 
 <li><b> New Preprint :: </b> <a href="/papers/Explaining_Group_Recommendations_via_Counterfactuals_2025.pdf" rel="noopener" target="_blank"> <strong>Explaining Group Recommendations via Counterfactuals</strong></a></li>
@@ -692,6 +732,17 @@ I received my PhD in Computer Science in 2016 from the <a href="http://www.ntua.
 </section>
 </main>
 </div>
+
+<script>
+    document.querySelectorAll('.mail-domain').forEach(function(el) {
+      try {
+        el.textContent = atob(el.getAttribute('data-domain'));
+      } catch (e) {
+        el.textContent = '';
+      }
+    });
+  </script>
+
 <script>
     var _gaq = _gaq || [];
     _gaq.push(['_setAccount', 'UA-11024030-1']);
