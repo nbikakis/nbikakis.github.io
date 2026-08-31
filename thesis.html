@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Diploma Thesis Topics</title>
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      background: #fafafa;
+      color: #171717;
+      line-height: 1.6;
+    }
+
+    .container {
+      width: min(100% - 40px, 960px);
+      margin: 0 auto;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding-top: 24px;
+    }
+
+    .author-line {
+      display: flex;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 6px 8px;
+      margin-top: 20px;
+      color: #6f7d89;
+      font-size: 14px;
+      line-height: 1.45;
+    }
+
+    .author-name {
+      color: #252525;
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+    .author-separator {
+      color: #b7c4cf;
+    }
+
+    .author-affiliation {
+      color: #627586;
+    }
+
+    .author-hmu {
+      color: #4f7fa8;
+      font-weight: 500;
+    }
+
+    .lang-switch {
+      display: inline-flex;
+      gap: 2px;
+      padding: 2px;
+      border: 1px solid #e5e5e5;
+      border-radius: 9px;
+      background: rgba(255, 255, 255, 0.92);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+      backdrop-filter: blur(8px);
+    }
+
+    .lang-btn {
+      border: 0;
+      background: transparent;
+      color: #777;
+      padding: 4px 7px;
+      border-radius: 6px;
+      font: inherit;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+    }
+
+    .lang-btn:hover {
+      color: #171717;
+      transform: translateY(-1px);
+    }
+
+    .flag-icon {
+      width: 16px;
+      height: 11px;
+      display: inline-flex;
+      border-radius: 3px;
+      overflow: hidden;
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08);
+      flex: 0 0 auto;
+    }
+
+    .flag-icon svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .lang-btn.active {
+      background: #eef6ff;
+      color: #145da0;
+      box-shadow: inset 0 0 0 1px #d8eaff;
+    }
+
+    header {
+      padding: 18px 0 48px;
+      border-bottom: 1px solid #e3ebf2;
+    }
+
+    header p.label {
+      font-size: 14px;
+      font-weight: 600;
+      color: #4f7fa8;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    h1 {
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-weight: 400;
+      font-size: 35px;
+      line-height: 1.05;
+      letter-spacing: -0.025em;
+      max-width: 750px;
+    }
+
+
+
+    .identity {
+      margin-top: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 6px 8px;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      color: #5f6f7d;
+    }
+
+    .identity a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .identity a:hover {
+      color: #2f6f9f;
+    }
+
+    .identity-name {
+      font-weight: 600;
+      color: #27313a;
+    }
+
+    .identity-email,
+    .identity-dept,
+    .identity-hmu {
+      font-weight: 400;
+      color: #5f6f7d;
+    }
+
+    .identity-sep {
+      color: #b6c1ca;
+    }
+
+    main { padding: 60px 0 100px; }
+
+    .section-header { margin-bottom: 28px; }
+
+    .section-header h2 {
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-weight: 400;
+      font-size: 30px;
+      letter-spacing: -0.02em;
+    }
+
+    .topics {
+      display: grid;
+      gap: 16px;
+    }
+
+    .topic {
+      background: #fff;
+      border: 1px solid #e5e5e5;
+      border-radius: 14px;
+      padding: 28px;
+      transition: transform 0.2s ease, border-color 0.2s ease,
+        box-shadow 0.2s ease;
+    }
+
+    .topic:hover {
+      transform: translateY(-2px);
+      border-color: #d6e7f7;
+      box-shadow: 0 10px 30px rgba(76, 133, 184, 0.08);
+    }
+
+    .topic-number {
+      font-size: 13px;
+      color: #999;
+      margin-bottom: 10px;
+    }
+
+    .topic h3 {
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-weight: 600;
+      font-size: 21px;
+      margin-bottom: 10px;
+      letter-spacing: -0.02em;
+    }
+
+    .description {
+      color: #666;
+      max-width: 720px;
+      margin-bottom: 22px;
+	  text-align: justify;
+    }
+
+    .keywords {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tag {
+      padding: 5px 10px;
+      background: #f4f8fc;
+      border: 1px solid #e5eff8;
+      border-radius: 6px;
+      font-size: 13px;
+      color: #4d6275;
+    }
+
+    footer {
+      padding: 24px 0 30px;
+      border-top: 1px solid #e3ebf2;
+      color: #7b8791;
+      font-size: 13px;
+    }
+
+    .footer-inner {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px 18px;
+    }
+
+    .footer-contact {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 8px;
+      align-items: center;
+    }
+
+    .footer-contact a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .footer-contact a:hover {
+      color: #2f6f9f;
+    }
+
+    .footer-sep {
+      color: #c1cad1;
+    }
+
+    @media (max-width: 600px) {
+      header { padding: 40px 0; }
+  
+    .identity {
+      margin-top: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 6px 8px;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      color: #5f6f7d;
+    }
+
+    .identity a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .identity a:hover {
+      color: #2f6f9f;
+    }
+
+    .identity-name {
+      font-weight: 600;
+      color: #27313a;
+    }
+
+    .identity-email,
+    .identity-dept,
+    .identity-hmu {
+      font-weight: 400;
+      color: #5f6f7d;
+    }
+
+    .identity-sep {
+      color: #b6c1ca;
+    }
+
+    main { padding-top: 40px; }
+      .topic { padding: 22px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container topbar">
+    <div class="lang-switch" aria-label="Language switcher">
+      <button class="lang-btn" data-lang="el" aria-label="Ελληνικά">
+        <span class="flag-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 16" xmlns="http://www.w3.org/2000/svg">
+            <rect width="24" height="16" rx="2" fill="#ffffff"/>
+            <rect y="0" width="24" height="2" fill="#2d5fb3"/>
+            <rect y="4" width="24" height="2" fill="#2d5fb3"/>
+            <rect y="8" width="24" height="2" fill="#2d5fb3"/>
+            <rect y="12" width="24" height="2" fill="#2d5fb3"/>
+            <rect width="10" height="9" rx="1" fill="#2d5fb3"/>
+            <rect x="4" width="2" height="9" fill="#ffffff"/>
+            <rect y="3.5" width="10" height="2" fill="#ffffff"/>
+          </svg>
+        </span>
+        <span>EL</span>
+      </button>
+
+      <button class="lang-btn active" data-lang="en" aria-label="English">
+        <span class="flag-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 16" xmlns="http://www.w3.org/2000/svg">
+            <rect width="24" height="16" rx="2" fill="#21468b"/>
+            <path d="M0 0L24 16M24 0L0 16" stroke="#ffffff" stroke-width="4"/>
+            <path d="M0 0L24 16M24 0L0 16" stroke="#c8102e" stroke-width="1.8"/>
+            <rect x="9" width="6" height="16" fill="#ffffff"/>
+            <rect y="5" width="24" height="6" fill="#ffffff"/>
+            <rect x="10.5" width="3" height="16" fill="#c8102e"/>
+            <rect y="6.5" width="24" height="3" fill="#c8102e"/>
+          </svg>
+        </span>
+        <span>EN</span>
+      </button>
+      </div>
+  </div>
+
+  <header>
+    <div class="container">
+      <h1 id="page-title"></h1>
+      <div class="identity" id="identity"></div>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <div class="section-header">
+        <h2 id="topics-heading"></h2>
+      </div>
+      <div class="topics" id="topics-list"></div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container footer-inner" id="footer-content"></div>
+  </footer>
+
+  
+
+
+  
+  <script>
+ 
+    const CONTENT = {
+      personal: {
+        name: "Nikos Bikakis",
+        email: "bikakis@hmu.gr",
+        department: "Department of Electronic Engineering",
+        institution: "HMU",
+        homepage: "https://www.nbikakis.com/",
+        year: "2026"
+      },
+
+      page: {
+        enTitle: "Diploma Thesis Topics [2026-2027]",
+        elTitle: "Θέματα Διπλωματικών Εργασιών [2026-2027]",
+
+        enTopicsHeading: "Topics",
+        elTopicsHeading: "Θέματα"
+      },
+
+      topics: [
+        {
+          // ENGLISH
+          enTitle: "Building an LLM-Powered RAG Chatbot with Vector Databases",
+          enDescription: "The thesis implements a system that answers natural language questions over a document collection, combining large language models with an information retrieval mechanism. Texts are chunked, converted into vector embeddings and stored in a vector database, so that for every question the most relevant passages are retrieved and given as context to the language model, which produces an answer with an explicit reference to the source. The work examines alternative chunking strategies, the combination of lexical and semantic retrieval, re-ranking of results and the reduction of hallucinations when the answer is not present in the data. The methodology is domain independent and can be applied indicatively to legal texts, medical guidelines, technical documentation or internal documents of organisations. The thesis outcome is a working web application, accompanied by an evaluation on a set of questions with known answers using correctness and grounding metrics.",
+
+          // ΕΛΛΗΝΙΚΑ
+          elTitle: "Ανάπτυξη Chatbot Ερωταποκρίσεων με LLM, RAG και Διανυσματικές Βάσεις Δεδομένων",
+          elDescription: "Η εργασία υλοποιεί σύστημα που απαντά σε ερωτήσεις φυσικής γλώσσας πάνω σε ένα σώμα εγγράφων, συνδυάζοντας μεγάλα γλωσσικά μοντέλα με μηχανισμό ανάκτησης πληροφορίας. Τα κείμενα τεμαχίζονται, μετατρέπονται σε διανυσματικές ενσωματώσεις και αποθηκεύονται σε διανυσματική βάση δεδομένων, ώστε για κάθε ερώτηση να ανακτώνται τα πλέον σχετικά αποσπάσματα και να δίνονται ως συμφραζόμενα στο γλωσσικό μοντέλο, το οποίο παράγει απάντηση με ρητή παραπομπή στην πηγή. Εξετάζονται εναλλακτικές στρατηγικές τεμαχισμού, ο συνδυασμός λεξικής και σημασιολογικής ανάκτησης, η επαναταξινόμηση αποτελεσμάτων και ο περιορισμός των παραισθήσεων του μοντέλου όταν η απάντηση δεν υπάρχει στα δεδομένα. Η μεθοδολογία είναι ανεξάρτητη πεδίου και μπορεί να εφαρμοστεί ενδεικτικά σε νομοθετικά κείμενα, ιατρικές οδηγίες, τεχνική τεκμηρίωση ή εσωτερικά έγγραφα οργανισμών. To αποτελεσμα της διπλοματικη εναι μια λειτουργική διαδικτυακή εφαρμογή, συνοδευόμενη από αξιολόγηση σε σύνολο ερωτήσεων με γνωστές απαντήσεις με μετρικές ορθότητας και τεκμηρίωσης.",
+
+          enKeywords: ["Retrieval-Augmented Generation",  "Large Language Models" , "Vector Search"],
+          elKeywords: ["Επαυξημένη Παραγωγή με Ανάκτηση (RAG)", "Μεγάλα Γλωσσικά Μοντέλα", "Διανυσματική Αναζήτηση"]
+        },
+
+
+
+
+
+
+        {
+          // ENGLISH
+          enTitle: "Natural Language Search over Instagram Images with Multimodal Embeddings",
+          enDescription: "The thesis implements an image retrieval system over social media collections, and specifically Instagram posts, in which the user expresses the query in natural language without the need for hashtags, labels or metadata. It exploits multimodal CLIP-style models that place images and text in a common vector space, with the embeddings stored in a vector database for fast similarity search. Both text queries and image queries are supported, while the combination of the visual information with the captions of the posts is also examined. The thesis outcome is a web application with an interactive search interface.",
+
+          // ΕΛΛΗΝΙΚΑ
+          elTitle: "Αναζήτηση Εικόνων Instagram με Φυσική Γλώσσα μέσω Πολυτροπικών Μοντέλων",
+          elDescription: "Η εργασία υλοποιεί σύστημα ανάκτησης εικόνων από συλλογές κοινωνικών δικτύων, και συγκεκριμένα αναρτήσεων Instagram, στο οποίο ο χρήστης διατυπώνει το ερώτημά του σε φυσική γλώσσα χωρίς να απαιτούνται hashtags, ετικέτες ή μεταδεδομένα. Αξιοποιούνται πολυτροπικά μοντέλα τύπου CLIP που τοποθετούν εικόνες και κείμενο σε κοινό διανυσματικό χώρο, με τις ενσωματώσεις να αποθηκεύονται σε διανυσματική βάση δεδομένων για γρήγορη αναζήτηση ομοιότητας. Υποστηρίζεται τόσο αναζήτηση με κείμενο όσο και με εικόνα ως ερώτημα, ενώ εξετάζεται και ο συνδυασμός της οπτικής πληροφορίας με τις λεζάντες των αναρτήσεων. To αποτελεσμα της διπλοματικη εναι μια διαδικτυακή εφαρμογή με διαδραστική διεπαφή αναζήτησης.",
+
+          enKeywords: ["Multimodal Models", "Image Retrieval", "Natural Language Search", "Social Media"],
+          elKeywords: ["Πολυτροπικά Μοντέλα", "Ανάκτηση Εικόνων", "Αναζήτηση σε Φυσική Γλώσσα", "Κοινωνικά Δίκτυα"]
+        },
+
+
+
+
+
+        {
+          // ENGLISH
+          enTitle: "Building an AI Agent for Automated News Collection, Summarization, and Categorization Using Large Language Models (LLMs)",
+          enDescription: "The thesis implements an intelligent agent based on a large language model, which automatically collects news content from multiple sources through RSS and web scraping, categorizes it thematically, identifies articles covering the same event using embeddings and clustering, and produces concise updates with references to the sources. The agent exploits external tools, such as search and database access, through a function calling mechanism, and keeps a history so that the evolution of a story over time becomes visible. The thesis outcome is a working system with a web interface presenting the results.",
+
+          // ΕΛΛΗΝΙΚΑ
+          elTitle: "Ανάπτυξη AI Agent με Χρηση Μεγάλων Γλωσσικών Μοντέλων για Αυτόματη Συλλογή, Σύνοψη και Κατηγοριοποίηση Ειδήσεων",
+          elDescription: "Η εργασία υλοποιεί ευφυή πράκτορα βασισμένο σε μεγάλο γλωσσικό μοντέλο, ο οποίος συλλέγει αυτόματα ειδησεογραφικό περιεχόμενο από πολλαπλές πηγές μέσω RSS και web scraping, το κατηγοριοποιεί θεματικά, εντοπίζει άρθρα που καλύπτουν το ίδιο γεγονός με χρήση ενσωματώσεων και ομαδοποίησης, και παράγει συνοπτικές ενημερώσεις με παραπομπή στις πηγές. Ο πράκτορας αξιοποιεί εξωτερικά εργαλεία, όπως αναζήτηση και πρόσβαση σε βάση δεδομένων, μέσω μηχανισμού κλήσης συναρτήσεων, και διατηρεί ιστορικό ώστε να αναδεικνύει την εξέλιξη μιας είδησης στον χρόνο. Η αξιολόγηση εστιάζει στην ποιότητα των συνόψεων, στην ορθότητα της κατηγοριοποίησης και στην αξιοπιστία της αυτόνομης λειτουργίας, με σύγκριση ανοικτών και εμπορικών γλωσσικών μοντέλων ως προς ποιότητα και κόστος. To αποτελεσμα της διπλοματικη εναι ενα λειτουργικό σύστημα με διαδικτυακή διεπαφή παρουσίασης των αποτελεσμάτων.",
+
+          enKeywords: ["AI Agents", "Automatic Summarization", "Text Categorization", "News Analysis"],
+          elKeywords: ["Ευφυείς Πράκτορες", "Αυτόματη Σύνοψη", "Κατηγοριοποίηση Κειμένου", "Ανάλυση Ειδήσεων"]
+        },
+
+
+
+
+
+        {
+          // ENGLISH
+          enTitle: "Sentiment and Topic Analysis of X (Twitter) Posts Using Large Language Models (LLMs)",
+          enDescription: "The thesis studies the automatic analysis of public opinion in social media posts, with an emphasis on Greek language content around current issues. The text corpus is preprocessed and analysed for sentiment with a combination of pretrained models, such as multilingual BERT, and large language models with zero-shot and few-shot prompting. In parallel, topic modeling is applied with vector embeddings and BERTopic-style techniques, so that the dominant themes and their evolution over time are highlighted. The thesis outcome is a working system with a web interface presenting the results.",
+
+          // ΕΛΛΗΝΙΚΑ
+          elTitle: "Ανάλυση Συναισθήματος και Θεματικής Μοντελοποίησης σε Αναρτήσεις X (Twitter) με Μεγάλα Γλωσσικά Μοντέλα (LLMs)",
+          elDescription: "Η εργασία μελετά την αυτόματη ανάλυση κοινής γνώμης σε αναρτήσεις κοινωνικών δικτύων, με έμφαση σε ελληνόγλωσσο περιεχόμενο γύρω από τρέχοντα ζητήματα. Το σώμα κειμένων προεπεξεργάζεται και αναλύεται ως προς το συναίσθημα με συνδυασμό προεκπαιδευμένων μοντέλων, όπως πολυγλωσσικά BERT, και μεγάλων γλωσσικών μοντέλων με zero-shot και few-shot προτροπές. Παράλληλα εφαρμόζεται θεματική μοντελοποίηση με διανυσματικές ενσωματώσεις και τεχνικές τύπου BERTopic, ώστε να αναδεικνύονται οι κυρίαρχες θεματικές και η εξέλιξή τους στον χρόνο. To αποτελεσμα της διπλοματικη θα ειναι ενα λειτουργικό σύστημα με διαδικτυακή διεπαφή παρουσίασης των αποτελεσμάτων",
+
+          enKeywords: ["Sentiment Analysis", "Topic Modeling", "Embeddings", "Social Media"],
+          elKeywords: ["Ανάλυση Συναισθήματος", "Θεματική Μοντελοποίηση", "Διανυσματικές Ενσωματώσεις", "Κοινωνικά Δίκτυα"]
+        },
+
+
+
+
+
+        {
+          // ENGLISH
+          enTitle: "Development of a Web Application for Describing Vessel Trips Using Large Language Models (LLMs)",
+          enDescription: "This thesis focuses on the design and development of a web application for describing vessel voyages in natural language using Large Language Models. The application will utilize data related to the route and characteristics of a voyage and provide them as input to an LLM, with the aim of automatically generating a description of the vessel's course, highlighting the most important stages and events of the voyage.",
+
+          // ΕΛΛΗΝΙΚΑ
+          elTitle: "Ανάπτυξη Διαδικτυακής Εφαρμογής για την Περιγραφή Ταξιδιών Πλοίων με Χρήση Μεγάλων Γλωσσικών Μοντέλων (LLMs)",
+          elDescription: "Η παρούσα διπλωματική εργασία έχει ως αντικείμενο τον σχεδιασμό και την ανάπτυξη μιας διαδικτυακής εφαρμογής για την περιγραφή ταξιδιών πλοίων σε φυσική γλώσσα με τη χρήση μεγάλων γλωσσικών μοντέλων (Large Language Models – LLMs). Η εφαρμογή θα αξιοποιεί δεδομένα που αφορούν τη διαδρομή και τα χαρακτηριστικά ενός ταξιδιού και θα τα παρέχει ως είσοδο σε ένα LLM, με στόχο την αυτόματη παραγωγή μιας περιγραφής της πορείας του πλοίου, αναφέροντας τα σημαντικότερα στάδια και γεγονότα του ταξιδιού.",
+
+          enKeywords: ["Large Language Models", "Data-to-Text Generation", "Trajectory Data", "Maritime Data"],
+          elKeywords: ["Μεγάλα Γλωσσικά Μοντέλα", "Παραγωγή Κειμένου από Δεδομένα", "Δεδομένα Τροχιών", "Ναυτιλιακά Δεδομένα"]
+        },
+		
+		
+		
+		
+
+        {
+          // ENGLISH
+          enTitle: "Explainable AI and AI Fairness Techniques in Recommender Systems",
+          enDescription: "Recommender systems are an important application of Artificial Intelligence (AI) and machine learning, designed to suggest relevant content, products, or services to users based on their preferences, behaviour, or similarities with other users. They are widely used on platforms such as Netflix, Spotify, YouTube, Amazon, and social media, where  recommendation models help users discover movies, music, products, or posts that are likely to interest them. For example, a movie recommender may suggest a film because a user has watched films from similar genres or because users with similar viewing habits enjoyed it. This thesis investigates explainability and fairness in recommender systems, focusing on methods that make recommendation decisions more transparent while reducing potential biases toward users or items. The thesis  will examine  Explainable AI and AI fairness techniques in recommendation algorithms, assessing how effectively they can provide understandable justifications for recommendations and mitigate unfair treatment across different groups/users.",
+
+          // ΕΛΛΗΝΙΚΑ
+          elTitle: "Επεξηγήσιμη και Δικαια Τεχνητή Νοημοσύνη στα Συστήματα Συστάσεων",
+          elDescription: "Τα συστήματα συστάσεων (recommender systems) αποτελούν σημαντική εφαρμογή της Τεχνητής Νοημοσύνης (AI) και της μηχανικής μάθησης και έχουν σχεδιαστεί ώστε να προτείνουν στους χρήστες σχετικό περιεχόμενο, προϊόντα ή υπηρεσίες με βάση τις προτιμήσεις τους, τη συμπεριφορά τους ή τις ομοιότητές τους με άλλους χρήστες. Χρησιμοποιούνται ευρέως σε πλατφόρμες όπως το Netflix, το Spotify, το YouTube, το Amazon και τα κοινωνικά δίκτυα, όπου βοηθούν τους χρήστες να ανακαλύπτουν ταινίες, μουσική, προϊόντα ή αναρτήσεις που είναι πιθανό να τους ενδιαφέρουν. Για παράδειγμα, ένα σύστημα συστάσεων ταινιών μπορεί να προτείνει μια ταινία επειδή ο χρήστης έχει παρακολουθήσει ταινίες παρόμοιων ειδών ή επειδή χρήστες με παρόμοιες προτιμήσεις την αξιολόγησαν θετικά. Η παρούσα διπλωματική εργασία διερευνά την επεξηγησιμότητα και τη δικαιοσύνη στα συστήματα συστάσεων, εστιάζοντας σε μεθόδους που καθιστούν τις αποφάσεις των συστημάτων περισσότερο διαφανείς, περιορίζοντας παράλληλα πιθανές μεροληψίες απέναντι σε χρήστες ή προτεινόμενα αντικείμενα. Η διπλωματική εργασία θα εξετάσει τεχνικές επεξηγήσιμης και δικαιας τεχνητής νοημοσύνης (Explainable AI and AI fairness) σε συστηματα συστάσεων, αξιολογώντας κατά πόσο μπορούν να παρέχουν κατανοητές αιτιολογήσεις για τις συστάσεις και να περιορίζουν την άνιση μεταχείριση διαφορετικών ομάδων.",
+		  
+          enKeywords: ["Explainable AI", "AI fairness", "Recommender Systems" ],
+          elKeywords: ["Επεξηγήσιμη Τεχνητή Νοημοσύνη", "Δικαια Τεχνητή Νοημοσύνη", "Συστήματα Συστάσεων"]
+        }
+		
+		
+		
+      ]
+    };
+
+    
+    function escapeHtml(value) {
+      return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function renderIdentity() {
+      const p = CONTENT.personal;
+
+      document.getElementById("identity").innerHTML = `
+        <a class="identity-name"
+           href="${escapeHtml(p.homepage)}"
+           target="_blank"
+           rel="noopener noreferrer">
+          ${escapeHtml(p.name)}
+        </a>
+
+        <span class="identity-sep">·</span>
+
+        <a class="identity-email"
+           href="mailto:${escapeHtml(p.email)}">
+          ${escapeHtml(p.email)}
+        </a>
+     `;
+    }
+
+    function renderTopics(lang) {
+      const isGreek = lang === "el";
+
+      const pageTitle = isGreek
+        ? CONTENT.page.elTitle
+        : CONTENT.page.enTitle;
+
+      const topicsHeading = isGreek
+        ? CONTENT.page.elTopicsHeading
+        : CONTENT.page.enTopicsHeading;
+
+      document.documentElement.lang = lang;
+      document.title = pageTitle;
+
+      document.getElementById("page-title").textContent = pageTitle;
+      document.getElementById("topics-heading").textContent = topicsHeading;
+
+      document.getElementById("topics-list").innerHTML =
+        CONTENT.topics.map((topic, index) => {
+          const number = String(index + 1).padStart(2, "0");
+
+          const title = isGreek
+            ? topic.elTitle
+            : topic.enTitle;
+
+          const description = isGreek
+            ? topic.elDescription
+            : topic.enDescription;
+
+          const keywords = isGreek
+            ? topic.elKeywords
+            : topic.enKeywords;
+
+          const tags = keywords
+            .map(keyword => `<span class="tag">${escapeHtml(keyword)}</span>`)
+            .join("");
+
+          return `
+            <article class="topic">
+              <div class="topic-number">${number}</div>
+              <h3>${escapeHtml(title)}</h3>
+              <p class="description">${escapeHtml(description)}</p>
+              <div class="keywords">${tags}</div>
+            </article>
+          `;
+        }).join("");
+
+      document.querySelectorAll(".lang-btn").forEach(button => {
+        button.classList.toggle(
+          "active",
+          button.dataset.lang === lang
+        );
+      });
+
+      try {
+        localStorage.setItem("preferredLanguage", lang);
+      } catch (error) {
+        /* storage unavailable */
+      }
+    }
+
+    function renderFooter() {
+      const p = CONTENT.personal;
+
+      document.getElementById("footer-content").innerHTML = `
+        <div class="footer-contact">
+          <a href="${escapeHtml(p.homepage)}"
+             target="_blank"
+             rel="noopener noreferrer">
+            ${escapeHtml(p.name)}
+          </a>
+
+          <span class="footer-sep">·</span>
+
+          <a href="mailto:${escapeHtml(p.email)}">
+            ${escapeHtml(p.email)}
+          </a>
+
+          <span class="footer-sep">·</span>
+          <span>${escapeHtml(p.department)}</span>
+
+          <span class="footer-sep">·</span>
+          <span>${escapeHtml(p.institution)}</span>
+        </div>
+
+        <div>© ${escapeHtml(p.year)}</div>
+      `;
+    }
+
+    document.querySelectorAll(".lang-btn").forEach(button => {
+      button.addEventListener("click", () => {
+        renderTopics(button.dataset.lang);
+      });
+    });
+
+    renderIdentity();
+    renderFooter();
+
+    let savedLanguage = null;
+    try {
+      savedLanguage = localStorage.getItem("preferredLanguage");
+    } catch (error) {
+      savedLanguage = null;
+    }
+
+    renderTopics(savedLanguage === "el" ? "el" : "en");
+  </script>
+
+</body>
+</html>
